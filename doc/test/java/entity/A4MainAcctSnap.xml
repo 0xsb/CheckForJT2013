@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="A4MainAcctSnap">
+
+	<typeAlias alias="a4MainAcctSnap"
+		type="com.ailk.jt.task.entity.A4MainAcctSnap" />
+
+	<resultMap id="a4MainAcctSnapResult" class="a4MainAcctSnap">
+		<result property="mainAcctId" column="MAIN_ACCT_ID" />
+		<result property="loginName" column="LOGIN_NAME" />
+		<result property="userName" column="USER_NAME" />
+		<result property="valid" column="VALID" />
+		<result property="lockStatus" column="LOCK_STATUS" />
+		<result property="acctType" column="ACCT_TYPE" />
+		<result property="rolelist" column="ROLELIST" />
+		<result property="effectTime" column="EFFECT_TIME" />
+		<result property="expireTime" column="EXPIRE_TIME" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="areaId" column="AREA_ID" />
+		<result property="orgId" column="ORG_ID" />
+		<result property="orgname" column="ORGNAME" />
+		<result property="updateTime" column="UPDATE_TIME" />
+		<result property="superuser" column="SUPERUSER" />
+		<result property="opendays" column="OPENDAYS" />
+		<result property="logondays" column="LOGONDAYS" />
+		<result property="modifyMode" column="MODIFY_MODE" />
+		<result property="acctUsage" column="ACCT_USAGE" />
+	</resultMap>
+
+	<resultMap id="a4MainAcctSnapResult_simple"
+		class="a4MainAcctSnap">
+		<result property="mainAcctId" column="MAIN_ACCT_ID" />
+		<result property="loginName" column="LOGIN_NAME" />
+		<result property="acctType" column="ACCT_TYPE" />
+		<result property="valid" column="VALID" />
+		<result property="modifyMode" column="MODIFY_MODE" />
+	</resultMap>
+
+	<sql id="dynamicWhere">
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="mainAcctId">
+				MAIN_ACCT_ID = #mainAcctId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="loginName">
+				LOGIN_NAME = #loginName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="userName">
+				USER_NAME = #userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="valid">
+				VALID = #valid#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lockStatus">
+				LOCK_STATUS = #lockStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="acctType">
+				ACCT_TYPE = #acctType#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rolelist">
+				ROLELIST = #rolelist#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="effectTime">
+				EFFECT_TIME = #effectTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="expireTime">
+				EXPIRE_TIME = #expireTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="createTime">
+				CREATE_TIME = #createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="areaId">
+				AREA_ID = #areaId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="orgId">
+				ORG_ID = #orgId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="orgname">
+				ORGNAME = #orgname#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="updateTime">
+				UPDATE_TIME = #updateTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="superuser">
+				SUPERUSER = #superuser#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="opendays">
+				OPENDAYS = #opendays#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="logondays">
+				LOGONDAYS = #logondays#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="modifyMode">
+				MODIFY_MODE = #modifyMode#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="acctUsage">
+				ACCT_USAGE = #acctUsage#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+		<![CDATA[
+	    select
+        	MAIN_ACCT_ID ,
+        	LOGIN_NAME ,
+        	USER_NAME ,
+        	VALID ,
+        	LOCK_STATUS ,
+        	ACCT_TYPE ,
+        	ROLELIST ,
+        	EFFECT_TIME ,
+        	EXPIRE_TIME ,
+        	CREATE_TIME ,
+        	AREA_ID ,
+        	ORG_ID ,
+        	ORGNAME ,
+        	UPDATE_TIME ,
+        	SUPERUSER ,
+        	OPENDAYS ,
+        	LOGONDAYS ,
+        	MODIFY_MODE ,
+        	ACCT_USAGE 
+	    ]]>
+	</sql>
+
+	<insert id="save" parameterClass="a4MainAcctSnap">
+		<selectKey resultClass="long" keyProperty="mainAcctId">
+			SELECT uap_seq.NEXTVAL AS id FROM DUAL
+		</selectKey>
+
+		<![CDATA[
+	        INSERT INTO
+	        A4_MAIN_ACCT_SNAP (
+	        	MAIN_ACCT_ID ,
+	        	LOGIN_NAME ,
+	        	USER_NAME ,
+	        	VALID ,
+	        	LOCK_STATUS ,
+	        	ACCT_TYPE ,
+	        	ROLELIST ,
+	        	EFFECT_TIME ,
+	        	EXPIRE_TIME ,
+	        	CREATE_TIME ,
+	        	AREA_ID ,
+	        	ORG_ID ,
+	        	ORGNAME ,
+	        	UPDATE_TIME ,
+	        	SUPERUSER ,
+	        	OPENDAYS ,
+	        	LOGONDAYS ,
+	        	MODIFY_MODE ,
+	        	ACCT_USAGE 
+	        ) VALUES (
+				#mainAcctId# ,
+				#loginName# ,
+				#userName# ,
+				#valid# ,
+				#lockStatus# ,
+				#acctType# ,
+				#rolelist# ,
+				#effectTime# ,
+				#expireTime# ,
+				#createTime# ,
+				#areaId# ,
+				#orgId# ,
+				#orgname# ,
+				#updateTime# ,
+				#superuser# ,
+				#opendays# ,
+				#logondays# ,
+				#modifyMode# ,
+				#acctUsage# 
+	        )
+	    ]]>
+	</insert>
+
+	<update id="update" parameterClass="a4MainAcctSnap">
+		<![CDATA[
+        UPDATE A4_MAIN_ACCT_SNAP SET
+			MAIN_ACCT_ID = #mainAcctId# ,
+			LOGIN_NAME = #loginName# ,
+			USER_NAME = #userName# ,
+			VALID = #valid# ,
+			LOCK_STATUS = #lockStatus# ,
+			ACCT_TYPE = #acctType# ,
+			ROLELIST = #rolelist# ,
+			EFFECT_TIME = #effectTime# ,
+			EXPIRE_TIME = #expireTime# ,
+			CREATE_TIME = #createTime# ,
+			AREA_ID = #areaId# ,
+			ORG_ID = #orgId# ,
+			ORGNAME = #orgname# ,
+			UPDATE_TIME = #updateTime# ,
+			SUPERUSER = #superuser# ,
+			OPENDAYS = #opendays# ,
+			LOGONDAYS = #logondays# ,
+			MODIFY_MODE = #modifyMode# ,
+			ACCT_USAGE = #acctUsage# 
+        WHERE 
+	        MAIN_ACCT_ID = #mainAcctId# 
+    ]]>
+	</update>
+	<update id="updateSnapAcct" parameterClass="a4MainAcctSnap">
+		<![CDATA[
+        UPDATE A4_MAIN_ACCT_SNAP SET
+			MAIN_ACCT_ID = #mainAcctId# ,
+			LOGIN_NAME = #loginName# ,
+			USER_NAME = #userName# ,
+			VALID = #valid# ,
+			LOCK_STATUS = #lockStatus# ,
+			ACCT_TYPE = #acctType# ,
+			ROLELIST = #rolelist# ,
+			EFFECT_TIME = #effectTime# ,
+			EXPIRE_TIME = #expireTime# ,
+			CREATE_TIME = #createTime# ,
+			AREA_ID = #areaId# ,
+			ORG_ID = #orgId# ,
+			ORGNAME = #orgname# ,
+			UPDATE_TIME = #updateTime# ,
+			SUPERUSER = #superuser# ,
+			OPENDAYS = #opendays# ,
+			LOGONDAYS = #logondays# ,
+			MODIFY_MODE = #modifyMode# ,
+			ACCT_USAGE = #acctUsage# 
+        WHERE 
+	       LOGIN_NAME = #loginName# 
+    ]]>
+	</update>
+	<delete id="deleteById" parameterClass="java.lang.Long">
+		<![CDATA[
+        delete from A4_MAIN_ACCT_SNAP where
+        MAIN_ACCT_ID = #mainAcctId# 
+    ]]>
+	</delete>
+
+	<delete id="deleteByExample" parameterClass="a4MainAcctSnap">
+		<![CDATA[
+        delete from A4_MAIN_ACCT_SNAP
+    ]]>
+		<include refid="dynamicWhere" />
+	</delete>
+
+	<select id="findById" resultMap="a4MainAcctSnapResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_SNAP 
+	        where 
+		        MAIN_ACCT_ID = #mainAcctId# 
+	    ]]>
+	</select>
+
+	<select id="count" resultClass="long">
+		<![CDATA[
+        select 
+        count(*)
+        from A4_MAIN_ACCT_SNAP
+    ]]>
+		<include refid="dynamicWhere" />
+	</select>
+
+	<select id="findByExample" resultMap="a4MainAcctSnapResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_SNAP 
+	    ]]>
+		<include refid="dynamicWhere" />
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">
+				$sortColumns$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+
+	<!-- 获取所有快照表中的账号信息 -->
+	<select id="getAllAcct" resultMap="a4MainAcctSnapResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_SNAP 
+	        where lock_status=0
+	    ]]>
+	</select>
+	<!-- ===================================================== -->
+	<select id="getEqualAcctList"
+		resultMap="a4MainAcctSnapResult_simple">
+		<![CDATA[
+		SELECT T.MAIN_ACCT_ID,
+                       T.LOGIN_NAME,
+                       T.ACCT_TYPE,
+                       T.VALID,
+                       T.MODIFY_MODE
+                  FROM A4_MAIN_ACCT_SNAP T
+                INTERSECT
+                SELECT W.MAIN_ACCT_ID,
+                       W.LOGIN_NAME,
+                       W.ACCT_TYPE,
+                       W.VALID,
+                       W.MODIFY_MODE
+                  FROM A4_MAIN_ACCT_USABLEDAY_USAGE W
+	    ]]>
+	</select>
+
+	<!-- ====================================================== -->
+	<select id="getNotEqualAcctList"
+		resultMap="a4MainAcctSnapResult_simple">
+		<![CDATA[
+	       SELECT T.MAIN_ACCT_ID,
+                       T.LOGIN_NAME,
+                       T.ACCT_TYPE,
+                       T.VALID,
+                       T.MODIFY_MODE
+                  FROM A4_MAIN_ACCT_SNAP T
+                 where t.last_update_time>SYSDATE -10
+                MINUS
+                SELECT W.MAIN_ACCT_ID,
+                       W.LOGIN_NAME,
+                       W.ACCT_TYPE,
+                       W.VALID,
+                       W.MODIFY_MODE
+                  FROM A4_MAIN_ACCT_USABLEDAY_USAGE W
+	    ]]>
+	</select>
+	<!-- 将计算出来的使用率添加到数据库中 -->
+	<insert id="insertSnap" parameterClass="java.util.Map">
+		<![CDATA[
+	insert into a4_main_acct_snap
+  (select main_acct_id,
+          case
+            when length(t.login_name) > 32 then
+             substr(t.login_name, 0, 32)
+            else
+             t.login_name
+          end login_name,
+          login_pwd,
+          pwd_question,
+          pwd_answer,
+          authen_rule_id,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and t.lock_status='0' ) then
+             '0'
+            else
+             '1'
+          end lock_status,
+          lock_type,
+          lock_desc,
+          lock_main_acct_id,
+          lock_time,
+          pwd_type,
+          pwd_wrong_times,
+          pwd_update_time,
+          effect_time,
+          expire_time,
+          last_login_time,
+          create_time,
+          last_update_time,
+          work_no,
+          area_id,
+          pwd_rule_id,
+          name,
+          gender,
+          birth_date,
+          id_card_no,
+          education,
+          mobile,
+          email,
+          oa_email,
+          tel,
+          staff_no,
+          person_status,
+          staff_type,
+          remark,
+          join_date,
+          contract_expire_date,
+          default_org,
+          acct_type,
+          acct_position,
+          CANLOGINWAY, 
+		  IS_APPROVE,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and
+                 t.lock_status = '0') then
+             '1'
+            else
+             '0'
+          end valid,
+          case 
+               when (to_char(t.last_update_time,'yyyy-mm-dd')<>to_char(t.create_time,'yyyy-mm-dd')) then 'upd'
+               else 'add'
+           end modify_mode
+     from uap_main_acct t
+    where t.create_time <
+          to_date(#createTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   union all (select main_acct_id,
+                    case
+                      when length(t1.login_name) > 32 then
+                       substr(t1.login_name, 0, 32)
+                      else
+                       t1.login_name
+                    end login_name,
+                    login_pwd,
+                    pwd_question,
+                    pwd_answer,
+                    authen_rule_id,
+                    case
+                      when (sysdate >= t1.effect_time and sysdate < t1.expire_time and t1.lock_status='0' ) then
+                       '0'
+                      else
+                       '1'
+                    end lock_status,
+                    lock_type,
+                    lock_desc,
+                    lock_main_acct_id,
+                    lock_time,
+                    pwd_type,
+                    pwd_wrong_times,
+                    pwd_update_time,
+                    effect_time,
+                    expire_time,
+                    last_login_time,
+                    create_time,
+                    last_update_time,
+                    work_no,
+                    area_id,
+                    pwd_rule_id,
+                    name,
+                    gender,
+                    birth_date,
+                    id_card_no,
+                    education,
+                    mobile,
+                    email,
+                    oa_email,
+                    tel,
+                    staff_no,
+                    person_status,
+                    staff_type,
+                    remark,
+                    join_date,
+                    contract_expire_date,
+                    default_org,
+                    acct_type,
+                    acct_position,
+                    '', 
+					IS_APPROVE,
+                    case
+                      when (sysdate >= t1.effect_time and
+                           sysdate < t1.expire_time and
+                           t1.lock_status = '0') then
+                       '1'
+                      else
+                       '0'
+                    end valid,
+                    'del' modify_mode
+               from (select * from a4_main_acct_his_today where login_name not in (select login_name from uap_main_acct) minus select * from a4_main_acct_his_yestoday ) t1))
+	]]>
+	</insert>
+
+	<select id="ByTwoCreateTime" resultMap="a4MainAcctSnapResult">
+		<![CDATA[
+		select t.MAIN_ACCT_ID,
+       t.LOGIN_NAME,
+       t.USER_NAME,
+       t.VALID,
+       t.LOCK_STATUS,
+       t.ACCT_TYPE,
+       t.ROLELIST,
+       t.EFFECT_TIME,
+       t.EXPIRE_TIME,
+       t.CREATE_TIME,
+       t.AREA_ID,
+       t.ORG_ID,
+       t.ORGNAME,
+       t.UPDATE_TIME,
+       t.SUPERUSER,
+       t.OPENDAYS,
+       t.logondays,
+       t.MODIFY_MODE,
+       t.ACCT_USAGE
+  from a4_main_acct_snap t
+ where (t.create_time >=
+       to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.create_time <
+       to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+    or (t.update_time >=
+       to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.UPDATE_TIME <
+       to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+    or (t.update_time >=
+       to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.UPDATE_TIME <
+       to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.modify_mode = 'del')
+	    ]]>
+	</select>
+	<select id="selectMainAcctByName" resultMap="a4MainAcctSnapResult"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+		select t.MAIN_ACCT_ID,
+       t.LOGIN_NAME,
+       t.USER_NAME,
+       t.VALID,
+       t.LOCK_STATUS,
+       t.ACCT_TYPE,
+       t.ROLELIST,
+       t.EFFECT_TIME,
+       t.EXPIRE_TIME,
+       t.CREATE_TIME,
+       t.AREA_ID,
+       t.ORG_ID,
+       t.ORGNAME,
+       t.UPDATE_TIME,
+       t.SUPERUSER,
+       t.OPENDAYS,
+       t.logondays,
+       t.MODIFY_MODE,
+       t.ACCT_USAGE
+  from a4_main_acct_snap t
+  where t.LOGIN_NAME = #login_name#
+	  
+]]>
+	</select>
+</sqlMap>

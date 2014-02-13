@@ -1,0 +1,1 @@
+mvn install:install-file -DgroupId=com.asiainfo.uap.util.des -DartifactId=3des -Dversion=1.0 -Dpackaging=jar -Dfile=3des.jar

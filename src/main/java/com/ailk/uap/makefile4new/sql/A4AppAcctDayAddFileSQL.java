@@ -1,0 +1,14 @@
+package com.ailk.uap.makefile4new.sql;
+
+import com.ailk.uap.makefile4new.constant.BusiCode;
+import com.ailk.uap.util.CommonUtil;
+
+public abstract interface A4AppAcctDayAddFileSQL extends BusiCode
+{
+  public static final String A4_APP_ACCT_DAY_ADD_SQL = "SELECT 'add' MODE1,\t                                                      APPACC.ACCT_SEQ ID,                                                  APPACC.LOGIN_ACCT LOGINNAME,                                         'CRM系统' RESNAME,                                        " + APP_ONLY_CRM_SQL_OF_RESTYPE + "        RESTYPE,                                                     " + "       APPACC.LAST_UPDATE_TIME UPDATETIME                            " + "  FROM UAP_APP_ACCT APPACC, UAP_APP APP                              " + " WHERE APPACC.APP_ID = APP.APP_ID                                    " + "   AND APP.APP_CODE IN (" + CommonUtil.arrayToSQLString(CRM_APPCODE.split(",")) + ")                           ";
+
+  public static final String A4_APP_ACCT_DAY_STOP_SQL = "SELECT 'del' MODE1,                                                   APPACC1.ACCT_SEQ ID,                                                 APPACC1.LOGIN_ACCT LOGINNAME,                                        'CRM系统' RESNAME,                                             " + APP_ONLY_CRM_SQL_OF_RESTYPE + "  RESTYPE,                                                           " + " APPACC1.LAST_UPDATE_TIME UPDATETIME                                 " + "  FROM UAP_APP_ACCT APPACC1, UAP_APP APP                             " + " WHERE APPACC1.APP_ID = APP.APP_ID                                   " + "   AND APP.APP_CODE IN (" + CommonUtil.arrayToSQLString(CRM_APPCODE.split(",")) + ")                            " + "   AND APPACC1.ACCT_STATUS = '2'                                     ";
+
+  public static final String A4_APP_ACCT_DAY_DEL_SQL = "SELECT 'del' MODE1,                                                         APPACCHIS.ACCT_SEQ ID,                                               APPACCHIS.LOGIN_ACCT LOGINNAME,                                      'CRM系统' RESNAME,                                     " + APP_ONLY_CRM_SQL_OF_RESTYPE + "        RESTYPE,                                                     " + "       APPACCHIS.LAST_UPDATE_TIME UPDATETIME                         " + "  FROM UAP_APP_ACCT_HIS APPACCHIS, UAP_APP APP                       " + " WHERE APPACCHIS.APP_ID = APP.APP_ID                                 " + "   AND APP.APP_CODE IN (" + CommonUtil.arrayToSQLString(CRM_APPCODE.split(",")) + ")                            ";
+  public static final String UNION_ALL = " UNION ALL ";
+}

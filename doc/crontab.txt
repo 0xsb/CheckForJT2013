@@ -1,0 +1,72 @@
+############################################################################################################################
+todo 需要处理AAI、AAR的BOMC告警问题
+8       0       *       *       *        cd /home/aiuap/bomc_upload/src/UploadTask/build;sh /home/aiuap/bomc_upload/src/UploadTask/build/runBossAppSubAcctLoginFile.sh
+8       0       *       *       *        cd /home/aiuap/bomc_upload/src/UploadTask/build;sh /home/aiuap/bomc_upload/src/UploadTask/build/runA4BossAppAcctDayAddFile.sh
+## month file , manul todo 可以删除
+#5       0       1       *       *      cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runA4ResourceCoverFullFile.sh
+#5       0       1       *       *      cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runAppAcctFullFile.sh
+#5       0       1       *       *      cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runAuthorFullFile.sh
+#5       0       1       *       *      cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runA4SuperAuthorityFullFile.sh
+#5       0       1       *       *     cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runMainAcctFullFile.sh
+#5       0       1       *       *      cd /home/aiuap/bomc_upload/src/UploadTask/build ;sh /home/aiuap/bomc_upload/src/UploadTask/build/runSysResourceAcctFullFile.sh
+## upload task todo 可以删除，需要记录,以便需要时运行
+#5       *       *       *       *       /home/aiuap/bomc_upload/src/UploadTask/build/runUploadFileThread.sh
+############################################################################################################################
+## for local validation new
+todo 可以删除 #2      21      *       *       *       cd /home/aiuap/SpringIbatisDemo/bin ; sh /home/aiuap/SpringIbatisDemo/bin/runCalculateAll.sh
+todo 可以删除 #4      0       *       *       *       cd /home/aiuap/SpringIbatisDemo/bin ; sh runCalculateAll.sh
+4       0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh runCalculateAll.sh >>all.txt   计算指标用的2012年的
+40      0       *       *       *       cd /home/aiuap/SpringIbatisDemo/bin ; sh  /home/aiuap/SpringIbatisDemo/bin/runCalculateChange.sh >>a.txt 计算指标用的老的
+40      0       *       *       *       cd /home/aiuap/SpringIbatisDemo/bin ; sh /home/aiuap/SpringIbatisDemo/bin/runVIPManage.sh >>b.txt 计算指标用的老的
+todo 考虑是否删除 38      0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runSMJKR.sh
+todo 考虑是否删除 40      0       *       *       *       cd /home/aiuap/SpringIbatisDemo/bin ; sh /home/aiuap/SpringIbatisDemo/bin/runCalculateGoldManage.sh >>c.txt
+
+############################################################################################################################
+# feedBack # todo 可以删除
+#20     *       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runHourFileFeedBack.sh
+#45     1       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runDayFileFeedBack.sh
+#20     9       2       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runMonthFileFeedBack.sh
+############################################################################################################################
+##           ##
+## hour file ##    两个小时文件
+##           ##
+###############
+3      *       *       *       *    cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ;sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runDeviceSubAcctLoginFile.sh >>smsalgernarate.txt
+3      *       *       *       *    cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ;sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runMainAcctLoginFile.sh   >>smmalgernarate.txt
+################
+#              #
+#  static file #   两个小时的给BOMC传安全文件
+################
+7       *       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/DeviceSubAcctLoginFile_static.sh
+7       *       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/MainAcctLoginFile_static.sh
+############################################################################################################################
+##           ##
+## day file  ##   日文件生成
+##           ##
+###############
+2       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runAppSubAcctLoginFile.sh  >>R.txt
+3       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runDbOperateLogDayFileForNow.sh  >>db.txt
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runGoldSceneOperateDayAddFile.sh >>gold.txt
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runMainAcctDayAddFile.sh   >>main.txt
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runWebExceptionBusinessDayAddFile_new.sh >>web.txt
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runA4AppAcctDayAddFile.sh >>I.txt
+####################
+# day static files #  日文件给BOMC传安全文件
+####################
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/A4AppAcctDayAddFile_static.sh
+2       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/AppSubAcctLoginFile_static.sh
+3       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/DbOperateLogDayFile_static.sh
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/GoldSceneOperateDayAddFile_static.sh
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/MainAcctDayAddFile_static.sh
+7       0       *       *       *     cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin ; sh  /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/WebExceptionBusinessDayAddFile_new_static.sh
+############################################################################################################################
+##                ##
+## validate file  ##  验证保障程序
+##                ##
+####################
+36      *       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runValidateHourFile.sh >>hour.txt
+40      0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runValidateDayFile.sh  >>day1.txt
+34      0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runDayFileSafeForR.sh >>dayR.txt
+35      0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runDayFileSafeForI.sh  >>dayI.txt
+45      0       *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runCalculateRValue.sh  >>Rvalue.txt
+todo 删除 45      19      *       *       *       cd /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin;sh /home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runSearchDay.sh  >>search.txt

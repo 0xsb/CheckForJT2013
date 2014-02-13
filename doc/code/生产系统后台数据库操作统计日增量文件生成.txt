@@ -1,0 +1,37 @@
+生产系统后台数据库操作统计日增量文件 生成程序
+SMDAR
+
+com.ailk.uap.makefile4new.DbOperateLogDayFile
+
+连接数据库：
+审计库
+
+涉及业务表：
+iap_device_session  a4_uap_db（从uap拷贝到审计库的表，需要定期从uap拷贝到审计库 todo）
+
+涉及考核临时表：
+a4_iap_device_session  test_device_session  second_final_device_session  final_device_session
+
+final_device_session_2013 todo 准生产环境上新建的表，为的是测试
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_iap_device_session；
+3、通过业务表查询出所需数据插入 a4_iap_device_session；
+4、清空 test_device_session；
+5、从 a4_iap_device_session t、a4_uap_db w 中查询t.device_id = w.db_id，插入test_device_session；
+6、清空 second_final_device_session；
+7、将 test_device_session 数据按 login_hour，belong_sys 分组，插入 second_final_device_session；
+8、查询 second_final_device_session ，更新 final_device_session 表设置 total 值；
+9、查询 final_device_session，生成XML文件
+
+todo
+该文件生成目前存在问题：
+由于之前的程序bug，没有清空 test_device_session，
+造成 final_device_session 数据量巨大，上报的数据量也巨大。
+
+金林为了消除该问题，在同申诉涛讨论后，将生产环境修改为，1-8步骤不再执行，
+而是直接从 final_device_session 查询数据后，
+当前日期 - 20130527 * 0.5 + 1 = x 得到一个逐渐变大的值x
+用查询出来的total值除以x，（其目的是使其平滑的下降，目标是在7月份降到真实水平）
+上报。

@@ -1,0 +1,57 @@
+upload to bomc task
+
+该命令是将/home/aiuap/CheckForJT2013/hour_upload目录下的小时XML文件上传到10.87.21.64的ftp的SafeM目录下
+sh /home/aiuap/CheckForJT2013/bin/hourUploadToBomcJava.sh >> /home/aiuap/CheckForJT2013/bin/hourUploadToBomcJava.log
+
+
+与上面类似，该命令是将/home/aiuap/CheckForJT2013/upload目录下的日文件上传到10.87.21.64的ftp的SafeM目录下
+sh /home/aiuap/CheckForJT2013/bin/dayUploadToBomcJava.sh >> /home/aiuap/CheckForJT2013/bin/dayUploadToBomcJava.log
+
+
+
+month file generate
+以下全部都是月文件生成的命令，生成文件的类型在命令中，生成的文件存放在/home/aiuap/CheckForJT2013/generate/month/文件类型
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMMAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMMAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMAAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMAAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMHAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMHAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMMSF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMMSF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMCRF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMCRF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMSMF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMSMF.log
+
+
+
+for validator
+该命令是检查/home/aiuap/CheckForJT2013/upload目录下面的XML，是否符合xsd，主要是用于月文件生成以后校验用的，
+当然你也可以用于其他文件的xsd校验，注意文件名必须是按照集团要求的，否则无法找到xsd
+sh /home/aiuap/CheckForJT2013/bin/runValidator.sh >> /home/aiuap/CheckForJT2013/bin/validator.log
+
+
+
+hour generate manual
+下面这两个命令是小时文件手动生成的，可以手动生成任意一个小时的文件，但是需要修改配置文件:config.properties
+在config.properties的第25行左右：
+# create_time ,begin_time, end_time these parameter just for manual generate files
+create_time=2011-09-09 03:04:00
+begin_time=2011-09-08 00:00:00
+end_time=2011-09-09 00:00:00
+file_name=20110908
+hour=016
+需要修改日期和小时，注意修改要谨慎，要符合集团的要求
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateSMMALManual.sh >> /home/aiuap/CheckForJT2013/bin/generateSMMALManual.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateSMSALManual.sh >> /home/aiuap/CheckForJT2013/bin/generateSMSALManual.log
+
+
+
+SMJKR SMJKA generate manual
+下面这个命令是手动生成金库两个文件用的，主要是为生成1-31的安全文件，平时不需要使用
+
+sh /home/aiuap/CheckForJT2013/bin/runGoldBankApplyAndOperateDayAddFileManual.sh >> /home/aiuap/CheckForJT2013/bin/generateJKManual.log
+

@@ -1,0 +1,16 @@
+防火墙单点登录操作日增量 生成程序
+SMFWL SMFLO
+
+com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile
+
+涉及业务表：
+iap_device_session  iap_device_session_cmd
+
+涉及考核临时表：
+a4_fire_wall_login_ope
+该表是给SMP提供视图用，视图为：a4_fire_wall_login_ope_view
+
+主要流程：
+1、通过业务表查询出所需数据后插入 a4_fire_wall_login_ope；
+2、登录日增量 select distinct 查询唯一结果（去掉重复的数据），生成XML文件；
+3、操作日增量 查询全部，生成XML文件。

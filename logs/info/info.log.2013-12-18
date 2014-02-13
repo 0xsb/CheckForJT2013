@@ -1,0 +1,85 @@
+[INFO ] [01:52:06]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:67)MainAcctLoginFile start to run......
+[INFO ] [01:52:06]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:68)uap_file_uapload==D:\work\work2012\db\hour\SMMAL
+[INFO ] [01:52:06]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:69)uap_version==uap2.0
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:117)generateMainAcctFullFile  ******Start***************
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.generateMainAcctAuthorFullFile(MainAcctLoginFile.java:197)mainAcctFullFileSql===select  MAIN_ACCT_ID as mainacctid, MAIN_ACCT_NAME as loginname, OPERATE_TIME as logintime, CLIENT_IP as ip, OPERATE_RESULT as result,OPERATE_TYPE_ID as logintype  from  iap_app_log t where (t.OPERATE_TYPE_ID='1-AIUAP-10000' or t.OPERATE_TYPE_ID='1-AIUAP-10027') AND t.MAIN_ACCT_NAME is not null and  t.operate_time <  to_date('2013-12-18 01:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.operate_time >= to_date('2013-12-18 00:00:00 ', 'yyyy-MM-dd HH24:mi:ss')  and t.MAIN_ACCT_ID is not null   and t.MAIN_ACCT_NAME is not null   and t.MAIN_ACCT_NAME<>'null'  and t.OPERATE_TIME is not null   and t.client_ip is not null      and t.CLIENT_IP <>'null'    and t.OPERATE_RESULT is not null   and t.OPERATE_TYPE_ID is not null   and length(t.CLIENT_IP)<30
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.generateMainAcctAuthorFullFile(MainAcctLoginFile.java:199)getMainAcctFullInfo*******************Start******
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.getMainAcctFullInfo(MainAcctLoginFile.java:249)sum=========== 0
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.generateMainAcctAuthorFullFile(MainAcctLoginFile.java:201)getMainAcctFullInfo*******************End*********
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.generateMainAcctAuthorFullFile(MainAcctLoginFile.java:206)mainAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAL</type>
+<province>371</province>
+<createtime>2013-12-18T09:50:40</createtime>
+<sum>0</sum>
+<begintime>2013-12-18T00:00:00</begintime>
+<endtime>2013-12-18T01:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:121)generateMainAcctFullFile  ******End ***************
+[INFO ] [01:52:23]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:123)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [01:52:34]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:139)GENERATE MAINACCT FULL FILE  TOTALTIME======28s
+[INFO ] [01:52:34]  - com.ailk.uap.makefile4new.MainAcctLoginFile.main(MainAcctLoginFile.java:161)-------------MainAcctLoginFile end-----------------
+[INFO ] [01:53:06]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:56)DeviceSubAcctLoginFile start to run......
+[INFO ] [01:53:06]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:57)uap_file_uapload==D:\work\work2012\db\hour\SMSAL
+[INFO ] [01:53:19]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:103)generateDeviceSubAcctLoginFile  ******Start***************
+[INFO ] [01:53:19]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:184)subAcctLoginFileCountSql===select main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult ,'0' as loginType from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and  t.login_time > to_date('2013-12-18 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.login_time <= to_date('2013-12-18 01:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) union all select  main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult,'1' as loginType  from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and t.logout_time > to_date('2013-12-18 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.logout_time <= to_date('2013-12-18 01:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) 
+[INFO ] [01:53:20]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:187)subAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSAL</type>
+<province>371</province>
+<createtime>2013-12-18T09:51:37</createtime>
+<sum>0</sum>
+<begintime>2013-12-18T00:00:00</begintime>
+<endtime>2013-12-18T01:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [01:53:20]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:107)generateDeviceSubAcctLoginFile  ******End ***************
+[INFO ] [01:53:20]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:109)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [01:53:20]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.insertUploadFileInfo(DeviceSubAcctLoginFile.java:217)insert into DR_UPLOAD_FILE_INFO values ('SMSAL_371_01HR_20131218_009_000.xml','371','SMSAL','01HR','009','0',to_date('2013-12-18 09:51:37','yyyy-MM-dd HH24:mi:ss'),0,to_date('2013-12-18 00:00:00','yyyy-MM-dd HH24:mi:ss'),to_date('2013-12-18 01:00:00','yyyy-MM-dd HH24:mi:ss'),'0')
+[INFO ] [01:53:31]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:124)GENERATE DeviceSubAcctLoginFile FULL FILE  TOTALTIME======25s
+[INFO ] [01:53:31]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:146)-------------MainAcctLoginFile end-----------------
+[INFO ] [09:45:16]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:56)DeviceSubAcctLoginFile start to run......
+[INFO ] [09:45:16]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:57)uap_file_uapload==D:\work\work2012\db\hour\SMSAL
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:103)generateDeviceSubAcctLoginFile  ******Start***************
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:185)subAcctLoginFileCountSql===select main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult ,'0' as loginType from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and  t.login_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.login_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) union all select  main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult,'1' as loginType  from  iap_device_session partition (PART_DEVICE_SESSION_201312) t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and t.logout_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.logout_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) 
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:188)subAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSAL</type>
+<province>371</province>
+<createtime>2013-12-18T17:43:48</createtime>
+<sum>0</sum>
+<begintime>2013-12-18T08:00:00</begintime>
+<endtime>2013-12-18T09:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:107)generateDeviceSubAcctLoginFile  ******End ***************
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:109)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:45:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.insertUploadFileInfo(DeviceSubAcctLoginFile.java:218)insert into DR_UPLOAD_FILE_INFO values ('SMSAL_371_01HR_20131218_017_000.xml','371','SMSAL','01HR','017','0',to_date('2013-12-18 17:43:48','yyyy-MM-dd HH24:mi:ss'),0,to_date('2013-12-18 08:00:00','yyyy-MM-dd HH24:mi:ss'),to_date('2013-12-18 09:00:00','yyyy-MM-dd HH24:mi:ss'),'0')
+[INFO ] [09:45:42]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:124)GENERATE DeviceSubAcctLoginFile FULL FILE  TOTALTIME======25s
+[INFO ] [09:45:42]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:146)-------------MainAcctLoginFile end-----------------
+[INFO ] [09:51:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:56)DeviceSubAcctLoginFile start to run......
+[INFO ] [09:51:30]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:57)uap_file_uapload==D:\work\work2012\db\hour\SMSAL
+[INFO ] [09:51:44]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:103)generateDeviceSubAcctLoginFile  ******Start***************
+[INFO ] [09:51:44]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:185)subAcctLoginFileCountSql===select main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult ,'0' as loginType from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and  t.login_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.login_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) union all select  main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult,'1' as loginType  from  iap_device_session partition (PART_DEVICE_SESSION_2013-1) t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and t.logout_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.logout_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) 
+[ERROR] [09:51:44]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:128)ORA-14108: 非法的分区扩展表名语法
+
+[INFO ] [09:53:27]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:56)DeviceSubAcctLoginFile start to run......
+[INFO ] [09:53:27]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:57)uap_file_uapload==D:\work\work2012\db\hour\SMSAL
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:103)generateDeviceSubAcctLoginFile  ******Start***************
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:185)subAcctLoginFileCountSql===select main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult ,'0' as loginType from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and  t.login_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.login_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) union all select  main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult,'1' as loginType  from  iap_device_session partition (PART_DEVICE_SESSION_201312) t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and t.logout_time > to_date('2013-12-18 08:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.logout_time <= to_date('2013-12-18 09:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) 
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:188)subAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSAL</type>
+<province>371</province>
+<createtime>2013-12-18T17:51:58</createtime>
+<sum>0</sum>
+<begintime>2013-12-18T08:00:00</begintime>
+<endtime>2013-12-18T09:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:107)generateDeviceSubAcctLoginFile  ******End ***************
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:109)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:53:41]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.insertUploadFileInfo(DeviceSubAcctLoginFile.java:218)insert into DR_UPLOAD_FILE_INFO values ('SMSAL_371_01HR_20131218_017_000.xml','371','SMSAL','01HR','017','0',to_date('2013-12-18 17:51:58','yyyy-MM-dd HH24:mi:ss'),0,to_date('2013-12-18 08:00:00','yyyy-MM-dd HH24:mi:ss'),to_date('2013-12-18 09:00:00','yyyy-MM-dd HH24:mi:ss'),'0')
+[INFO ] [09:53:52]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:124)GENERATE DeviceSubAcctLoginFile FULL FILE  TOTALTIME======25s
+[INFO ] [09:53:52]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:146)-------------MainAcctLoginFile end-----------------

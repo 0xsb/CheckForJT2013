@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="A4MainAcctJt">
+
+	<typeAlias alias="a4MainAcctJt"
+		type="com.ailk.jt.task.entity.A4MainAcctJt" />
+
+	<resultMap id="a4MainAcctJtResult" class="a4MainAcctJt">
+		<result property="mainAcctId" column="MAIN_ACCT_ID" />
+		<result property="loginName" column="LOGIN_NAME" />
+		<result property="userName" column="USER_NAME" />
+		<result property="valid" column="VALID" />
+		<result property="lockStatus" column="LOCK_STATUS" />
+		<result property="acctType" column="ACCT_TYPE" />
+		<result property="rolelist" column="ROLELIST" />
+		<result property="effectTime" column="EFFECT_TIME" />
+		<result property="expireTime" column="EXPIRE_TIME" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="areaId" column="AREA_ID" />
+		<result property="orgId" column="ORG_ID" />
+		<result property="orgname" column="ORGNAME" />
+		<result property="updateTime" column="UPDATE_TIME" />
+		<result property="superuser" column="SUPERUSER" />
+		<result property="opendays" column="OPENDAYS" />
+		<result property="logondays" column="LOGONDAYS" />
+		<result property="modifyMode" column="MODIFY_MODE" />
+		<result property="acctUsage" column="ACCT_USAGE" />
+	</resultMap>
+
+	<sql id="dynamicWhere">
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="mainAcctId">
+				MAIN_ACCT_ID = #mainAcctId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="loginName">
+				LOGIN_NAME = #loginName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="userName">
+				USER_NAME = #userName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="valid">
+				VALID = #valid#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lockStatus">
+				LOCK_STATUS = #lockStatus#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="acctType">
+				ACCT_TYPE = #acctType#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rolelist">
+				ROLELIST = #rolelist#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="effectTime">
+				EFFECT_TIME = #effectTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="expireTime">
+				EXPIRE_TIME = #expireTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="createTime">
+				CREATE_TIME = #createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="areaId">
+				AREA_ID = #areaId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="orgId">
+				ORG_ID = #orgId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="orgname">
+				ORGNAME = #orgname#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="updateTime">
+				UPDATE_TIME = #updateTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="superuser">
+				SUPERUSER = #superuser#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="opendays">
+				OPENDAYS = #opendays#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="logondays">
+				LOGONDAYS = #logondays#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="modifyMode">
+				MODIFY_MODE = #modifyMode#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="acctUsage">
+				ACCT_USAGE = #acctUsage#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+		<![CDATA[
+	    select
+        	MAIN_ACCT_ID ,
+        	LOGIN_NAME ,
+        	USER_NAME ,
+        	VALID ,
+        	LOCK_STATUS ,
+        	ACCT_TYPE ,
+        	ROLELIST ,
+        	EFFECT_TIME ,
+        	EXPIRE_TIME ,
+        	CREATE_TIME ,
+        	AREA_ID ,
+        	ORG_ID ,
+        	ORGNAME ,
+        	UPDATE_TIME ,
+        	SUPERUSER ,
+        	OPENDAYS ,
+        	LOGONDAYS ,
+        	MODIFY_MODE ,
+        	ACCT_USAGE
+	    ]]>
+	</sql>
+
+	<insert id="save" parameterClass="a4MainAcctJt">
+		<selectKey resultClass="long" keyProperty="mainAcctId">
+			SELECT uap_seq.NEXTVAL AS id FROM DUAL
+		</selectKey>
+
+		<![CDATA[
+	        INSERT INTO
+	        A4_MAIN_ACCT_JT (
+	        	MAIN_ACCT_ID ,
+	        	LOGIN_NAME ,
+	        	USER_NAME ,
+	        	VALID ,
+	        	LOCK_STATUS ,
+	        	ACCT_TYPE ,
+	        	ROLELIST ,
+	        	EFFECT_TIME ,
+	        	EXPIRE_TIME ,
+	        	CREATE_TIME ,
+	        	AREA_ID ,
+	        	ORG_ID ,
+	        	ORGNAME ,
+	        	UPDATE_TIME ,
+	        	SUPERUSER ,
+	        	OPENDAYS ,
+	        	LOGONDAYS ,
+	        	MODIFY_MODE ,
+	        	ACCT_USAGE
+	        ) VALUES (
+				#mainAcctId# ,
+				#loginName# ,
+				#userName# ,
+				#valid# ,
+				#lockStatus# ,
+				#acctType# ,
+				#rolelist# ,
+				#effectTime# ,
+				#expireTime# ,
+				#createTime# ,
+				#areaId# ,
+				#orgId# ,
+				#orgname# ,
+				#updateTime# ,
+				#superuser# ,
+				#opendays# ,
+				#logondays# ,
+				#modifyMode# ,
+				#acctUsage#
+	        )
+	    ]]>
+	</insert>
+
+	<update id="update" parameterClass="a4MainAcctJt">
+		<![CDATA[
+        UPDATE A4_MAIN_ACCT_JT SET
+			MAIN_ACCT_ID = #mainAcctId# ,
+			LOGIN_NAME = #loginName# ,
+			USER_NAME = #userName# ,
+			VALID = #valid# ,
+			LOCK_STATUS = #lockStatus# ,
+			ACCT_TYPE = #acctType# ,
+			ROLELIST = #rolelist# ,
+			EFFECT_TIME = #effectTime# ,
+			EXPIRE_TIME = #expireTime# ,
+			CREATE_TIME = #createTime# ,
+			AREA_ID = #areaId# ,
+			ORG_ID = #orgId# ,
+			ORGNAME = #orgname# ,
+			UPDATE_TIME = #updateTime# ,
+			SUPERUSER = #superuser# ,
+			OPENDAYS = #opendays# ,
+			LOGONDAYS = #logondays# ,
+			MODIFY_MODE = #modifyMode# ,
+			ACCT_USAGE = #acctUsage#
+        WHERE
+	        MAIN_ACCT_ID = #mainAcctId#
+    ]]>
+	</update>
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+		<![CDATA[
+        delete from A4_MAIN_ACCT_JT where
+        MAIN_ACCT_ID = #mainAcctId#
+    ]]>
+	</delete>
+
+	<delete id="deleteByExample" parameterClass="a4MainAcctJt">
+		<![CDATA[
+        delete from A4_MAIN_ACCT_JT
+    ]]>
+		<include refid="dynamicWhere" />
+	</delete>
+
+	<select id="findById" resultMap="a4MainAcctJtResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_JT
+	        where
+		        MAIN_ACCT_ID = #mainAcctId#
+	    ]]>
+	</select>
+
+	<select id="count" resultClass="long">
+		<![CDATA[
+        select
+        count(*)
+        from A4_MAIN_ACCT_JT
+    ]]>
+		<include refid="dynamicWhere" />
+	</select>
+
+	<select id="getInvalidCount" resultClass="long">
+		<![CDATA[
+        select  count(1) from A4_MAIN_ACCT_JT t
+        where t.acct_type='6'
+		and t.valid=0
+		and t.logondays<4
+     ]]>
+	</select>
+
+	<select id="getHZAllCount" resultClass="long">
+		<![CDATA[
+        select  count(1) from A4_MAIN_ACCT_JT t
+        where t.acct_type='6'
+		and t.logondays<4
+     ]]>
+	</select>
+
+
+	<select id="getLogOnDays" resultClass="long"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+       SELECT  COUNT(DISTINCT TO_CHAR(T.OPERATE_TIME, 'yyyy-MM-dd')) as login_days
+                   FROM audit11.IAP_APP_LOG t,
+                        a4_main_acct_usableday_usage w
+                  WHERE w.valid = 1
+                    and w.login_name=t.main_acct_name
+                    and t.main_acct_name=#login_name#
+                    and T.OPERATE_TYPE_ID = '1-AIUAP-10000'
+                    AND T.DOMAIN_ID = 'UAP'
+                    AND T.OPERATE_TIME >
+                        TO_DATE(#monthBeginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+                    AND T.OPERATE_TIME <
+                        TO_DATE(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+    ]]>
+	</select>
+
+	<select id="findByExample" resultMap="a4MainAcctJtResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_JT
+	    ]]>
+		<include refid="dynamicWhere" />
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">
+				$sortColumns$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<!--      getAllAcct ByName         -->
+	<select id="ByLoginName" parameterClass="java.util.HashMap"
+		resultMap="a4MainAcctJtResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_JT
+	        where login_name = #login_name#
+	    ]]>
+	</select>
+	<select id="getAllAcct" parameterClass="java.util.HashMap"
+		resultMap="a4MainAcctJtResult">
+		<include refid="commonSelectColumnsPrefix" />
+		<![CDATA[
+	        from A4_MAIN_ACCT_JT  t
+	    ]]>
+	</select>
+
+	<delete id="deleteAcctFromJT" parameterClass="a4MainAcctJt">
+		<![CDATA[
+	     delete from  A4_MAIN_ACCT_JT where  login_name = #loginName#
+	    ]]>
+	</delete>
+
+
+	<update id="updateAcctFroJT" parameterClass="a4MainAcctJt">
+		<![CDATA[
+	UPDATE A4_MAIN_ACCT_JT SET
+			MAIN_ACCT_ID = #mainAcctId# ,
+			LOGIN_NAME = #loginName# ,
+			USER_NAME = #userName# ,
+			VALID = #valid# ,
+			LOCK_STATUS = #lockStatus# ,
+			ACCT_TYPE = #acctType# ,
+			ROLELIST = #rolelist# ,
+			EFFECT_TIME = #effectTime# ,
+			EXPIRE_TIME = #expireTime# ,
+			CREATE_TIME = #createTime# ,
+			AREA_ID = #areaId# ,
+			ORG_ID = #orgId# ,
+			ORGNAME = #orgname# ,
+			UPDATE_TIME = #updateTime# ,
+			SUPERUSER = #superuser# ,
+			OPENDAYS = #opendays# ,
+			LOGONDAYS = #logondays# ,
+			MODIFY_MODE = #modifyMode# ,
+			ACCT_USAGE = #acctUsage#
+        WHERE
+	        MAIN_ACCT_ID = #mainAcctId#
+	 ]]>
+	</update>
+
+
+	<insert id="insertAcctToJT" parameterClass="a4MainAcctJt">
+		<![CDATA[
+	   INSERT INTO
+	        A4_MAIN_ACCT_JT (
+	        	MAIN_ACCT_ID ,
+	        	LOGIN_NAME ,
+	        	USER_NAME ,
+	        	VALID ,
+	        	LOCK_STATUS ,
+	        	ACCT_TYPE ,
+	        	ROLELIST ,
+	        	EFFECT_TIME ,
+	        	EXPIRE_TIME ,
+	        	CREATE_TIME ,
+	        	AREA_ID ,
+	        	ORG_ID ,
+	        	ORGNAME ,
+	        	UPDATE_TIME ,
+	        	SUPERUSER ,
+	        	OPENDAYS ,
+	        	LOGONDAYS ,
+	        	MODIFY_MODE ,
+	        	ACCT_USAGE
+	        ) VALUES (
+				#mainAcctId# ,
+				#loginName# ,
+				#userName# ,
+				#valid# ,
+				#lockStatus# ,
+				#acctType# ,
+				#rolelist# ,
+				#effectTime# ,
+				#expireTime# ,
+				#createTime# ,
+				#areaId# ,
+				#orgId# ,
+				#orgname# ,
+				#updateTime# ,
+				#superuser# ,
+				#opendays# ,
+				#logondays# ,
+				#modifyMode# ,
+				#acctUsage#
+	        )
+	 ]]>
+	</insert>
+</sqlMap>

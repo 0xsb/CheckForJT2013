@@ -1,0 +1,6 @@
+[ERROR] [05:07:05]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:86)sum=========== 19335
+[ERROR] [05:09:12]  - com.ailk.jt.validate.FileValidatorOldGood.validate(FileValidatorOldGood.java:42)<!--validator error-->
+[ERROR] [05:09:28]  - com.ailk.jt.validate.FileValidatorOldGood.validate(FileValidatorOldGood.java:42)<!--validator error-->
+[ERROR] [05:13:03]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:86)sum=========== 19335
+[ERROR] [05:13:49]  - com.ailk.jt.validate.FileValidatorOldGood.validate(FileValidatorOldGood.java:42)<!--validator error-->
+[ERROR] [05:19:41]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:86)sum=========== 19335

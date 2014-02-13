@@ -1,0 +1,20 @@
+4A平台覆盖资源信息月全量文件 生成程序
+SMCRF
+
+com.ailk.uap.makefile4new.A4ResourceCoverFullFile
+
+涉及业务表：
+UAP_APP  UAP_HOST  UAP_HOST_IP  UAP_SECURITY_DEVICE  UAP_DB UAP_DB_HOST  UAP_NET_DEVICE
+
+涉及考核临时表：
+a4_crf_smp
+该临时表的目的是给SMP提供一个视图，已给SMP赋权，SMP目前已经取到视图。
+视图名字是：a4_crf_smp_view
+SMP的数据库用户是：HA4A_SMP
+
+主要流程：
+1、通过业务表查询出所需数据后，将 EFFECTTIME 小于 endTime （XML文件中的结束时间）的插入 a4_crf_smp；
+2、查询a4_crf_smp，生成XML文件；
+
+todo 过滤防火墙 10.96.161.228,10.96.161.196,10.96.161.236,10.96.164.136
+要考虑是否存在防火墙单点登录、操作的文件会取到这四个IP？

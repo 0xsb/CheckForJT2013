@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.blue.org"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.blue.org ../xsd/configuration.xsd"
+               name="SMMAF">
+    <!-- 数据库相关配置 -->
+    <db type="aiuap20"
+        sql="SELECT rownum as ROW_NUM, MAIN_ACCT_ID, LOGIN_NAME, USER_NAME, VALID, LOCK_STATUS, ACCT_TYPE, EFFECT_TIME, EXPIRE_TIME, CREATE_TIME, AREA_ID, ORG_ID, ORGNAME, UPDATE_TIME, SUPERUSER, OPENDAYS, LOGONDAYS, ACCT_USAGE FROM A4_MAIN_ACCT_JT t where t.login_name like '%wangpu%' ">
+        <!-- xml对象属性对应sql查询结果的列 -->
+        <mapper namespace="com.ailk.check.xsd.smmaf.Smp">
+            <element name="seq">
+                <column>row_num</column>
+            </element>
+            <element name="mainacctid">
+                <column>main_acct_id</column>
+            </element>
+            <element name="loginname">
+                <column>login_name</column>
+            </element>
+            <element name="username">
+                <column>user_name</column>
+            </element>
+            <element name="valid">
+                <column>valid</column>
+            </element>
+            <element name="lockstatus">
+                <column>lock_status</column>
+            </element>
+            <element name="accttype">
+                <column>acct_type</column>
+            </element>
+            <element name="rolelist">
+                <!-- 在sql查询结果中没有的，需要定义Handler和method单独进行处理 -->
+                <handler>com.ailk.check.xsd.smmaf.handler.SmmafHandler</handler>
+                <method>
+                    <!-- 方法名 -->
+                    <name>getMainAcctRoleListInfo</name>
+                    <!-- 参数定义 -->
+                    <params>
+                        <param>
+                            <!-- 参数类型都是String -->
+                            <value>column:main_acct_id</value>
+                        </param>
+                    </params>
+                </method>
+            </element>
+            <element name="effecttime">
+                <column>effect_time</column>
+            </element>
+            <element name="expiretime">
+                <column>expire_time</column>
+            </element>
+            <element name="createtime">
+                <column>create_time</column>
+            </element>
+            <element name="areaid">
+                <column>area_id</column>
+            </element>
+            <element name="orgid">
+                <column>org_id</column>
+            </element>
+            <element name="orgname">
+                <column>orgname</column>
+            </element>
+            <element name="updatetime">
+                <column>update_time</column>
+            </element>
+            <element name="superuser">
+                <column>superuser</column>
+            </element>
+            <element name="opendays">
+                <column>opendays</column>
+            </element>
+            <element name="logondays">
+                <column>logondays</column>
+            </element>
+            <element name="usage">
+                <column>acct_usage</column>
+            </element>
+        </mapper>
+    </db>
+</configuration>

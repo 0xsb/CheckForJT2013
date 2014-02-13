@@ -1,0 +1,25 @@
+前台异常业务操作统计日增量文件 生成程序
+SMBHR
+
+com.ailk.uap.makefile4new.WebExceptionBusinessDayAddlFile_new
+
+连接数据库：
+aiuap  cboss
+
+涉及业务表：
+orig_busi_record
+
+涉及考核临时表：
+a4_cboss_buss_cx  a4_cboss_buss_jf  demo_test
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_cboss_buss_cx；
+3、清空 a4_cboss_buss_jf；
+4、连接cboss数据库，查询 cboss.orig_busi_record，获取 HOME_SWITCH_NODE, COUNT(1) TOTAL_COUNT；
+5、将查询结果插入 a4_cboss_buss_cx （该处使用了ibatis2）；
+6、连接cboss数据库，查询 cboss.orig_busi_record，获取 HOME_SWITCH_NODE, count(1) BUSI_COUNT；
+7、将查询结果插入 a4_cboss_buss_jf （该处使用了ibatis2）；
+8、根据 a4_cboss_buss_cx t, demo_test w 向 demo_test 的 total_count 插入数据；（代码182行）
+9、根据 a4_cboss_buss_jf t, demo_test w 向 demo_test 的 busi_count 插入数据；（代码183行）
+10、根据三种异常行为代码，分三次从 a4_cboss_buss_cx t, demo_test w, A4_CBOSS_BUSS_JF u 查询，并生成XML文件。

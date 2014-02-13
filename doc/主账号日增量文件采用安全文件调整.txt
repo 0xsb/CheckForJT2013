@@ -1,0 +1,101 @@
+主账号日增量文件采用安全文件上报集团后，有可能影响变动率
+一、影响原理说明：
+    前一日确实发生变动的账号信息已经更新本地集团表，但是由于未上报给集团，因此集团处该部分数据并非本地最新状态；
+集团处由于收到了安全文件上报的主账号日增量文件，因此集团处的集团表已经将安全文件中的主账号更新为安全文件中的状态。从而导致了集团处和本地账户状态存在差异。
+
+二：为避免影响变动率，需进行一下操作，调整数据：
+  调整依据：将未上报给集团的主账号信息重新上报给集团，让集团处的这些账户信息与本地保持一致；将安全文件中的主账号信重
+新安装本地最新状态重新上报给集团，让集团处这些账号信息与本地保持一致。
+
+三、调整由两部份：
+第一步：将昨日确实发生过更新，但是未是上报给集团的数据，重新更新最后更新时间，来上报给集团
+操作方法：
+1、通过主账号日增量文件生成sql取出数据，创建临时表
+create table a4_wangpu as (select 'add' as modify_mode,
+       t1.main_acct_id,
+       t1.login_name,
+       t1.name as user_name,
+       case
+         when (sysdate >= t1.effect_time and sysdate < t1.expire_time and
+              t1.lock_status = '0') then
+          '1'
+         else
+          '0'
+       end valid,
+       t1.lock_status,
+       t1.acct_type,
+       t1.effect_time,
+       t1.expire_time,
+       t1.create_time,
+       t1.area_id,
+       t1.default_org as org_id,
+       t1.last_update_time as update_time
+  from uap_main_acct t1
+ where t1.create_time >=
+       to_date('2013-07-02 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t1.create_time <
+       to_date('2013-07-03 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+union all
+select 'upd' as modify_mode,
+       t2.main_acct_id,
+       t2.login_name,
+       t2.name as user_name,
+       case
+         when (sysdate >= t2.effect_time and sysdate < t2.expire_time and
+              t2.lock_status = '0') then
+          '1'
+         else
+          '0'
+       end valid,
+       t2.lock_status,
+       t2.acct_type,
+       t2.effect_time,
+       t2.expire_time,
+       t2.create_time,
+       t2.area_id,
+       t2.default_org as org_id,
+       t2.last_update_time as update_time
+  from uap_main_acct t2
+ where t2.last_update_time >=
+       to_date('2013-07-02 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.last_update_time <
+       to_date('2013-07-03 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.last_update_time > t2.create_time
+union all
+select 'del' as modify_mode,
+       t3.main_acct_id,
+       t3.login_name,
+       t3.name as user_name,
+       '0' as valid,
+       t3.lock_status,
+       t3.acct_type,
+       t3.effect_time,
+       t3.expire_time,
+       t3.create_time,
+       t3.area_id,
+       t3.default_org as org_id,
+       t3.last_update_time as update_time
+  from uap_main_acct_his t3
+ where t3.last_update_time >=
+       to_date('2013-07-02 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t3.last_update_time <
+       to_date('2013-07-03 00:00:00', 'yyyy-MM-dd HH24:mi:ss'))
+2、更新主账号表中的最后更新时间
+update uap_main_acct t
+   set t.last_update_time = sysdate
+ where t.login_name in (select a.login_name from a4_wangpu a);
+如果安全文件中有删除的数据，需要同时更新主账号历史表中的关联数据的最后更新时间
+
+第二步：将安全文件中的数据根据login_name或者mainacctid字段关联主账号表，更新主账号表中这些字段的最后更新时间，将主账号表中的这些账号的状态更新给集团。
+操作方法：
+1、将安全文件解析，导入临时表中
+此步可以有程序完成
+该程序在29服务器的/home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/runSMMAI.sh
+2、关联出主账号表中与安全文件中数据相关的主账号，然后更新其最后更新时间
+查询语句为：
+select * from uap_main_acct t where t.login_name in(select a.loginname from a4_smmai_for_jk a);
+
+
+update uap_main_acct t set t.last_update_time = sysdate where t.main_acct_id in(select w.mainacctid from a4_smmai_for_jk w )
+
+update uap_main_acct_his t set t.last_update_time=sysdate where t.main_acct_id in (select w.mainacctid from a4_smmai_for_jk w)

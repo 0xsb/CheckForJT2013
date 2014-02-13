@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<id name="save_error_file_reason">
+		<![CDATA[
+		insert into A4_FILE_ERROR_LIST_temp
+		values
+		  (to_date(#file_begin_time#, 'yyyy-MM-dd hh24:Mi:ss'),
+		   to_date(#file_end_time#, 'yyyy-MM-dd hh24:Mi:ss'),
+		    #file_name#,
+		    #file_sum#,
+		    #file_error_reason#,
+		   to_date(#file_upload_to_bomc#, 'yyyy-MM-dd hh24:Mi:ss'))
+        ]]>
+	</id>
+
+
+	<id name="vip_manage">
+		<![CDATA[
+	insert into A4_partner_manage (caculate_time,login_days,all_acct,acct_manage)
+	values (to_date(#caculate_time#,'yyyy-MM-dd hh24:Mi:ss'),#login_days#,#all_acct#,#acct_manage#)
+	 ]]>
+	</id>
+
+
+	<id
+		name="update_a4_main_acct_usableday_usage_aviliable_days_and_logon_days">
+		<![CDATA[
+	update a4_main_acct_usableday_usage t
+   set t.aviliable_days =0 ,t.logon_days=0
+	]]>
+	</id>
+
+
+
+
+	<id name="update_a4_main_acct_login_days">
+		<![CDATA[
+		update a4_main_acct_usableday_usage z
+   set z.logon_days =
+       (
+        select i.login_days
+          from (SELECT w.login_name,
+                        COUNT(DISTINCT TO_CHAR(T.OPERATE_TIME, 'yyyy-MM-dd')) as login_days
+                   FROM audita.IAP_APP_LOG          PARTITION(#dataBasePart#) T,
+                        a4_main_acct_usableday_usage w
+                  WHERE w.valid = 1
+                    and w.login_name=t.main_acct_name
+                    and T.OPERATE_TYPE_ID = '1-AIUAP-10000'
+                    AND T.DOMAIN_ID = 'UAP'
+                    AND T.OPERATE_TIME >
+                        TO_DATE(#monthBeginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+                    AND T.OPERATE_TIME <
+                        TO_DATE(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+                  group by w.login_name) i
+         where z.login_name = i.login_name
+        
+        )
+		where z.valid=1
+	]]>
+	</id>
+
+	<!-- 主账号日增量 -->
+	<id name="main_acct_day_add">
+		<![CDATA[
+	    select sum(count)
+  from (select count(1) as count
+          from uap_main_acct t1
+         where t1.create_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t1.create_time <
+               to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss')
+        union all
+        select count(1) as count
+          from uap_main_acct t2
+         where t2.last_update_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t2.last_update_time <
+               to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss')
+        union all
+        select count(1) as count
+          from uap_main_acct_his t3
+         where t3.last_update_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t3.last_update_time <
+               to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+	 ]]>
+	</id>
+
+	<id name="update_a4_main_acct_usableday_usage_aviliable_part1">
+		<![CDATA[
+	 update a4_main_acct_usableday_usage t
+   set t.aviliable_days = t.aviliable_days + 1
+ where t.main_acct_id =
+       (select w.main_acct_id
+          from uap_main_acct w
+         where w.lock_status = 0
+           and sysdate between w.expire_time and w.effect_time)
+	]]>
+	</id>
+	<id name="update_a4_main_acct_usableday_usage_aviliable_part2">
+		<![CDATA[
+	 update a4_main_acct_usableday_usage t
+   set t.aviliable_days = 0
+ where t.main_acct_id =
+       (select w.main_acct_id
+          from uap_main_acct_his w
+         where w.lock_status = 0
+           and sysdate between w.expire_time and w.effect_time)
+	]]>
+	</id>
+
+	<!-- 生成系统后台日志日增量文件 开始 -->
+	<id name="truncate_table_a4_iap_device_session">
+		<![CDATA[
+	       truncate table a4_iap_device_session
+        ]]>
+	</id>
+	<id name="count_sys_device">
+		<![CDATA[
+	   select count(distinct(t.belong_sys))total_sys_device from final_device_session t
+        ]]>
+	</id>
+
+	<id name="db_day_file">
+		<![CDATA[
+		 insert into a4_iap_device_session (DEVICE_ID,TOTAL,LOGIN_HOUR)
+	         select distinct (t1.device_id),
+                count(t1.device_id) total,
+                CASE TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                         'hh24:mi') || '-' ||
+                 TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                         'hh24:mi')
+                  WHEN '00:00-00:30' THEN
+          '1'
+         WHEN '00:30-01:00' THEN
+          '2'
+         WHEN '01:00-01:30' THEN
+          '3'
+         WHEN '01:30-02:00' THEN
+          '4'
+         WHEN '02:00-02:30' THEN
+          '5'
+         WHEN '02:30-03:00' THEN
+          '6'
+         WHEN '03:00-03:30' THEN
+          '7'
+         WHEN '03:30-04:00' THEN
+          '8'
+         WHEN '04:00-04:30' THEN
+          '9'
+         WHEN '04:30-05:00' THEN
+          '10'
+         WHEN '05:00-05:30' THEN
+          '11'
+         WHEN '05:30-06:00' THEN
+          '12'
+         WHEN '06:00-06:30' THEN
+          '13'
+         WHEN '06:30-07:00' THEN
+          '14'
+         WHEN '07:00-07:30' THEN
+          '15'
+         WHEN '07:30-08:00' THEN
+          '16'
+         WHEN '08:00-08:30' THEN
+          '17'
+         WHEN '08:30-09:00' THEN
+          '18'
+         WHEN '09:00-09:30' THEN
+          '19'
+         WHEN '09:30-10:00' THEN
+          '20'
+         WHEN '10:00-10:30' THEN
+          '21'
+         WHEN '10:30-11:00' THEN
+          '22'
+         WHEN '11:00-11:30' THEN
+          '23'
+         WHEN '11:30-12:00' THEN
+          '24'
+         WHEN '12:00-12:30' THEN
+          '25'
+         WHEN '12:30-13:00' THEN
+          '26'
+         WHEN '13:00-13:30' THEN
+          '27'
+         WHEN '13:30-14:00' THEN
+          '28'
+         WHEN '14:00-14:30' THEN
+          '29'
+         WHEN '14:30-15:00' THEN
+          '30'
+         WHEN '15:00-15:30' THEN
+          '31'
+         WHEN '15:30-16:00' THEN
+          '32'
+         WHEN '16:00-16:30' THEN
+          '33'
+         WHEN '16:30-17:00' THEN
+          '34'
+         WHEN '17:00-17:30' THEN
+          '35'
+         WHEN '17:30-18:00' THEN
+          '36'
+         WHEN '18:00-18:30' THEN
+          '37'
+         WHEN '18:30-19:00' THEN
+          '38'
+         WHEN '19:00-19:30' THEN
+          '39'
+         WHEN '19:30-20:00' THEN
+          '40'
+         WHEN '20:00-20:30' THEN
+          '41'
+         WHEN '20:30-21:00' THEN
+          '42'
+         WHEN '21:00-21:30' THEN
+          '43'
+         WHEN '21:30-22:00' THEN
+          '44'
+         WHEN '22:00-22:30' THEN
+          '45'
+         WHEN '22:30-23:00' THEN
+          '46'
+         WHEN '23:00-23:30' THEN
+          '47'
+         WHEN '23:30-00:00' THEN
+          '48'
+         ELSE
+          '0'
+         END login_hour
+  from iap_device_session PARTITION(#dataBasePart#)  t1, iap_device_session_cmd t2
+ where t1.device_type = 3
+   and t1.session_id = t2.session_id
+   and t1.log_source = '4AFortLog'
+   and t2.op_time > to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+   and t2.op_time <=
+       to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss')
+ group by t1.device_id,
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                  'hh24:mi') || '-' ||
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                  'hh24:mi')
+        ]]>
+	</id>
+
+	<id name="truncate_test_device_session">
+		<![CDATA[
+        truncate table test_device_session
+   ]]>
+	</id>
+
+	<id name="sepreate_device">
+		<![CDATA[
+        insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+   ]]>
+	</id>
+
+	<id name="truncate_second_final_device_session">
+		<![CDATA[
+        truncate table second_final_device_session
+   ]]>
+	</id>
+
+	<id name="second_final_device_session">
+		<![CDATA[
+        insert into second_final_device_session 
+  select t.belong_sys, sum(total) total, t.login_hour
+    from test_device_session t
+   group by login_hour, t.belong_sys
+   ]]>
+	</id>
+
+	<id name="final_device">
+		<![CDATA[
+   update final_device_session t
+     set t.total =
+         (select y.total
+            from second_final_device_session y
+           where t.belong_sys = y.belong_sys
+             and t.login_hour = y.login_hour)
+   ]]>
+	</id>
+	<id name="g_file">
+		<![CDATA[
+	 select t.belong_sys,
+       t.login_hour,
+       case
+         when t.total is null then 0
+           when t.total is not null then t.total
+       end total
+  from final_device_session t
+	]]>
+	</id>
+
+	<!-- 生成系统后台日志日增量文件 结束 -->
+	<!-- =================================(CBOSS)==================================== -->
+	<id name="a4_cboss_update_db_source_truncate_cx">
+		<![CDATA[
+	      truncate table a4_cboss_buss_cx
+        ]]>
+	</id>
+
+	<id name="a4_cboss_update_db_source_truncate_jf">
+		<![CDATA[
+	      truncate table a4_cboss_buss_jf
+        ]]>
+	</id>
+
+	<!--前台异常业务操作统计日增量文件中total值 -->
+	<id name="WEBEXCEPTIONBUSINESS_total_cx">
+		<![CDATA[
+	   select HOME_SWITCH_NODE, COUNT(1) TOTAL_COUNT
+	    from  cboss.orig_busi_record t
+	   	where t.bipcode='BIP1C001'
+	   		and t.activitycode ='T1000003'
+	   		and t.processtime>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+	   		and t.processtime<=to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+	   	group by t.HOME_SWITCH_NODE
+        ]]>
+	</id>
+	<!--前台异常业务操作统计日增量文件中buztotal值 -->
+	<id name="WEBEXCEPTIONBUSINESS_buztotal_jf">
+		<![CDATA[
+	   select HOME_SWITCH_NODE,count(1) BUSI_COUNT
+	    from cboss.orig_busi_record t
+	   	where t.bipcode='BIP1C001'
+	   		and t.activitycode ='T1001001'
+	   		and t.processtime>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+	   		and t.processtime<=to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+	   	group by t.HOME_SWITCH_NODE
+	    ]]>
+	</id>
+	<id name="a4_cboss_update_db_source_insert_cx_temp">
+		<![CDATA[
+	     insert into demo_test
+         (total_count)
+        	select t.total_count
+  		  from a4_cboss_buss_cx t, demo_test w
+  			 where t.home_switch_node = w.home_switch_node
+        ]]>
+	</id>
+	<id name="a4_cboss_update_db_source_insert_jf_temp">
+		<![CDATA[
+	    insert into demo_test
+  (busi_count)
+  select t.busi_count
+    from a4_cboss_buss_jf t, demo_test w
+   where t.home_switch_node = w.home_switch_node
+        ]]>
+	</id>
+	<id name="a4_cboss_all_temp">
+		<![CDATA[
+	       select w.PRVO_NAME, t.TOTAL_COUNT,u.BUSI_COUNT
+    from a4_cboss_buss_cx t, demo_test w,A4_CBOSS_BUSS_JF u
+   where t.home_switch_node = w.home_switch_node
+   and w.HOME_SWITCH_NODE=u.HOME_SWITCH_NODE
+        ]]>
+	</id>
+
+	<!-- =================================(测试环境上)这些都是跟替BOSS系统生成文件需要使用到的SQL==================================== -->
+	<id name="sql_boss_acct_cs">
+		<![CDATA[
+	     SELECT T2.STAFF_ID,
+       T2.CODE AS LOGINNAME,
+       case
+         when T1.OPERATE_TYPE = 3 then
+          'del'
+         when T1.OPERATE_TYPE = 1 then
+          'add'
+       end "MODE",
+       T1.DONE_DATE AS UPDATETIME
+  FROM SEC.SYS_OPERATE_LOG T1, SEC.SYS_OPERATOR T2
+ WHERE T1.TABLE_NAME_OP = 'SYS_OPERATOR'
+   AND T1.FUNC_CHILD_TYPE IN (11, 13, 14)
+   AND T1.RECORD_ID = T2.OPERATOR_ID
+   and t1.done_date > sysdate - 2
+   and TO_CHAR(T1.DONE_DATE, 'yyyy-MM-dd') =
+       TO_CHAR(SYSDATE - 1, 'yyyy-MM-dd')  
+        ]]>
+	</id>
+	<id name="sql_boss_login_cs">
+		<![CDATA[
+	     select count(1) 
+	      from BOSS_LOGIN_OPER t 
+	      where t.login_channel='4A-BOSS'
+		    and  t.login_date > to_date('#beginTime#', 'yyyy-MM-dd HH24:mi:ss')
+		    and t.login_date <= to_date('#endTime#', 'yyyy-MM-dd HH24:mi:ss')
+        ]]>
+	</id>
+	<id name="sql_boss_acct_cs_truncate">
+		<![CDATA[
+	   truncate table A4_BOSS_ACCT
+        ]]>
+	</id>
+	<!-- =================================这些都是跟替BOSS系统生成文件需要使用到的SQL==================================== -->
+	<!-- BOSS账号增加删除需要使用到的SQL,该SQL主要用户生成《应用侧记录应用系统从账号日增量文件》(SMAAI) -->
+	<id name="select_boss_acct_change">
+		<![CDATA[
+	    SELECT  T2.STAFF_ID,
+	            T2.CODE AS LOGINNAME,
+	            T1.OPERATE_TYPE AS "MODE" ,
+	            T1.DONE_DATE AS UPDATETIME 
+	      FROM SEC.SYS_OPERATE_LOG T1,SEC.SYS_OPERATOR T2 
+         WHERE  T1.TABLE_NAME_OP = 'SYS_OPERATOR' 
+           AND  T1.FUNC_CHILD_TYPE IN(11,13,14) 
+           AND T1.RECORD_ID = T2.OPERATOR_ID 
+           AND t1.done_date > sysdate -2
+           AND TO_CHAR(T1.DONE_DATE,'yyyy-MM-dd') = TO_CHAR(SYSDATE -1,'yyyy-MM-dd');
+        ]]>
+	</id>
+	<!-- BOSS账号登陆和操作需要使用到的SQL,该SQL主要用户生成《应用侧记录应用系统登录及操作统计日增量文件》(SMAAR) -->
+	<id name="select_boss_acct_login">
+		<![CDATA[
+	    SELECT * FROM SEC.SYS_LOGIN_LOG T WHERE LOGIN_CHANNEL= '4A-BOSS'
+        ]]>
+	</id>
+	<id name="select_boss_acct_operate">
+		<![CDATA[
+	    SELECT * FROM dual
+        ]]>
+	</id>
+	<!-- BOSS账号日增量文姐 -->
+	<id name="updateAppAcctTableSourceAdd_part1">
+		<![CDATA[
+		insert into a4_app_acct_snap
+  (acct_seq, staff_id, loginname, chage_mode, acct_create_time, updatetime)
+  select acct_seq,user_id, login_acct, chage_mode, create_time , last_update_time
+    from (select t.acct_seq,
+		         t.user_id,
+                 t.login_acct,
+                 'add' as chage_mode,
+                 t.create_time ,
+				 t.last_update_time
+            from uap_app_acct t
+           where t.acct_status = 1
+             and t.app_id = '10430'
+             and t.create_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and t.create_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+          minus
+          select  w.acct_seq,
+                  w.user_id,
+                 w.login_acct,
+                 'add' as chage_mode,
+                 w.create_time ,
+				w.last_update_time
+            from a4_app_acct_#timeForTable# w
+           where w.acct_status = 1
+             and w.app_id = '10430'
+             and w.create_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and w.create_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss'))
+        ]]>
+	</id>
+	<id name="updateAppAcctTableSourceAdd_part2">
+		<![CDATA[
+  insert into a4_app_acct_snap
+  (acct_seq, staff_id, loginname, chage_mode, acct_create_time, updatetime)
+  select acct_seq,user_id, login_acct, chage_mode, create_time , last_update_time
+      from (select w.acct_seq,
+                 w.user_id,
+                 w.login_acct,
+                 'add' as chage_mode ,
+                 w.create_time,
+                 w.last_update_time
+              from a4_app_acct_#timeForTable# w
+             where w.acct_status = 1
+               and w.app_id = '10430'
+               and w.create_time >=
+                   to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+               and w.create_time <=
+                   to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+            minus
+            select  t.acct_seq,
+		              t.user_id,
+                 t.login_acct,
+                 'add' as chage_mode,
+                 t.create_time ,
+				t.last_update_time
+              from uap_app_acct t
+             where t.acct_status = 1
+               and t.app_id = '10430'
+               and t.create_time >=
+                   to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+               and t.create_time <=
+                   to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+            )
+        ]]>
+	</id>
+	<id name="updateAppAcctTableSourceDel_part1">
+		<![CDATA[
+		insert into a4_app_acct_snap
+  (acct_seq, staff_id, loginname, chage_mode, acct_create_time, updatetime)
+  select acct_seq,user_id, login_acct, chage_mode, create_time , last_update_time
+      from (select w.acct_seq,
+                  w.user_id,
+                 w.login_acct,
+                 'add' as chage_mode,
+                 w.create_time ,
+				w.last_update_time
+            from a4_app_acct_#timeForTable# w
+           where w.acct_status in (0, 2)
+             and w.app_id = '10430'
+             and w.pwd_update_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and w.pwd_update_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+          minus
+          select  t.acct_seq,
+		          t.user_id,
+                 t.login_acct,
+                 'add' as chage_mode,
+                 t.create_time ,
+				t.last_update_time
+            from uap_app_acct t
+           where t.acct_status in (0, 2)
+             and t.app_id = '10430'
+             and t.pwd_update_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and t.pwd_update_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss'))
+        ]]>
+	</id>
+	<id name="updateAppAcctTableSourceDel_part2">
+		<![CDATA[
+		insert into a4_app_acct_snap
+  (acct_seq, staff_id, loginname, chage_mode, acct_create_time, updatetime)
+  select acct_seq,user_id, login_acct, chage_mode, create_time , last_update_time
+      from (select  t.acct_seq,
+		           t.user_id,
+                 t.login_acct,
+                 'add' as chage_mode,
+                 t.create_time ,
+				t.last_update_time
+            from uap_app_acct t
+           where t.acct_status in (0, 2)
+             and t.app_id = '10430'
+             and t.pwd_update_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and t.pwd_update_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+          minus
+            select  w.acct_seq,
+                  w.user_id,
+                 w.login_acct,
+                 'add' as chage_mode,
+                 w.create_time ,
+				w.last_update_time
+            from a4_app_acct_#timeForTable# w
+           where w.acct_status in (0, 2)
+             and w.app_id = '10430'
+             and w.pwd_update_time >=
+                 to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+             and w.pwd_update_time <=
+                 to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss'))
+        ]]>
+	</id>
+	<id name="a4_boss_select_acct_day_change">
+		<![CDATA[
+	select count(1)
+  from a4_app_acct_snap t
+ where t.updatetime >=  to_date(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+    or t.acct_create_time > = to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+        ]]>
+	</id>
+
+	<!-- BOSS账号登陆和操作需要使用到的SQL,该SQL主要用户生成《前台具备超级权限人员统计月全量文件》(SMSMF) -->
+	<id name="">
+		<![CDATA[
+
+        ]]>
+	</id>
+	<!-- ================================= 一下这些SQL主要是4A系统计算考核指标使用 ================================= -->
+	<id name="select_acct_type">
+		<![CDATA[
+	    SELECT * FROM uap_main_acct t where t.acct_type=#acct_type# and t.login_name=#login_name#
+        ]]>
+	</id>
+	<!-- 计算4A侧BOSS从账号和BOSS侧从账号差异SQL -->
+	<id name="boss_4A_acct_differ">
+		<![CDATA[
+	   insert into UAP_BOSS_4A_differ
+       (staff_id, loginname, chage_mode, updatetime)
+  select w.staff_id, w.loginname, w.chage_mode, w.updatetime
+    from a4_boss_acct_change_detail w
+   where w.updatetime >=
+         to_date(to_char(sysdate - 1, 'yyyy-MM-dd hh24:Mi:ss'),
+                 'yyyy-MM-dd hh24:Mi:ss')
+     and w.updatetime <=
+         to_date('#endTime#', 'yyyy-MM-dd hh24:Mi:ss')
+           minus
+  select t.user_id, t.login_acct, t.acct_status, t.last_update_time
+    from a4_app_acct_snap t
+   where t.last_update_time >=
+         to_date(to_char(sysdate - 1, 'yyyy-MM-dd hh24:Mi:ss'),
+                 'yyyy-MM-dd hh24:Mi:ss')
+     and t.last_update_time <=
+         to_date('#endTime#', 'yyyy-MM-dd hh24:Mi:ss')
+
+        ]]>
+	</id>
+
+	<!-- 查找模拟集团表中主账号总数 -->
+	<id name="main_acct_jt_count">
+		<![CDATA[
+	     select count(1) from a4_main_acct_jt t
+	]]>
+	</id>
+	<!-- 查找本地快照表中主账号总数 -->
+	<id name="main_acct_local_count">
+		<![CDATA[
+	select count(1) from  a4_main_acct_snap
+	]]>
+	</id>
+	<!-- 从模拟集团表中查找指定类型账号有效的账号总数 -->
+	<id name="acct_type_valid">
+		<![CDATA[
+	   select count(1)
+  from a4_main_acct_jt t
+ where t.acct_type=#acct_type#
+ and t.acct_usage >= 0.4
+   and t.opendays>5
+	]]>
+	</id>
+	<id name="acct_type_valid_count">
+		<![CDATA[
+	   select count(1)
+  from a4_main_acct_jt t
+ where t.acct_type=#acct_type#
+ and t.opendays>5
+	]]>
+	</id>
+	<id name="save_usage">
+		<![CDATA[
+	insert into a4_main_acct_usage 
+	 (caculate_time,  over_five_count,  over_forty_count,  acct_type,  acct_usage,  all_count)
+	 values( to_date(#caculate_time#,'yyyy-MM-dd hh24:Mi:ss'),#over_five_count#,#over_forty_count#,#acct_type#,#acct_usage#,#all_count#)
+	 ]]>
+	</id>
+	<id name="acct_type_over_five_days">
+		<![CDATA[
+	 select count(1) from a4_main_acct_jt t where t.logondays>5
+	 ]]>
+	</id>
+
+	<!-- 查询在模拟集团表中但不在本地快照表中数据 -->
+	<id name="acct_in_JT_not_in_local">
+		<![CDATA[
+	select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_jt t
+        minus
+        select w.login_name, w.Lock_Status, w.Valid
+          from a4_main_acct_snap w
+         where w.modify_mode <> 'del')
+	]]>
+	</id>
+	<!-- 查询在本地快照表中但不在模拟集团表中数据 -->
+	<id name="acct_in_local_not_in_jt">
+		<![CDATA[
+	select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_snap t
+         where t.Modify_Mode <> 'del'
+        minus
+        select w.login_name, w.Lock_Status, w.Valid from a4_main_acct_jt w)
+	]]>
+	</id>
+	<!--比对本地快照表主账号与模拟集团表中账号数据 -->
+	<id name="compare_local_and_jt_acct">
+		<![CDATA[select count(1)
+  from (select a.login_name, a.valid, a.acct_type
+          from (select t.login_name, t.valid, t.acct_type
+                  from a4_main_acct_jt t) a,
+               a4_main_acct_snap b
+         where a.login_name = b.login_name
+           and b.modify_mode <> 'del'
+        minus
+        select m.login_name, m.valid, m.acct_type
+          from (select w.login_name, w.valid, w.acct_type
+                  from a4_main_acct_snap w
+                 where w.modify_mode <> 'del') m,
+               a4_main_acct_jt n
+         where m.login_name = n.login_name)
+	]]>
+	</id>
+	<!-- 将主账号变动率保存到变动率表中 -->
+	<id name="a4_main_acct_change_do">
+		<![CDATA[
+	    insert into a4_main_acct_change_do values( sysdate,#jtchange#,#fullmainacctjt#,#dayacctchangejt#,#fullmainacctlocal#,#inanotinb#,#inbnotina#,#fullmainacctjt#)
+	]]>
+	</id>
+	<!-- 删除账号差异表数据 -->
+	<id name="truncate_different_acct">
+		<![CDATA[
+	    truncate table  a4_main_acct_jt_differ
+	]]>
+	</id>
+	<id name="insert_different_acct">
+		<![CDATA[
+	 insert into a4_main_acct_jt_differ
+  select t.login_name, t.valid, t.acct_type
+    from a4_main_acct_snap t
+  minus
+  select w.login_name, w.valid, w.acct_type from a4_main_acct_jt w
+	 ]]>
+	</id>
+	<!-- ==========================================以下是主账号使用率涉及到的SQL==================================================== -->
+	<id name="a4_main_acct_usage_getAviliableDays">
+		<![CDATA[
+      SELECT  t.aviliable_days FROM  A4_MAIN_ACCT_USABLEDAY_USAGE t where t.main_acct_id=#main_acct_id#
+    ]]>
+	</id>
+
+	<!-- ==========================================以下是从账号覆盖率涉及到的SQL==================================================== -->
+	<!-- 计算4A侧某一天增加的boss账号总数SQL 单个增加应用帐号 1-AIUAP-20119 增加应用帐号 -->
+	<!-- 操作内容"创建应用帐号成功：应用系统=BOSS系统,帐号标识=2,000,054,129,帐号名称=G948958" 需要将账号名称取出来 -->
+	<id name="a4_boss_add">
+		<![CDATA[
+		insert into A4_BOSS_ACCT_FROM_LOG
+  (seq,
+   log_id,
+   DOMAIN_ID,
+   OPERATE_TYPE_ID,
+   OPERATE_TYPE_NAME,
+   OPERATE_CONTENT,
+   CREATE_TIME,
+   OPERATE_TIME,
+   IS_BATCH,
+   ACCT_CHANGE_MODE)
+  select a4_boss_acct_change_seq.nextval,
+         t.log_id,
+         t.domain_id,
+         t.operate_type_id,
+         t.operate_type_name,
+         t.operate_content,
+         t.create_time,
+         t.operate_time,
+         '0' as is_batch,
+         'add' as acct_change_mode
+    from audita.iap_app_log partition(#dataBasePart#) t
+   where t.operate_type_id in ('1-AIUAP-20119')
+   and t.domain_id='UAP'
+   and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+   and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 计算4A侧某一天增加的boss账号总数SQL 1-AIUAP-20134 批量增加应用帐号 -->
+	<!-- 操作内容"管理员[liyan80]于时间[2012-06-07 16:53:45.0]批量新增应用帐号，批量工单号：[256187]，详细信息可在批量明细中查询"
+		需要根据工单号查询出该工单做了多少个账号和时间 -->
+	<id name="a4_boss_batch_add">
+		<![CDATA[
+		insert into A4_BOSS_ACCT_FROM_LOG
+  (seq,
+   log_id,
+   DOMAIN_ID,
+   OPERATE_TYPE_ID,
+   OPERATE_TYPE_NAME,
+   OPERATE_CONTENT,
+   CREATE_TIME,
+   OPERATE_TIME,
+   IS_BATCH,
+   ACCT_CHANGE_MODE)
+  select a4_boss_acct_change_seq.nextval,
+         t.log_id,
+         t.domain_id,
+         t.operate_type_id,
+         t.operate_type_name,
+         t.operate_content,
+         t.create_time,
+         t.operate_time,
+         '1' as is_batch,
+         'add' as acct_change_mode
+    from  audita.iap_app_log partition(#dataBasePart#) t
+   where t.operate_type_id in ('1-AIUAP-20134')
+   and  t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+	  ]]>
+	</id>
+	<!-- 计算4A侧某一天删除的boss账号总数SQL 1-AIUAP-20121 删除应用帐号 -->
+	<!-- 操作内容" 停用(失效)应用帐号成功：帐号标识=21,662,帐号名称=N720125",需要将账号名称取出来 -->
+	<id name="a4_boss_del">
+		<![CDATA[
+		insert into A4_BOSS_ACCT_FROM_LOG
+  (seq,
+   log_id,
+   DOMAIN_ID,
+   OPERATE_TYPE_ID,
+   OPERATE_TYPE_NAME,
+   OPERATE_CONTENT,
+   CREATE_TIME,
+   OPERATE_TIME,
+   IS_BATCH,
+   ACCT_CHANGE_MODE)
+  select a4_boss_acct_change_seq.nextval,
+         t.log_id,
+         t.domain_id,
+         t.operate_type_id,
+         t.operate_type_name,
+         t.operate_content,
+         t.create_time,
+         t.operate_time,
+         '0' as is_batch,
+         'del' as acct_change_mode
+    from  audita.iap_app_log partition(#dataBasePart#) t
+   where t.operate_type_id in ('1-AIUAP-20121')
+   and  t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 计算4A侧某一天删除的boss账号总数SQL 1-AIUAP-20132 应用帐号停用 编码有问题？ -->
+	<id name="a4_boss_logic_del">
+		<![CDATA[
+       select t.operate_type_id,t.operate_type_name,t.operate_content
+  from audita.iap_app_log partition(#dataBasePart#) t
+ where t.operate_type_id = '1-AIUAP-20132'
+ and t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 计算4A侧某一天删除的boss账号总数SQL 1-AIUAP-20136 批量删除(停用)应用帐号 这个有数据！！！！！ -->
+	<id name="a4_boss_batch_logic_del_part1">
+		<![CDATA[
+		insert into A4_BOSS_ACCT_FROM_LOG
+  (seq,
+   log_id,
+   DOMAIN_ID,
+   OPERATE_TYPE_ID,
+   OPERATE_TYPE_NAME,
+   OPERATE_CONTENT,
+   CREATE_TIME,
+   OPERATE_TIME,
+   IS_BATCH,
+   ACCT_CHANGE_MODE)
+  select a4_boss_acct_change_seq.nextval,
+         t.log_id,
+         t.domain_id,
+         t.operate_type_id,
+         t.operate_type_name,
+         t.operate_content,
+         t.create_time,
+         t.operate_time,
+         '1' as is_batch,
+         'del' as acct_change_mode
+    from  audita.iap_app_log partition(#dataBasePart#) t
+   where t.operate_type_id in ('1-AIUAP-20136')
+   and  t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 计算4A侧某一天删除的boss账号总数SQL 1-AIUAP-20198 批量删除(停用)应用帐号 编码有问题？ -->
+	<id name="a4_boss_batch_logic_del_part2">
+		<![CDATA[
+       select t.operate_type_id,t.operate_type_name,t.operate_content
+  from audita.iap_app_log partition(#dataBasePart#) t
+ where t.operate_type_id = '1-AIUAP-20198'
+ and t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 计算4A侧某一天删除的boss账号总数SQL 1-AIUAP-20205 批量删除(停用)应用帐号 编码有问题？ -->
+	<id name="a4_boss_batch_logic_del_part3">
+		<![CDATA[
+       select t.operate_type_id,t.operate_type_name,t.operate_content
+  from audita.iap_app_log partition(#dataBasePart#) t
+ where t.operate_type_id = '1-AIUAP-20205'
+ and t.domain_id='UAP'
+  and t.operate_time>to_date(#beginTime#,'yyyy-MM-dd hh24:Mi:ss')
+ and t.operate_time<to_date(#endTime#,'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<!-- 通过SVNSN查找批量增加和删除的BOSS账号 -->
+	<id name="a4_boss_batch_findBySVNSN">
+		<![CDATA[
+select sub_acct_id as staff_id,
+       login_acct as login_name,
+       #chage_mode# as chage_mode,
+       (select op_end_time from uap_batch_works  where t.svc_sn=#snv_sn# )as acct_create_time,
+       (select sheet_desc from uap_batch_works  where t.svc_sn=#snv_sn# )as  change_content
+  from uap_batch_app_detail
+ where t.svc_sn = #snv_sn#
+	]]>
+	</id>
+	<!-- 从4A临时日志表中跟新到最终比对的数据表中 -->
+	<id name="a4_select_app_acct_change">
+		<![CDATA[
+	 select t.operate_type_id,t.operate_type_name,t.operate_content,t.is_batch,t.acct_change_mode from audita.A4_BOSS_ACCT_FROM_LOG t where t.is_batch=0
+	 ]]>
+	</id>
+	<!-- 将在可用天数使用率表中已存在的账号更新可用天数 -->
+	<id name="a4_usage_update_available_usage">
+		<![CDATA[
+	update a4_main_acct_usableday_usage set aviliable_days= aviliable_days+1 where main_acct_id=#mainacctid#
+	]]>
+	</id>
+	<!--将不在可用天数使用率表的账号添加到表中 -->
+	<id name="a4_usage_insert_available_usage">
+		<![CDATA[
+	insert into a4_main_acct_usableday_usage(main_acct_id,login_name,acct_type,lock_time,last_update_time,aviliable_days,calculate_time,acct_usage,valid,
+	modify_mode) select t.main_acct_id,t.login_name,t.acct_type,t.lock_time,t.last_update_time,'0',#caculatetime#,'',t.valid,t.modify_mode
+	from a4_main_acct_snap t
+	where t.main_acct_id=#mainacctid# and t.lock_status='0' and to_char(#caculatetime#,'yyyy-MM-dd hh24:Mi:ss')<=t.expire_time and to_char(#caculatetime#,'yyyy-MM-dd hh24:Mi:ss')>=t.effect_time
+	]]>
+	</id>
+	<!-- 更新可用天数使用率表中使用率 -->
+	<id name="a4_usage_update_usage">
+		<![CDATA[
+	update a4_main_acct_usableday_usage set acct_usage=   where login_name=#loginname#
+	]]>
+	</id>
+
+	<!-- 单账号当月可用天数 -->
+	<id name="a4_usage_sigle_acct_available_days">
+		<![CDATA[
+       select  aviliable_days from a4_main_acct_usableday_usage a
+       where a.acct_type=#accttype# and a.main_acct_id=#mainacctid#
+    ]]>
+	</id>
+	<!-- 单账号当月可用天数超过五天 -->
+	<id name="a4_usage_get_over_five_days">
+		<![CDATA[
+       select * from a4_main_acct_usableday_usage a
+       where a.acct_type=#accttype# and a.aviliable_days>='5'
+    ]]>
+	</id>
+	<!-- 单账号当月登录天数 -->
+	<id name="a4_usage_sigle_acct_loigin_days">
+		<![CDATA[
+        SELECT COUNT(DISTINCT TO_CHAR(T.OPERATE_TIME, 'yyyy-MM-dd'))
+   FROM IAP_APP_LOG PARTITION(#dataBasePart#) T
+  WHERE T.OPERATE_TYPE_ID = '1-AIUAP-10000'
+    AND T.PERSON_NAME = #acct_name#
+    AND T.DOMAIN_ID = 'UAP'
+    AND T.MAIN_ACCT_ID = #mainacctide#
+    AND T.OPERATE_TIME > TO_DATE(#beginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+    AND T.OPERATE_TIME < TO_DATE(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+    ]]>
+	</id>
+	<!-- 使用率大于等于40%的总数 -->
+	<id name="a4_usage_get_overforty_count">
+		<![CDATA[
+       select count(1) from a4_main_acct_usableday_usage a
+       where a.acct_usage>=0.4
+    ]]>
+	</id>
+
+	<!-- SM4AR监控用文件 -->
+	<id name="sub_4ar_Acct_Login_Opearte_Sql">
+		<![CDATA[
+insert into  a4_4ar_temp (select a, count(b) dlvalue, count(c) czvalue
+                  from (SELECT (CASE
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '00:31' THEN
+                                  '1'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '01:01' THEN
+                                  '2'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '01:31' THEN
+                                  '3'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '02:01' THEN
+                                  '4'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '02:31' THEN
+                                  '5'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '03:01' THEN
+                                  '6'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '03:31' THEN
+                                  '7'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '04:01' THEN
+                                  '8'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '04:31' THEN
+                                  '9'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '05:01' THEN
+                                  '10'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '05:31' THEN
+                                  '11'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '06:01' THEN
+                                  '12'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '06:31' THEN
+                                  '13'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '07:01' THEN
+                                  '14'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '07:31' THEN
+                                  '15'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '08:01' THEN
+                                  '16'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '08:31' THEN
+                                  '17'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '09:01' THEN
+                                  '18'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '09:31' THEN
+                                  '19'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '10:01' THEN
+                                  '20'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '10:31' THEN
+                                  '21'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '11:01' THEN
+                                  '22'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '11:31' THEN
+                                  '23'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '12:01' THEN
+                                  '24'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '12:31' THEN
+                                  '25'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '13:01' THEN
+                                  '26'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '13:31' THEN
+                                  '27'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '14:01' THEN
+                                  '28'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '14:31' THEN
+                                  '29'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '15:01' THEN
+                                  '30'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '15:31' THEN
+                                  '31'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '16:01' THEN
+                                  '32'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '16:31' THEN
+                                  '33'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '17:01' THEN
+                                  '34'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '17:31' THEN
+                                  '35'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '18:01' THEN
+                                  '36'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '18:31' THEN
+                                  '37'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '19:01' THEN
+                                  '38'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '19:31' THEN
+                                  '39'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '20:01' THEN
+                                  '40'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '20:31' THEN
+                                  '41'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '21:01' THEN
+                                  '42'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '21:31' THEN
+                                  '43'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '22:01' THEN
+                                  '44'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '22:31' THEN
+                                  '45'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '23:01' THEN
+                                  '46'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '23:31' THEN
+                                  '47'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '24:01' THEN
+                                  '48'
+                                 ELSE
+                                  '0'
+                               END) as a,
+                               t.log_id as b,
+                               '' as c
+                          from audita.iap_app_log PARTITION(#dataBasePart#) t
+                         where t.operate_content like '%appcode=#app_code#%'
+                           and t.operate_type_id = '#op_type_id#'
+                           and t.operate_time >
+                               to_date('#begin#',
+                                       'yyyy-MM-dd HH24:mi:ss')
+                           and t.operate_time <=
+                               to_date('#end#',
+                                       'yyyy-MM-dd HH24:mi:ss')
+                        union all
+                        SELECT (CASE
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '00:31' THEN
+                                  '1'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '01:01' THEN
+                                  '2'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '01:31' THEN
+                                  '3'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '02:01' THEN
+                                  '4'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '02:31' THEN
+                                  '5'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '03:01' THEN
+                                  '6'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '03:31' THEN
+                                  '7'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '04:01' THEN
+                                  '8'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '04:31' THEN
+                                  '9'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '05:01' THEN
+                                  '10'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '05:31' THEN
+                                  '11'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '06:01' THEN
+                                  '12'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '06:31' THEN
+                                  '13'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '07:01' THEN
+                                  '14'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '07:31' THEN
+                                  '15'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '08:01' THEN
+                                  '16'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '08:31' THEN
+                                  '17'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '09:01' THEN
+                                  '18'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '09:31' THEN
+                                  '19'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '10:01' THEN
+                                  '20'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '10:31' THEN
+                                  '21'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '11:01' THEN
+                                  '22'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '11:31' THEN
+                                  '23'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '12:01' THEN
+                                  '24'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '12:31' THEN
+                                  '25'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '13:01' THEN
+                                  '26'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '13:31' THEN
+                                  '27'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '14:01' THEN
+                                  '28'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '14:31' THEN
+                                  '29'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '15:01' THEN
+                                  '30'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '15:31' THEN
+                                  '31'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '16:01' THEN
+                                  '32'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '16:31' THEN
+                                  '33'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '17:01' THEN
+                                  '34'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '17:31' THEN
+                                  '35'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '18:01' THEN
+                                  '36'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '18:31' THEN
+                                  '37'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '19:01' THEN
+                                  '38'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '19:31' THEN
+                                  '39'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '20:01' THEN
+                                  '40'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '20:31' THEN
+                                  '41'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '21:01' THEN
+                                  '42'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '21:31' THEN
+                                  '43'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '22:01' THEN
+                                  '44'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '22:31' THEN
+                                  '45'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '23:01' THEN
+                                  '46'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '23:31' THEN
+                                  '47'
+                                 WHEN TO_CHAR(t.operate_time, 'hh24:mi') <
+                                      '24:01' THEN
+                                  '48'
+                                 ELSE
+                                  '0'
+                               END) as a,
+                               '' as b,
+                               t.log_id as c
+                          from audita.iap_app_log PARTITION(#dataBasePart#) t
+                         where t.domain_id = '#crm_domain_id#'
+                           and t.operate_type_id <> '#op_type_id#'
+                           and t.operate_time >
+                               to_date('#begin#',
+                                       'yyyy-MM-dd HH24:mi:ss')
+                           and t.operate_time <=
+                               to_date('#end#',
+                                       'yyyy-MM-dd HH24:mi:ss'))
+                 group by a)
+    ]]>
+	</id>
+</sql>

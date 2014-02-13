@@ -1,0 +1,16 @@
+主帐号日增量文件 生成程序
+SMMAI
+
+com.ailk.uap.makefile4new.MainAcctDayAddFile
+
+连接数据库：
+aiuap
+
+涉及业务表：
+uap_main_acct   uap_main_acct_his
+
+涉及考核临时表：
+
+主要流程：
+1、准备上传文件名称等；
+2、通过业务表查询出所需数据，生成XML文件。

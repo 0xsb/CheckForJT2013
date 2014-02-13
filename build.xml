@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="CheckForJT2013" default="junitReport">
+  	<property file="build.properties"/>
+	<property name="app.home" value="."/>
+	<path id="app.compile.classpath">
+			<fileset dir="${app.lib.home}">
+				<include name="jsp/" />
+				<include name="*.jar" />
+				<exclude name="*.zip" />
+			</fileset>
+		<fileset dir="${app.home}/setup/extjar">
+					<include name="*.jar" />
+		</fileset>
+	</path>
+	<path id="app.complie.junit.jar">
+		<fileset dir="${app.home}/setup/extjar">
+				<include name="junit.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${project.build.dir}"/>
+		<delete dir="${project.target.classes.java}"/>
+		<delete dir="${project.target.classes.test}"/>
+		<delete dir="${project.junitreport.dir}"/>
+		<delete dir="${project.junit.dir}"/>  
+	</target> 
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${project.build.dir}"/>
+		<mkdir dir="${project.target.classes.java}"/>
+		<mkdir dir="${project.target.classes.test}"/>
+		<mkdir dir="${project.junitreport.dir}"/>
+		<mkdir dir="${project.junit.dir}"/>  
+	</target>
+	
+	<target name="compile.java" depends="init">
+		<javac destdir="${project.target.classes.java}" fork="true" memorymaximumsize="500M" includeantruntime="on" debug="on" compiler="modern" encoding="UTF-8">
+			<src location ="${project.java.dir}"/>
+			<classpath refid="app.compile.classpath"></classpath>
+		</javac>
+		<copy todir="${project.target.classes.java}">
+			<fileset dir="${app.src.home}/main/resources">
+					<include name="**/*.properties" />
+					<include name="**/*.xml" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="compile.test" depends="compile.java">
+		<javac destdir="${project.target.classes.test}">
+			<src location="${project.test.dir}"></src>
+			<classpath>
+				<pathelement location="${project.target.classes.java}"/>
+			</classpath>
+			<classpath refid="app.compile.classpath"/>
+		</javac>
+	</target>
+	
+	<target name="junit" depends="compile.test">
+		    <junit printsummary="true">
+		    	<formatter type="xml"/>
+		        <batchtest fork="yes" todir="${project.junit.dir}">
+					<fileset dir="${project.test.dir}">
+						<include name="com/ailk/suits/*SuitTest.java"/>
+		         	</fileset>
+		        </batchtest>
+		    	<classpath refid="app.compile.classpath"/>
+		    	<classpath>
+		    			<pathelement location="${project.target.classes.java}"/>
+		    	</classpath>	
+		    	<classpath>
+		    			<pathelement location="${project.target.classes.test}"/>
+		    	</classpath>	
+		    </junit>
+		</target>
+	
+		<target name="junitReport" depends="junit">  
+			<junitreport todir="${project.junit.dir}">  
+				<fileset dir="${project.junit.dir}">  
+					<include name="TEST-*.xml"/>  
+				</fileset>  
+				<report format="frames" todir="${project.junit.dir}"/>  
+			</junitreport>  
+		</target>  
+	<target name="complie" depends="compile.java,compile.test"></target>
+	
+	<target name="help">
+		<echo message="clean"/>
+		<echo message="init"/>
+		<echo message="complie.java"/>
+		<echo message="complie.test"/>
+		<echo message="complie"/>
+		<echo message="junit"/>
+		<echo message="junitReport"/>
+	</target>
+	
+</project>

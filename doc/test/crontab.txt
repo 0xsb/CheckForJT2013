@@ -1,0 +1,45 @@
+############################################ 2013 CheckForJT Test ##########################################################
+##           ##
+## hour file ##
+##           ##
+###############
+23      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateHourSMSAL.sh >> generateSMSAL.log
+23      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateHourSMMAL.sh >> generateSMMAL.log
+############################################################################################################################
+##           ##
+## day file  ##
+##           ##
+###############
+2       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySM4AR.sh >> generateSM4AR.log
+3       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMDAR.sh >> generateSMDAR.log
+9       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMJK2.sh >> generateSMJK2.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMMAI.sh >> generateSMMAI.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMBHR.sh >> generateSMBHR.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySM4AI.sh >> generateSM4AI.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMFWLandSMFLO.sh >> generateSMFWLandSMFLO.log
+############################################################################################################################
+##                ##
+## validate file  ##
+##                ##
+####################
+32      *       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runValidateHourFile.sh >> safeHour.log
+11      5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runValidateDayFile.sh >> safeDay.log
+7       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForR.sh >> safeForR.log
+6       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForI.sh >> safeForI.log
+8       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForJK.sh >> safeForJK.log
+3       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForSMFWLandSMFLO.sh >> safeForSMFWLandSMFLO.log
+############################################################################################################################
+##                ##
+## up to bomc     ##
+##                ##
+####################
+*/5      *       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/hourUploadToBomc.sh >>hour_upload.log
+5,15,25,35,45,55      7-9      *      *      *      cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/dayUploadToBomc.sh >>day_upload.log
+############################################################################################################################
+##                         ##
+## static safe to bomc     ##
+##                         ##
+#############################
+3      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeSMMAL.sh >> staticSafeSMMAL.log
+3      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeSMSAL.sh >> staticSafeSMSAL.log
+32      4       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeDay.sh >> staticSafeDay.log

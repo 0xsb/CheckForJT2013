@@ -1,0 +1,41 @@
+upload to bomc task
+
+sh /home/aiuap/CheckForJT2013/bin/hourUploadToBomcJava.sh >> /home/aiuap/CheckForJT2013/bin/hourUploadToBomcJava.log
+sh /home/aiuap/CheckForJT2013/bin/dayUploadToBomcJava.sh >> /home/aiuap/CheckForJT2013/bin/dayUploadToBomcJava.log
+
+
+
+month file generate
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMMAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMMAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMAAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMAAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMHAF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMHAF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMMSF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMMSF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMCRF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMCRF.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateMonthSMSMF.sh >> /home/aiuap/CheckForJT2013/bin/generateMonthSMSMF.log
+
+
+
+for validator
+
+sh /home/aiuap/CheckForJT2013/bin/runValidator.sh >> /home/aiuap/CheckForJT2013/bin/validator.log
+
+
+
+hour generate manual
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateSMMALManual.sh >> /home/aiuap/CheckForJT2013/bin/generateSMMALManual.log
+
+sh /home/aiuap/CheckForJT2013/bin/runGenerateSMSALManual.sh >> /home/aiuap/CheckForJT2013/bin/generateSMSALManual.log
+
+
+
+SMJKR SMJKA generate manual
+
+sh /home/aiuap/CheckForJT2013/bin/runGoldBankApplyAndOperateDayAddFileManual.sh >> /home/aiuap/CheckForJT2013/bin/generateJKManual.log
+

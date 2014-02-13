@@ -1,0 +1,501 @@
+com.ailk.jt.task.biz.CalculateAll
+
+计算指标
+1、计算主账号使用率（客服、坐席、合作伙伴）
+2、计算主账号变动率（所有）
+3、计算主账号良好管理率（合作伙伴）
+4、计算从账号登录和操作情况（从账号登录情况、从账号操作情况）
+5、计算从账号覆盖率（4A库和BOSS库从账号）
+
+
+
+【计算4A账号使用率】
+主要人员使用率
+总部根据各省公司上报的营业员、客服、渠道、大客户经理、业务支撑内部员工（以下简称内部人员）、业务支撑部门合作伙伴（以下简称合作伙伴）
+六类人员分别计算4A平台使用率
+
+使用率计算公式如下：
+x类人员4A平台使用率=（x类人员在用主账号使用率大于等于40%的总数/x类人员在用主账号总数），
+x类人员在用主账号是指类别为x类，且在该省当月提交主账号月全量文件中可用天数超过5天的所有主账号。
+其中，单个主账号的4A平台使用率=（主账号当月登录天数/主账号当月可用天数），
+其中主账号在一天内登录一次及以上，则计为拥有一个登录天；
+主账号可用天数是指当月主账号状态为可用的天数（若主账号当前有效且未被锁定状态，应计为可用状态）。
+单个主账号的登录天数与可用天数由省公司通过主账号月全量文件上报为准。
+
+要求：（2013年新规范只对合作伙伴有考核）
+对营业员、客服人员、与合作伙伴三类人员分别计算4A平台使用率，每类人员的使用率大于80%则不扣分，低于80%扣0.05分，
+在此基础上，使用率每下降10%则加扣0.05分。三类人员的使用率分别独立计算，扣分结果进行累计。
+
+备注：
+"主账号当月可用天数"这个数值需要单独创建一张表UAP_MAIN_ACCT_USABLEDAY,这个表需要每天更新
+"主账号使用率"这个数值需要单独创建一张表uap_main_acct_single_usage,这个表需要每天更新
+
+程序流程：
+1、备份快照表(a4_main_acct_snap)
+create table a4_main_acct_snap_#timeForTable#  as select * from a4_main_acct_snap
+2、清空昨天的历史表
+truncate table a4_main_acct_his_yestoday
+3、将今天的历史表数据导入到昨天的历史表中去
+insert into a4_main_acct_his_yestoday select * from a4_main_acct_his_today
+4、清空今天的历史表
+truncate table a4_main_acct_his_today
+5、将历史表数据导入到今天的历史表中去
+insert into a4_main_acct_his_today
+  (main_acct_id,
+   login_name,
+   user_name,
+   valid,
+   lock_status,
+   acct_type,
+   rolelist,
+   effect_time,
+   expire_time,
+   create_time,
+   area_id,
+   org_id,
+   orgname,
+   update_time,
+   superuser,
+   opendays,
+   logondays,
+   modify_mode,
+   acct_usage)
+  select main_acct_id,
+         login_name,
+         name,
+         0,
+         0,
+         acct_type,
+         '',
+         effect_time,
+         expire_time,
+         create_time,
+         area_id,
+         default_org,
+         '',
+         last_update_time,
+         0,
+         0,
+         0,
+         'del',
+         0.0000
+    from uap_main_acct_his t
+6、删除快照表数据
+truncate table a4_main_acct_snap
+7、更新数据源(uap_main_acct,uap_main_acct_his表中的数据更新到a4_main_acct_snap表中)
+insert into a4_main_acct_snap
+  (select main_acct_id,
+          case
+            when length(t.login_name) > 32 then
+             substr(t.login_name, 0, 32)
+            else
+             t.login_name
+          end login_name,
+          name as USER_NAME,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and
+                 t.lock_status = '0') then
+             '1'
+            else
+             '0'
+          end valid,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and
+                 t.lock_status = '0') then
+             '0'
+            else
+             '1'
+          end lock_status,
+          ACCT_TYPE,
+          '' rolelist,
+          effect_time,
+          expire_time,
+          create_time,
+          area_id,
+          default_org as ORG_ID,
+          '' as ORGNAME,
+          last_update_time as UPDATE_TIME,
+          '0' superuser,
+          '0' opendays,
+          '0' logondays,
+          case
+            when (to_char(t.last_update_time, 'yyyy-mm-dd') <>
+                 to_char(t.create_time, 'yyyy-mm-dd')) then
+             'upd'
+            else
+             'add'
+          end modify_mode,
+          0.0000 acct_usage
+     from uap_main_acct t
+    where t.create_time < to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   union all
+   select main_acct_id,
+          case
+            when length(t1.login_name) > 32 then
+             substr(t1.login_name, 0, 32)
+            else
+             t1.login_name
+          end login_name,
+          USER_NAME,
+          case
+            when (sysdate >= t1.effect_time and sysdate < t1.expire_time and
+                 t1.lock_status = '0') then
+             '1'
+            else
+             '1'
+          end valid,
+          case
+            when (sysdate >= t1.effect_time and sysdate < t1.expire_time and
+                 t1.lock_status = '0') then
+             '1'
+            else
+             '1'
+          end lock_status,
+          acct_type,
+          '' rolelist,
+          effect_time,
+          expire_time,
+          create_time,
+          area_id,
+          ORG_ID,
+          '' as ORGNAME,
+          UPDATE_TIME,
+          '0' superuser,
+          '0' opendays,
+          '0' logondays,
+          'del' modify_mode,
+          0.0000 as acct_usage
+     from (select main_acct_id,
+                  login_name,
+                  user_name,
+                  valid,
+                  lock_status,
+                  acct_type,
+                  rolelist,
+                  effect_time,
+                  expire_time,
+                  create_time,
+                  area_id,
+                  org_id,
+                  orgname,
+                  update_time,
+                  superuser,
+                  opendays,
+                  logondays,
+                  modify_mode,
+                  acct_usage
+             from a4_main_acct_his_today
+            where login_name not in (select login_name from uap_main_acct)
+           minus
+           select main_acct_id,
+                  login_name,
+                  user_name,
+                  valid,
+                  lock_status,
+                  acct_type,
+                  rolelist,
+                  effect_time,
+                  expire_time,
+                  create_time,
+                  area_id,
+                  org_id,
+                  orgname,
+                  update_time,
+                  superuser,
+                  opendays,
+                  logondays,
+                  modify_mode,
+                  acct_usage
+             from a4_main_acct_his_yestoday) t1)
+----------------------------------------------------------------------------
+8、在更新今天的集团表之前先进行备份
+create table a4_main_acct_jt_#nowdatetime# as select * from a4_main_acct_jt
+----------------------------------------------------------------------------
+依据临时表更新主账号集团表
+9、如果是月初，首先将所有主账号集团表中的可用天数和登录天数重置为0
+update a4_main_acct_jt t set t.opendays=0,t.logondays=0
+10、将集团表中所有有效账号的可用天数加1
+update a4_main_acct_jt t set t.opendays=t.opendays+1 where t.valid=1
+----------------------------------------------------------------------------
+从快照表中查找所有昨天一天的主账号，更新到集团表中
+11、snap表中数据
+select t.MAIN_ACCT_ID,
+       t.LOGIN_NAME,
+       t.USER_NAME,
+       t.VALID,
+       t.LOCK_STATUS,
+       t.ACCT_TYPE,
+       t.ROLELIST,
+       t.EFFECT_TIME,
+       t.EXPIRE_TIME,
+       t.CREATE_TIME,
+       t.AREA_ID,
+       t.ORG_ID,
+       t.ORGNAME,
+       t.UPDATE_TIME,
+       t.SUPERUSER,
+       t.OPENDAYS,
+       t.logondays,
+       t.MODIFY_MODE,
+       t.ACCT_USAGE
+  from a4_main_acct_snap t
+ where (t.create_time >= to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.create_time < to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+    or (t.update_time >= to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.UPDATE_TIME < to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+    or (t.update_time >= to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.UPDATE_TIME < to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss') and
+       t.modify_mode = 'del')
+12、依据主账号表中的主账号登陆名称查找主账号集团表
+from A4_MAIN_ACCT_JT where login_name = #login_name#
+13、如果能查到主账号，说明主账号发生过变更，包括更改和删除   -------  CalculateUsage.java 171行
+如果主账号被删除
+delete from  A4_MAIN_ACCT_JT where  login_name = #loginName#
+如果主账号不是被删除
+如果主账号的Valid == 1 更新该账号的使用天数 + 1
+设置ModifyMode == "upd"
+更新到数据库中
+UPDATE A4_MAIN_ACCT_JT
+   SET MAIN_ACCT_ID = #mainAcctId#,
+       LOGIN_NAME   = #loginName#,
+       USER_NAME    = #userName#,
+       VALID        = #valid#,
+       LOCK_STATUS  = #lockStatus#,
+       ACCT_TYPE    = #acctType#,
+       ROLELIST     = #rolelist#,
+       EFFECT_TIME  = #effectTime#,
+       EXPIRE_TIME  = #expireTime#,
+       CREATE_TIME  = #createTime#,
+       AREA_ID      = #areaId#,
+       ORG_ID       = #orgId#,
+       ORGNAME      = #orgname#,
+       UPDATE_TIME  = #updateTime#,
+       SUPERUSER    = #superuser#,
+       OPENDAYS     = #opendays#,
+       LOGONDAYS    = #logondays#,
+       MODIFY_MODE  = #modifyMode#,
+       ACCT_USAGE   = #acctUsage#
+ WHERE MAIN_ACCT_ID = #mainAcctId#
+14、如果查询不到就直接添加到集团表中
+INSERT INTO A4_MAIN_ACCT_JT
+  (MAIN_ACCT_ID,
+   LOGIN_NAME,
+   USER_NAME,
+   VALID,
+   LOCK_STATUS,
+   ACCT_TYPE,
+   ROLELIST,
+   EFFECT_TIME,
+   EXPIRE_TIME,
+   CREATE_TIME,
+   AREA_ID,
+   ORG_ID,
+   ORGNAME,
+   UPDATE_TIME,
+   SUPERUSER,
+   OPENDAYS,
+   LOGONDAYS,
+   MODIFY_MODE,
+   ACCT_USAGE)
+VALUES
+  (#mainAcctId#,
+   #loginName#,
+   #userName#,
+   #valid#,
+   #lockStatus#,
+   #acctType#,
+   #rolelist#,
+   #effectTime#,
+   #expireTime#,
+   #createTime#,
+   #areaId#,
+   #orgId#,
+   #orgname#,
+   #updateTime#,
+   #superuser#,
+   #opendays#,
+   #logondays#,
+   #modifyMode#,
+   #acctUsage#)
+---------------------------------------------------------------
+根据临时表更新主账号快照表，主要是更新集团表的登录天数   -------  CalculateUsage.java 205行
+15、
+select t.main_acct_name, count(t.login_day) as login_day
+  from A4_MAIN_ACCT_LOGONS_TEMP t
+ where t.login_day >= to_date(#monthBeginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   and t.login_day < to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+ group by t.main_acct_name
+16、依据主账号登录表中的主账号登陆名称查找主账号集团表
+from A4_MAIN_ACCT_JT
+	        where login_name = #login_name#
+如果能查到主账号，说明主账号存在登录记录，需要更新集团表中对应的登录记录
+设置Opendays == A4_MAIN_ACCT_LOGONS_TEMP.login_day
+设置Logondays == A4_MAIN_ACCT_LOGONS_TEMP.login_day
+
+long openDays = jtAcct.getOpendays() + 1;
+设置AcctUsage == (logon_days - openDays > 0 ? openDays : logon_days) / openDays;
+
+更新该条数据到A4_MAIN_ACCT_JT
+---------------------------------------------------------------
+通过日志表查找那些账号登陆过，将登陆过的记录保存到临时表中
+根据月初和当前时间查询该月账号的登录天数，将登录天数更新到一个临时表中
+17、因为每天都要计算可用天数和登录天数，首先清空临时表
+truncate table A4_MAIN_ACCT_LOGONS_TEMP
+18、从日志表中查询出从月初到当前时间的登录天数，并更新到临时表中
+insert into A4_MAIN_ACCT_LOGONS_TEMP
+  (SELECT DISTINCT (to_date(to_char(T.OPERATE_TIME, 'yyyy-MM-dd'),
+                            'yyyy-MM-dd')) as login_day,
+                   t.main_acct_id,
+                   t.main_acct_name
+     FROM audit11.IAP_APP_LOG PARTITION(#dataBasePart#) T
+    WHERE T.OPERATE_TYPE_ID = '1-AIUAP-10000'
+      AND T.DOMAIN_ID = 'UAP'
+      and t.operate_time >=
+          to_date(#monthBeginTime#, 'yyyy-mm-dd  hh24:Mi:ss')
+      and t.operate_time < to_date(#endTime#, 'yyyy-mm-dd  hh24:Mi:ss'))
+19、
+truncate table  a4_mainacct_logon_count
+20、
+insert into a4_mainacct_logon_count
+  (select t.main_acct_name, count(t.login_day) as login_day
+     from A4_MAIN_ACCT_LOGONS_TEMP t
+    where t.login_day >= to_date('monthBeginTime', 'yyyy-MM-dd hh24:Mi:ss')
+      and t.login_day < to_date('endTime', 'yyyy-MM-dd hh24:Mi:ss')
+    group by t.main_acct_name)
+21、
+update a4_main_acct_jt t
+   set t.logondays =
+       (select b.login_day
+          from a4_mainacct_logon_count b
+         where b.main_acct_name = t.login_name)
+ where exists (select 1
+          from a4_mainacct_logon_count b
+         where b.main_acct_name = t.login_name)
+22、
+update a4_main_acct_jt t set t.acct_usage=t.logondays/t.opendays where t.opendays<>0 and t.logondays<=t.opendays
+23、
+update a4_main_acct_jt t set t.acct_usage=0.0000 where t.opendays=0
+24、
+update a4_main_acct_jt t set t.acct_usage=1 where t.logondays>t.opendays
+--------------------------------------------------------------------------------------
+计算并保存使用率,分三类人员计算
+25、查询费登录天数超过5天的账号总数
+over_five_count == select count(1) from a4_main_acct_jt t where t.logondays>5
+26、查询使用率超过40%的账号总数
+over_forty_count == select count(1)
+  from a4_main_acct_jt t
+ where t.acct_type=#acct_type#
+ and t.acct_usage >= 0.4
+   and t.opendays>5
+27、查询有效的账号总数
+all_count == select count(1)
+  from a4_main_acct_jt t
+ where t.acct_type=#acct_type#
+ and t.opendays>5
+28、计算
+acct_usage = over_forty_count / all_count;
+29、保存使用率
+insert into a4_main_acct_usage
+  (caculate_time,
+   over_five_count,
+   over_forty_count,
+   acct_type,
+   acct_usage,
+   all_count)
+values
+  (to_date(#caculate_time#, 'yyyy-MM-dd hh24:Mi:ss'),
+   #over_five_count#,
+   #over_forty_count#,
+   #acct_type#,
+   #acct_usage#,
+   #all_count#)
+-------------------------------------------------------------------------------
+
+
+
+【计算主账号变动率】
+省公司每月上报的主帐号月全量数据与
+总部主帐号数据库月初快照的差异主帐号总数，
+若超过该省在总部快照记录中主帐号总数的5%，
+则扣0.05分
+
+计算主账号变动率方法  ------  CalculateChange.java 140行
+1、查询日增量主账号
+select sum(count)
+  from (select count(1) as count
+          from uap_main_acct t1
+         where t1.create_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t1.create_time < to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss')
+        union all
+        select count(1) as count
+          from uap_main_acct t2
+         where t2.last_update_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t2.last_update_time <
+               to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss')
+        union all
+        select count(1) as count
+          from uap_main_acct_his t3
+         where t3.last_update_time >=
+               to_date(#beginTime#, 'yyyy-MM-dd HH24:mi:ss')
+           and t3.last_update_time <
+               to_date(#endTime#, 'yyyy-MM-dd HH24:mi:ss'))
+2、
+fullmainacctjt == select count(1) from a4_main_acct_jt t
+3、查找本地快照表中主账号总数
+select count(1) from  a4_main_acct_snap
+4、查询在模拟集团表中但不在本地快照表中数据
+inanotinb == select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_jt t
+        minus
+        select w.login_name, w.Lock_Status, w.Valid
+          from a4_main_acct_snap w
+         where w.modify_mode <> 'del')
+5、查询在本地快照表中但不在模拟集团表中数据
+inbnotina == select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_snap t
+         where t.Modify_Mode <> 'del'
+        minus
+        select w.login_name, w.Lock_Status, w.Valid from a4_main_acct_jt w)
+6、对比模拟集团表主账号和本地日快照主账号数据
+abdiffer == from (select a.login_name, a.valid, a.acct_type
+          from (select t.login_name, t.valid, t.acct_type
+                  from a4_main_acct_jt t) a,
+               a4_main_acct_snap b
+         where a.login_name = b.login_name
+           and b.modify_mode <> 'del'
+        minus
+        select m.login_name, m.valid, m.acct_type
+          from (select w.login_name, w.valid, w.acct_type
+                  from a4_main_acct_snap w
+                 where w.modify_mode <> 'del') m,
+               a4_main_acct_jt n
+         where m.login_name = n.login_name)
+7、计算
+jtchange == (inanotinb + inbnotina + abdiffer) / fullmainacctjt
+8、保存
+insert into a4_main_acct_change_do
+values
+  (sysdate,
+   #jtchange#,
+   #fullmainacctjt#,
+   #dayacctchangejt#,
+   #fullmainacctlocal#,
+   #inanotinb#,
+   #inbnotina#,
+   #fullmainacctjt#)
+9、保存差异主账号信息
+truncate table  a4_main_acct_jt_differ
+
+insert into a4_main_acct_jt_differ
+  select t.login_name, t.valid, t.acct_type
+    from a4_main_acct_snap t
+  minus
+  select w.login_name, w.valid, w.acct_type
+    from a4_main_acct_jt w
+
+
+

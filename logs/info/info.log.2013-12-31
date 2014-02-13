@@ -1,0 +1,3043 @@
+[INFO ] [06:35:46]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:56)DeviceSubAcctLoginFile start to run......
+[INFO ] [06:35:46]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:57)uap_file_uapload==D:\work\work2012\db\hour\SMSAL
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:103)generateDeviceSubAcctLoginFile  ******Start***************
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:185)subAcctLoginFileCountSql===select main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult ,'0' as loginType from  iap_device_session t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and  t.login_time > to_date('2013-12-31 05:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.login_time <= to_date('2013-12-31 06:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) union all select  main_acct_id as mainacctid,login_time as logintime,MAIN_ACCT_NAME as loginname, sub_acct_name as acctname, device_name as resname, device_ip as resip,device_port as resport,CLIENT_IP as ip,OPERATE_RESULT as operateresult,'1' as loginType  from  iap_device_session partition (PART_DEVICE_SESSION_201312) t where  t.main_acct_id is not null and t.login_time is not null  and t.MAIN_ACCT_NAME is not null and t.sub_acct_name is not null  and t.device_name is not null and t.device_ip is not null and t.device_port is not null and t.CLIENT_IP is not null  and t.OPERATE_RESULT is not null and t.logout_time > to_date('2013-12-31 05:00:00', 'yyyy-MM-dd HH24:mi:ss') and t.logout_time <= to_date('2013-12-31 06:00:00', 'yyyy-MM-dd HH24:mi:ss') and (t.device_type = 2 or t.device_type = 3) 
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.generateMainAcctAuthorFullFile(DeviceSubAcctLoginFile.java:188)subAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSAL</type>
+<province>371</province>
+<createtime>2013-12-31T14:34:20</createtime>
+<sum>0</sum>
+<begintime>2013-12-31T05:00:00</begintime>
+<endtime>2013-12-31T06:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:107)generateDeviceSubAcctLoginFile  ******End ***************
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:109)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [06:36:00]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.insertUploadFileInfo(DeviceSubAcctLoginFile.java:218)insert into DR_UPLOAD_FILE_INFO values ('SMSAL_371_01HR_20131231_014_000.xml','371','SMSAL','01HR','014','0',to_date('2013-12-31 14:34:21','yyyy-MM-dd HH24:mi:ss'),0,to_date('2013-12-31 05:00:00','yyyy-MM-dd HH24:mi:ss'),to_date('2013-12-31 06:00:00','yyyy-MM-dd HH24:mi:ss'),'0')
+[INFO ] [06:36:12]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:124)GENERATE DeviceSubAcctLoginFile FULL FILE  TOTALTIME======25s
+[INFO ] [06:36:12]  - com.ailk.uap.makefile4new.DeviceSubAcctLoginFile.main(DeviceSubAcctLoginFile.java:146)-------------MainAcctLoginFile end-----------------
+[INFO ] [08:46:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:58)UpLoadFileThread start to run......
+[INFO ] [08:46:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:59)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [08:46:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:60)uap_version==uap2.0
+[INFO ] [08:46:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:62)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[INFO ] [08:47:11]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:74)com.ailk.uap.makefile4new.MainAcctDayAddFile ******Start***************
+[INFO ] [08:47:11]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:91)mainAcctDayAddFileSql===select 'add' as  modify_mode,t1.main_acct_id,t1.login_name,t1.name as user_name,case when (sysdate >= t1.effect_time and sysdate< t1.expire_time and t1.lock_status='0') then  '1' else '0' end valid,t1.lock_status, t1.acct_type, t1.effect_time,t1.expire_time,t1.create_time,t1.area_id,t1.default_org as org_id, t1.last_update_time as update_time from uap_main_acct t1 where t1.create_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t1.create_time < to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')  union all select 'upd'  as modify_mode,t2.main_acct_id,t2.login_name,t2.name as user_name,case when (sysdate >= t2.effect_time and  sysdate< t2.expire_time and t2.lock_status='0') then  '1' else '0' end valid,t2.lock_status, t2.acct_type, t2.effect_time,t2.expire_time,t2.create_time,t2.area_id,t2.default_org as org_id, t2.last_update_time as update_time from uap_main_acct t2 where t2.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t2.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t2.last_update_time > t2.create_time union all select 'del'  as modify_mode,t3.main_acct_id,t3.login_name,t3.name as user_name,'0' as valid,t3.lock_status, t3.acct_type, t3.effect_time,t3.expire_time,t3.create_time,t3.area_id,t3.default_org as org_id, t3.last_update_time as update_time from uap_main_acct_his t3 where t3.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t3.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+[INFO ] [08:47:11]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:93)getMainAcctFullInfo*******************Start******
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:95)getMainAcctFullInfo*******************End*********
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:100)mainAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAI</type>
+<province>371</province>
+<createtime>2013-12-31T16:45:31</createtime>
+<sum>0</sum>
+<begintime>2013-12-30T00:00:00</begintime>
+<endtime>2013-12-31T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:76)com.ailk.uap.makefile4new.MainAcctDayAddFile  ******End ***************
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:90)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:47:13]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:92)GENERATE com.ailk.uap.makefile4new.MainAcctDayAddFile FULL FILE  TOTALTIME======16s
+[INFO ] [08:52:16]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:58)UpLoadFileThread start to run......
+[INFO ] [08:52:16]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:59)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [08:52:16]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:60)uap_version==uap2.0
+[INFO ] [08:52:16]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:62)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:74)com.ailk.uap.makefile4new.MainAcctDayAddFile ******Start***************
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:91)mainAcctDayAddFileSql===select 'add' as  modify_mode,t1.main_acct_id,t1.login_name,t1.name as user_name,case when (sysdate >= t1.effect_time and sysdate< t1.expire_time and t1.lock_status='0') then  '1' else '0' end valid,t1.lock_status, t1.acct_type, t1.effect_time,t1.expire_time,t1.create_time,t1.area_id,t1.default_org as org_id, t1.last_update_time as update_time from uap_main_acct t1 where t1.create_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t1.create_time < to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')  union all select 'upd'  as modify_mode,t2.main_acct_id,t2.login_name,t2.name as user_name,case when (sysdate >= t2.effect_time and  sysdate< t2.expire_time and t2.lock_status='0') then  '1' else '0' end valid,t2.lock_status, t2.acct_type, t2.effect_time,t2.expire_time,t2.create_time,t2.area_id,t2.default_org as org_id, t2.last_update_time as update_time from uap_main_acct t2 where t2.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t2.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t2.last_update_time > t2.create_time union all select 'del'  as modify_mode,t3.main_acct_id,t3.login_name,t3.name as user_name,'0' as valid,t3.lock_status, t3.acct_type, t3.effect_time,t3.expire_time,t3.create_time,t3.area_id,t3.default_org as org_id, t3.last_update_time as update_time from uap_main_acct_his t3 where t3.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t3.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:93)getMainAcctFullInfo*******************Start******
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:95)getMainAcctFullInfo*******************End*********
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:100)mainAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAI</type>
+<province>371</province>
+<createtime>2013-12-31T16:50:51</createtime>
+<sum>0</sum>
+<begintime>2013-12-30T00:00:00</begintime>
+<endtime>2013-12-31T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:76)com.ailk.uap.makefile4new.MainAcctDayAddFile  ******End ***************
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:90)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:52:31]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:92)GENERATE com.ailk.uap.makefile4new.MainAcctDayAddFile FULL FILE  TOTALTIME======14s
+[INFO ] [08:53:56]  - com.ailk.uap.makefile4new.WebExceptionBusinessDayAddlFile_new.main(WebExceptionBusinessDayAddlFile_new.java:69)WebExceptionBusinessDayAddFile start to run......
+[INFO ] [08:53:56]  - com.ailk.uap.makefile4new.WebExceptionBusinessDayAddlFile_new.main(WebExceptionBusinessDayAddlFile_new.java:70)uap_file_uapload==D:\work\work2012\db\day\SMBHR
+[INFO ] [08:57:19]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:61)DbOperateLogDayFile start to run......
+[INFO ] [08:57:19]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:62)uap_file_uapload==D:\work\work2012\db\day\SMDAR
+[INFO ] [08:57:44]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:152)truncate_Sql=======truncate table a4_iap_device_session
+[INFO ] [08:57:44]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:166)mainAcctDayAddFileCountSql=======insert into a4_iap_device_session (DEVICE_ID,TOTAL,LOGIN_HOUR)
+	         select distinct (t1.device_id),
+                count(t1.device_id) total,
+                CASE TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                         'hh24:mi') || '-' ||
+                 TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                         'hh24:mi')
+                  WHEN '00:00-00:30' THEN
+          '1'
+         WHEN '00:30-01:00' THEN
+          '2'
+         WHEN '01:00-01:30' THEN
+          '3'
+         WHEN '01:30-02:00' THEN
+          '4'
+         WHEN '02:00-02:30' THEN
+          '5'
+         WHEN '02:30-03:00' THEN
+          '6'
+         WHEN '03:00-03:30' THEN
+          '7'
+         WHEN '03:30-04:00' THEN
+          '8'
+         WHEN '04:00-04:30' THEN
+          '9'
+         WHEN '04:30-05:00' THEN
+          '10'
+         WHEN '05:00-05:30' THEN
+          '11'
+         WHEN '05:30-06:00' THEN
+          '12'
+         WHEN '06:00-06:30' THEN
+          '13'
+         WHEN '06:30-07:00' THEN
+          '14'
+         WHEN '07:00-07:30' THEN
+          '15'
+         WHEN '07:30-08:00' THEN
+          '16'
+         WHEN '08:00-08:30' THEN
+          '17'
+         WHEN '08:30-09:00' THEN
+          '18'
+         WHEN '09:00-09:30' THEN
+          '19'
+         WHEN '09:30-10:00' THEN
+          '20'
+         WHEN '10:00-10:30' THEN
+          '21'
+         WHEN '10:30-11:00' THEN
+          '22'
+         WHEN '11:00-11:30' THEN
+          '23'
+         WHEN '11:30-12:00' THEN
+          '24'
+         WHEN '12:00-12:30' THEN
+          '25'
+         WHEN '12:30-13:00' THEN
+          '26'
+         WHEN '13:00-13:30' THEN
+          '27'
+         WHEN '13:30-14:00' THEN
+          '28'
+         WHEN '14:00-14:30' THEN
+          '29'
+         WHEN '14:30-15:00' THEN
+          '30'
+         WHEN '15:00-15:30' THEN
+          '31'
+         WHEN '15:30-16:00' THEN
+          '32'
+         WHEN '16:00-16:30' THEN
+          '33'
+         WHEN '16:30-17:00' THEN
+          '34'
+         WHEN '17:00-17:30' THEN
+          '35'
+         WHEN '17:30-18:00' THEN
+          '36'
+         WHEN '18:00-18:30' THEN
+          '37'
+         WHEN '18:30-19:00' THEN
+          '38'
+         WHEN '19:00-19:30' THEN
+          '39'
+         WHEN '19:30-20:00' THEN
+          '40'
+         WHEN '20:00-20:30' THEN
+          '41'
+         WHEN '20:30-21:00' THEN
+          '42'
+         WHEN '21:00-21:30' THEN
+          '43'
+         WHEN '21:30-22:00' THEN
+          '44'
+         WHEN '22:00-22:30' THEN
+          '45'
+         WHEN '22:30-23:00' THEN
+          '46'
+         WHEN '23:00-23:30' THEN
+          '47'
+         WHEN '23:30-00:00' THEN
+          '48'
+         ELSE
+          '0'
+         END login_hour
+  from iap_device_session PARTITION(PART_DEVICE_SESSION_201312)  t1, iap_device_session_cmd t2
+ where t1.device_type = 3
+   and t1.session_id = t2.session_id
+   and t1.log_source = '4AFortLog'
+   and t2.op_time > to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.op_time <=
+       to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+ group by t1.device_id,
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                  'hh24:mi') || '-' ||
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                  'hh24:mi')
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:171)truncate_test_device_session======truncate table test_device_session
+[ERROR] [08:57:47]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:175)sepreate_device=======insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:179)truncate_second_final_device_session=======truncate table second_final_device_session
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:182)second_final_device_session=======insert into second_final_device_session 
+  select t.belong_sys, sum(total) total, t.login_hour
+    from test_device_session t
+   group by login_hour, t.belong_sys
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:186)final_device=======update final_device_session t
+     set t.total =
+         (select y.total
+            from second_final_device_session y
+           where t.belong_sys = y.belong_sys
+             and t.login_hour = y.login_hour)
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:101)generateDbOperateLogDayFile  ******Start***************
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:201)subAcctDeviceIdsSql===select count(distinct(t.belong_sys))total_sys_device from final_device_session t
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:209)total sum ===432
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:215)getDbOperateLogInfo*******************Start*********
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:219)getDbOperateLogInfo*******************End*********
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:224)subAcctFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMDAR</type>
+<province>371</province>
+<createtime>2013-12-31T16:55:53</createtime>
+<sum>432</sum>
+<begintime>2013-12-30T00:00:00</begintime>
+<endtime>2013-12-31T00:00:00</endtime>
+<data>
+<rcd>
+<seq>1</seq>
+<restype>11</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>2</seq>
+<restype>11</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>3</seq>
+<restype>11</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>4</seq>
+<restype>11</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>5</seq>
+<restype>11</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>6</seq>
+<restype>11</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>7</seq>
+<restype>11</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>8</seq>
+<restype>11</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>9</seq>
+<restype>11</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>10</seq>
+<restype>11</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>11</seq>
+<restype>11</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>12</seq>
+<restype>11</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>13</seq>
+<restype>11</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>14</seq>
+<restype>11</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>15</seq>
+<restype>11</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>16</seq>
+<restype>11</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>17</seq>
+<restype>11</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>18</seq>
+<restype>11</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>19</seq>
+<restype>11</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>20</seq>
+<restype>11</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>21</seq>
+<restype>11</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>22</seq>
+<restype>11</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>23</seq>
+<restype>11</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>24</seq>
+<restype>11</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>25</seq>
+<restype>11</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>26</seq>
+<restype>11</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>27</seq>
+<restype>11</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>28</seq>
+<restype>11</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>29</seq>
+<restype>11</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>30</seq>
+<restype>11</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>31</seq>
+<restype>11</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>32</seq>
+<restype>11</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>33</seq>
+<restype>11</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>34</seq>
+<restype>11</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>35</seq>
+<restype>11</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>36</seq>
+<restype>11</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>37</seq>
+<restype>11</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>38</seq>
+<restype>11</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>39</seq>
+<restype>11</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>40</seq>
+<restype>11</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>41</seq>
+<restype>11</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>42</seq>
+<restype>11</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>43</seq>
+<restype>11</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>44</seq>
+<restype>11</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>45</seq>
+<restype>11</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>46</seq>
+<restype>11</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>47</seq>
+<restype>11</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>48</seq>
+<restype>11</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>49</seq>
+<restype>12</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>50</seq>
+<restype>12</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>51</seq>
+<restype>12</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>52</seq>
+<restype>12</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>53</seq>
+<restype>12</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>54</seq>
+<restype>12</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>55</seq>
+<restype>12</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>56</seq>
+<restype>12</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>57</seq>
+<restype>12</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>58</seq>
+<restype>12</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>59</seq>
+<restype>12</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>60</seq>
+<restype>12</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>61</seq>
+<restype>12</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>62</seq>
+<restype>12</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>63</seq>
+<restype>12</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>64</seq>
+<restype>12</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>65</seq>
+<restype>12</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>66</seq>
+<restype>12</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>67</seq>
+<restype>12</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>68</seq>
+<restype>12</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>69</seq>
+<restype>12</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>70</seq>
+<restype>12</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>71</seq>
+<restype>12</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>72</seq>
+<restype>12</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>73</seq>
+<restype>12</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>74</seq>
+<restype>12</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>75</seq>
+<restype>12</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>76</seq>
+<restype>12</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>77</seq>
+<restype>12</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>78</seq>
+<restype>12</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>79</seq>
+<restype>12</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>80</seq>
+<restype>12</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>81</seq>
+<restype>12</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>82</seq>
+<restype>12</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>83</seq>
+<restype>12</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>84</seq>
+<restype>12</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>85</seq>
+<restype>12</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>86</seq>
+<restype>12</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>87</seq>
+<restype>12</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>88</seq>
+<restype>12</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>89</seq>
+<restype>12</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>90</seq>
+<restype>12</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>91</seq>
+<restype>12</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>92</seq>
+<restype>12</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>93</seq>
+<restype>12</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>94</seq>
+<restype>12</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>95</seq>
+<restype>12</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>96</seq>
+<restype>12</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>97</seq>
+<restype>13</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>98</seq>
+<restype>13</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>99</seq>
+<restype>13</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>100</seq>
+<restype>13</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>101</seq>
+<restype>13</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>102</seq>
+<restype>13</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>103</seq>
+<restype>13</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>104</seq>
+<restype>13</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>105</seq>
+<restype>13</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>106</seq>
+<restype>13</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>107</seq>
+<restype>13</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>108</seq>
+<restype>13</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>109</seq>
+<restype>13</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>110</seq>
+<restype>13</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>111</seq>
+<restype>13</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>112</seq>
+<restype>13</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>113</seq>
+<restype>13</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>114</seq>
+<restype>13</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>115</seq>
+<restype>13</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>116</seq>
+<restype>13</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>117</seq>
+<restype>13</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>118</seq>
+<restype>13</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>119</seq>
+<restype>13</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>120</seq>
+<restype>13</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>121</seq>
+<restype>13</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>122</seq>
+<restype>13</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>123</seq>
+<restype>13</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>124</seq>
+<restype>13</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>125</seq>
+<restype>13</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>126</seq>
+<restype>13</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>127</seq>
+<restype>13</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>128</seq>
+<restype>13</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>129</seq>
+<restype>13</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>130</seq>
+<restype>13</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>131</seq>
+<restype>13</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>132</seq>
+<restype>13</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>133</seq>
+<restype>13</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>134</seq>
+<restype>13</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>135</seq>
+<restype>13</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>136</seq>
+<restype>13</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>137</seq>
+<restype>13</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>138</seq>
+<restype>13</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>139</seq>
+<restype>13</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>140</seq>
+<restype>13</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>141</seq>
+<restype>13</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>142</seq>
+<restype>13</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>143</seq>
+<restype>13</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>144</seq>
+<restype>13</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>145</seq>
+<restype>14</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>146</seq>
+<restype>14</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>147</seq>
+<restype>14</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>148</seq>
+<restype>14</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>149</seq>
+<restype>14</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>150</seq>
+<restype>14</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>151</seq>
+<restype>14</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>152</seq>
+<restype>14</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>153</seq>
+<restype>14</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>154</seq>
+<restype>14</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>155</seq>
+<restype>14</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>156</seq>
+<restype>14</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>157</seq>
+<restype>14</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>158</seq>
+<restype>14</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>159</seq>
+<restype>14</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>160</seq>
+<restype>14</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>161</seq>
+<restype>14</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>162</seq>
+<restype>14</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>163</seq>
+<restype>14</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>164</seq>
+<restype>14</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>165</seq>
+<restype>14</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>166</seq>
+<restype>14</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>167</seq>
+<restype>14</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>168</seq>
+<restype>14</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>169</seq>
+<restype>14</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>170</seq>
+<restype>14</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>171</seq>
+<restype>14</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>172</seq>
+<restype>14</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>173</seq>
+<restype>14</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>174</seq>
+<restype>14</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>175</seq>
+<restype>14</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>176</seq>
+<restype>14</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>177</seq>
+<restype>14</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>178</seq>
+<restype>14</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>179</seq>
+<restype>14</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>180</seq>
+<restype>14</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>181</seq>
+<restype>14</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>182</seq>
+<restype>14</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>183</seq>
+<restype>14</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>184</seq>
+<restype>14</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>185</seq>
+<restype>14</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>186</seq>
+<restype>14</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>187</seq>
+<restype>14</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>188</seq>
+<restype>14</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>189</seq>
+<restype>14</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>190</seq>
+<restype>14</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>191</seq>
+<restype>14</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>192</seq>
+<restype>14</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>193</seq>
+<restype>15</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>194</seq>
+<restype>15</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>195</seq>
+<restype>15</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>196</seq>
+<restype>15</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>197</seq>
+<restype>15</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>198</seq>
+<restype>15</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>199</seq>
+<restype>15</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>200</seq>
+<restype>15</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>201</seq>
+<restype>15</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>202</seq>
+<restype>15</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>203</seq>
+<restype>15</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>204</seq>
+<restype>15</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>205</seq>
+<restype>15</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>206</seq>
+<restype>15</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>207</seq>
+<restype>15</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>208</seq>
+<restype>15</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>209</seq>
+<restype>15</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>210</seq>
+<restype>15</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>211</seq>
+<restype>15</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>212</seq>
+<restype>15</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>213</seq>
+<restype>15</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>214</seq>
+<restype>15</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>215</seq>
+<restype>15</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>216</seq>
+<restype>15</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>217</seq>
+<restype>15</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>218</seq>
+<restype>15</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>219</seq>
+<restype>15</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>220</seq>
+<restype>15</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>221</seq>
+<restype>15</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>222</seq>
+<restype>15</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>223</seq>
+<restype>15</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>224</seq>
+<restype>15</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>225</seq>
+<restype>15</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>226</seq>
+<restype>15</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>227</seq>
+<restype>15</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>228</seq>
+<restype>15</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>229</seq>
+<restype>15</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>230</seq>
+<restype>15</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>231</seq>
+<restype>15</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>232</seq>
+<restype>15</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>233</seq>
+<restype>15</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>234</seq>
+<restype>15</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>235</seq>
+<restype>15</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>236</seq>
+<restype>15</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>237</seq>
+<restype>15</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>238</seq>
+<restype>15</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>239</seq>
+<restype>15</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>240</seq>
+<restype>15</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>241</seq>
+<restype>16</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>242</seq>
+<restype>16</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>243</seq>
+<restype>16</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>244</seq>
+<restype>16</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>245</seq>
+<restype>16</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>246</seq>
+<restype>16</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>247</seq>
+<restype>16</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>248</seq>
+<restype>16</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>249</seq>
+<restype>16</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>250</seq>
+<restype>16</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>251</seq>
+<restype>16</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>252</seq>
+<restype>16</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>253</seq>
+<restype>16</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>254</seq>
+<restype>16</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>255</seq>
+<restype>16</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>256</seq>
+<restype>16</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>257</seq>
+<restype>16</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>258</seq>
+<restype>16</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>259</seq>
+<restype>16</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>260</seq>
+<restype>16</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>261</seq>
+<restype>16</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>262</seq>
+<restype>16</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>263</seq>
+<restype>16</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>264</seq>
+<restype>16</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>265</seq>
+<restype>16</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>266</seq>
+<restype>16</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>267</seq>
+<restype>16</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>268</seq>
+<restype>16</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>269</seq>
+<restype>16</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>270</seq>
+<restype>16</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>271</seq>
+<restype>16</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>272</seq>
+<restype>16</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>273</seq>
+<restype>16</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>274</seq>
+<restype>16</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>275</seq>
+<restype>16</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>276</seq>
+<restype>16</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>277</seq>
+<restype>16</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>278</seq>
+<restype>16</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>279</seq>
+<restype>16</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>280</seq>
+<restype>16</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>281</seq>
+<restype>16</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>282</seq>
+<restype>16</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>283</seq>
+<restype>16</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>284</seq>
+<restype>16</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>285</seq>
+<restype>16</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>286</seq>
+<restype>16</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>287</seq>
+<restype>16</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>288</seq>
+<restype>16</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>289</seq>
+<restype>17</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>290</seq>
+<restype>17</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>291</seq>
+<restype>17</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>292</seq>
+<restype>17</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>293</seq>
+<restype>17</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>294</seq>
+<restype>17</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>295</seq>
+<restype>17</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>296</seq>
+<restype>17</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>297</seq>
+<restype>17</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>298</seq>
+<restype>17</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>299</seq>
+<restype>17</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>300</seq>
+<restype>17</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>301</seq>
+<restype>17</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>302</seq>
+<restype>17</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>303</seq>
+<restype>17</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>304</seq>
+<restype>17</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>305</seq>
+<restype>17</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>306</seq>
+<restype>17</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>307</seq>
+<restype>17</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>308</seq>
+<restype>17</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>309</seq>
+<restype>17</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>310</seq>
+<restype>17</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>311</seq>
+<restype>17</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>312</seq>
+<restype>17</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>313</seq>
+<restype>17</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>314</seq>
+<restype>17</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>315</seq>
+<restype>17</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>316</seq>
+<restype>17</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>317</seq>
+<restype>17</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>318</seq>
+<restype>17</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>319</seq>
+<restype>17</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>320</seq>
+<restype>17</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>321</seq>
+<restype>17</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>322</seq>
+<restype>17</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>323</seq>
+<restype>17</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>324</seq>
+<restype>17</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>325</seq>
+<restype>17</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>326</seq>
+<restype>17</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>327</seq>
+<restype>17</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>328</seq>
+<restype>17</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>329</seq>
+<restype>17</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>330</seq>
+<restype>17</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>331</seq>
+<restype>17</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>332</seq>
+<restype>17</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>333</seq>
+<restype>17</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>334</seq>
+<restype>17</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>335</seq>
+<restype>17</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>336</seq>
+<restype>17</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>337</seq>
+<restype>18</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>338</seq>
+<restype>18</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>339</seq>
+<restype>18</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>340</seq>
+<restype>18</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>341</seq>
+<restype>18</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>342</seq>
+<restype>18</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>343</seq>
+<restype>18</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>344</seq>
+<restype>18</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>345</seq>
+<restype>18</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>346</seq>
+<restype>18</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>347</seq>
+<restype>18</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>348</seq>
+<restype>18</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>349</seq>
+<restype>18</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>350</seq>
+<restype>18</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>351</seq>
+<restype>18</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>352</seq>
+<restype>18</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>353</seq>
+<restype>18</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>354</seq>
+<restype>18</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>355</seq>
+<restype>18</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>356</seq>
+<restype>18</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>357</seq>
+<restype>18</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>358</seq>
+<restype>18</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>359</seq>
+<restype>18</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>360</seq>
+<restype>18</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>361</seq>
+<restype>18</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>362</seq>
+<restype>18</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>363</seq>
+<restype>18</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>364</seq>
+<restype>18</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>365</seq>
+<restype>18</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>366</seq>
+<restype>18</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>367</seq>
+<restype>18</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>368</seq>
+<restype>18</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>369</seq>
+<restype>18</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>370</seq>
+<restype>18</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>371</seq>
+<restype>18</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>372</seq>
+<restype>18</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>373</seq>
+<restype>18</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>374</seq>
+<restype>18</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>375</seq>
+<restype>18</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>376</seq>
+<restype>18</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>377</seq>
+<restype>18</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>378</seq>
+<restype>18</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>379</seq>
+<restype>18</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>380</seq>
+<restype>18</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>381</seq>
+<restype>18</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>382</seq>
+<restype>18</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>383</seq>
+<restype>18</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>384</seq>
+<restype>18</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>385</seq>
+<restype>99</restype>
+<num>1</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>386</seq>
+<restype>99</restype>
+<num>2</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>387</seq>
+<restype>99</restype>
+<num>3</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>388</seq>
+<restype>99</restype>
+<num>4</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>389</seq>
+<restype>99</restype>
+<num>5</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>390</seq>
+<restype>99</restype>
+<num>6</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>391</seq>
+<restype>99</restype>
+<num>7</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>392</seq>
+<restype>99</restype>
+<num>8</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>393</seq>
+<restype>99</restype>
+<num>9</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>394</seq>
+<restype>99</restype>
+<num>10</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>395</seq>
+<restype>99</restype>
+<num>11</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>396</seq>
+<restype>99</restype>
+<num>12</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>397</seq>
+<restype>99</restype>
+<num>13</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>398</seq>
+<restype>99</restype>
+<num>14</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>399</seq>
+<restype>99</restype>
+<num>15</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>400</seq>
+<restype>99</restype>
+<num>16</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>401</seq>
+<restype>99</restype>
+<num>17</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>402</seq>
+<restype>99</restype>
+<num>18</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>403</seq>
+<restype>99</restype>
+<num>19</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>404</seq>
+<restype>99</restype>
+<num>20</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>405</seq>
+<restype>99</restype>
+<num>21</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>406</seq>
+<restype>99</restype>
+<num>22</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>407</seq>
+<restype>99</restype>
+<num>23</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>408</seq>
+<restype>99</restype>
+<num>24</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>409</seq>
+<restype>99</restype>
+<num>25</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>410</seq>
+<restype>99</restype>
+<num>26</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>411</seq>
+<restype>99</restype>
+<num>27</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>412</seq>
+<restype>99</restype>
+<num>28</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>413</seq>
+<restype>99</restype>
+<num>29</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>414</seq>
+<restype>99</restype>
+<num>30</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>415</seq>
+<restype>99</restype>
+<num>31</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>416</seq>
+<restype>99</restype>
+<num>32</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>417</seq>
+<restype>99</restype>
+<num>33</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>418</seq>
+<restype>99</restype>
+<num>34</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>419</seq>
+<restype>99</restype>
+<num>35</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>420</seq>
+<restype>99</restype>
+<num>36</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>421</seq>
+<restype>99</restype>
+<num>37</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>422</seq>
+<restype>99</restype>
+<num>38</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>423</seq>
+<restype>99</restype>
+<num>39</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>424</seq>
+<restype>99</restype>
+<num>40</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>425</seq>
+<restype>99</restype>
+<num>41</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>426</seq>
+<restype>99</restype>
+<num>42</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>427</seq>
+<restype>99</restype>
+<num>43</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>428</seq>
+<restype>99</restype>
+<num>44</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>429</seq>
+<restype>99</restype>
+<num>45</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>430</seq>
+<restype>99</restype>
+<num>46</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>431</seq>
+<restype>99</restype>
+<num>47</num>
+<value>0</value>
+</rcd>
+<rcd>
+<seq>432</seq>
+<restype>99</restype>
+<num>48</num>
+<value>0</value>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:105)generateDbOperateLogDayFile  ******End ***************
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:107)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:57:47]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.insertUploadFileInfo(DbOperateLogDayFile.java:256)insert into DR_UPLOAD_FILE_INFO values ('SMDAR_371_01DY_20131230_000_000.xml','371','SMDAR','01DY','016','0',to_date('2013-12-31 16:56:08','yyyy-MM-dd HH24:mi:ss'),432,to_date('2013-12-30 00:00:00','yyyy-MM-dd HH24:mi:ss'),to_date('2013-12-31 00:00:00','yyyy-MM-dd HH24:mi:ss'),'0')
+[INFO ] [08:57:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:121)GENERATE DbOperateLogDayFile FULL FILE  TOTALTIME======40s
+[INFO ] [08:57:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.main(DbOperateLogDayFile.java:143)-------------DbOperateLogDayFile end-----------------
+[INFO ] [09:04:10]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:58)UpLoadFileThread start to run......
+[INFO ] [09:04:10]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:59)uap_file_uapload==D:\work\work2012\db\day\SMDAR
+[INFO ] [09:04:10]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:60)uap_version==uap2.0
+[INFO ] [09:04:10]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:62)com.ailk.uap.makefile4new.DbOperateLogDayFile begin ...
+[INFO ] [09:08:17]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)UpLoadFileThread start to run......
+[INFO ] [09:08:19]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_file_uapload==D:\work\work2012\db\day\SMDAR
+[INFO ] [09:08:20]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_version==uap2.0
+[INFO ] [09:08:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.DbOperateLogDayFile begin ...
+[INFO ] [09:08:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.DbOperateLogDayFile ******Start***************
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:39)truncate_Sql=======truncate table a4_iap_device_session
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:53)mainAcctDayAddFileCountSql=======insert into a4_iap_device_session (DEVICE_ID,TOTAL,LOGIN_HOUR)
+	         select distinct (t1.device_id),
+                count(t1.device_id) total,
+                CASE TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                         'hh24:mi') || '-' ||
+                 TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                         'hh24:mi')
+                  WHEN '00:00-00:30' THEN
+          '1'
+         WHEN '00:30-01:00' THEN
+          '2'
+         WHEN '01:00-01:30' THEN
+          '3'
+         WHEN '01:30-02:00' THEN
+          '4'
+         WHEN '02:00-02:30' THEN
+          '5'
+         WHEN '02:30-03:00' THEN
+          '6'
+         WHEN '03:00-03:30' THEN
+          '7'
+         WHEN '03:30-04:00' THEN
+          '8'
+         WHEN '04:00-04:30' THEN
+          '9'
+         WHEN '04:30-05:00' THEN
+          '10'
+         WHEN '05:00-05:30' THEN
+          '11'
+         WHEN '05:30-06:00' THEN
+          '12'
+         WHEN '06:00-06:30' THEN
+          '13'
+         WHEN '06:30-07:00' THEN
+          '14'
+         WHEN '07:00-07:30' THEN
+          '15'
+         WHEN '07:30-08:00' THEN
+          '16'
+         WHEN '08:00-08:30' THEN
+          '17'
+         WHEN '08:30-09:00' THEN
+          '18'
+         WHEN '09:00-09:30' THEN
+          '19'
+         WHEN '09:30-10:00' THEN
+          '20'
+         WHEN '10:00-10:30' THEN
+          '21'
+         WHEN '10:30-11:00' THEN
+          '22'
+         WHEN '11:00-11:30' THEN
+          '23'
+         WHEN '11:30-12:00' THEN
+          '24'
+         WHEN '12:00-12:30' THEN
+          '25'
+         WHEN '12:30-13:00' THEN
+          '26'
+         WHEN '13:00-13:30' THEN
+          '27'
+         WHEN '13:30-14:00' THEN
+          '28'
+         WHEN '14:00-14:30' THEN
+          '29'
+         WHEN '14:30-15:00' THEN
+          '30'
+         WHEN '15:00-15:30' THEN
+          '31'
+         WHEN '15:30-16:00' THEN
+          '32'
+         WHEN '16:00-16:30' THEN
+          '33'
+         WHEN '16:30-17:00' THEN
+          '34'
+         WHEN '17:00-17:30' THEN
+          '35'
+         WHEN '17:30-18:00' THEN
+          '36'
+         WHEN '18:00-18:30' THEN
+          '37'
+         WHEN '18:30-19:00' THEN
+          '38'
+         WHEN '19:00-19:30' THEN
+          '39'
+         WHEN '19:30-20:00' THEN
+          '40'
+         WHEN '20:00-20:30' THEN
+          '41'
+         WHEN '20:30-21:00' THEN
+          '42'
+         WHEN '21:00-21:30' THEN
+          '43'
+         WHEN '21:30-22:00' THEN
+          '44'
+         WHEN '22:00-22:30' THEN
+          '45'
+         WHEN '22:30-23:00' THEN
+          '46'
+         WHEN '23:00-23:30' THEN
+          '47'
+         WHEN '23:30-00:00' THEN
+          '48'
+         ELSE
+          '0'
+         END login_hour
+  from iap_device_session PARTITION(PART_DEVICE_SESSION_201312)  t1, iap_device_session_cmd t2
+ where t1.device_type = 3
+   and t1.session_id = t2.session_id
+   and t1.log_source = '4AFortLog'
+   and t2.op_time > to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.op_time <=
+       to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+ group by t1.device_id,
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                  'hh24:mi') || '-' ||
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                  'hh24:mi')
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:58)truncate_test_device_session======truncate table test_device_session
+[ERROR] [09:08:59]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:62)sepreate_device=======insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:66)truncate_second_final_device_session=======truncate table second_final_device_session
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:69)second_final_device_session=======insert into second_final_device_session 
+  select t.belong_sys, sum(total) total, t.login_hour
+    from test_device_session t
+   group by login_hour, t.belong_sys
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.updateDateSource(DbOperateLogDayFile.java:73)final_device=======update final_device_session t
+     set t.total =
+         (select y.total
+            from second_final_device_session y
+           where t.belong_sys = y.belong_sys
+             and t.login_hour = y.login_hour)
+[INFO ] [09:08:59]  - com.ailk.uap.makefile4new.DbOperateLogDayFile.generateDbOperateLogDayFile(DbOperateLogDayFile.java:88)subAcctDeviceIdsSql===select count(distinct(t.belong_sys))total_sys_device from final_device_session t
+[ERROR] [09:10:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)ORA-00942: 表或视图不存在
+
+[INFO ] [09:12:32]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:63)UpLoadFileThread start to run......
+[INFO ] [09:12:32]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:64)uap_file_uapload==D:\work\work2012\db\day\I
+[INFO ] [09:12:32]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:65)uap_version==uap2.0
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:99)generateA4AppAcctDayAddFile  ******Start***************
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.generateA4AppAcctDayAddFile(A4AppAcctDayAddFile.java:159)uap_version=================uap2.0
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.generateA4AppAcctDayAddFile(A4AppAcctDayAddFile.java:190)a4AppAcctDayAddFileSql===SELECT 'add' MODE1,	                                                      APPACC.ACCT_SEQ ID,                                                  APPACC.LOGIN_ACCT LOGINNAME,                                         'CRM系统' RESNAME,                                        	CASE WHEN INSTR('HANGBOSS' ,APP.APP_CODE,1,1)>0 THEN '12' WHEN INSTR('HANGBOSS'  ,APP.APP_CODE,1,1)>0 THEN '12'  ELSE '99' END           RESTYPE,                                                            APPACC.LAST_UPDATE_TIME UPDATETIME                              FROM UAP_APP_ACCT APPACC, UAP_APP APP                               WHERE APPACC.APP_ID = APP.APP_ID                                       AND APP.APP_CODE IN ('HANGBOSS')                              AND APPACC.CREATE_TIME >=                                                TO_DATE('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss')               AND APPACC.CREATE_TIME <                                                 TO_DATE('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')                UNION ALL SELECT 'del' MODE1,                                                   APPACC1.ACCT_SEQ ID,                                                 APPACC1.LOGIN_ACCT LOGINNAME,                                        'CRM系统' RESNAME,                                             	CASE WHEN INSTR('HANGBOSS' ,APP.APP_CODE,1,1)>0 THEN '12' WHEN INSTR('HANGBOSS'  ,APP.APP_CODE,1,1)>0 THEN '12'  ELSE '99' END     RESTYPE,                                                            APPACC1.LAST_UPDATE_TIME UPDATETIME                                   FROM UAP_APP_ACCT APPACC1, UAP_APP APP                              WHERE APPACC1.APP_ID = APP.APP_ID                                      AND APP.APP_CODE IN ('HANGBOSS')                               AND APPACC1.ACCT_STATUS = '2'                                        AND APPACC1.LAST_UPDATE_TIME >=                                          TO_DATE('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss')               AND APPACC1.LAST_UPDATE_TIME <                                           TO_DATE('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')                UNION ALL SELECT 'del' MODE1,                                                         APPACCHIS.ACCT_SEQ ID,                                               APPACCHIS.LOGIN_ACCT LOGINNAME,                                      'CRM系统' RESNAME,                                     	CASE WHEN INSTR('HANGBOSS' ,APP.APP_CODE,1,1)>0 THEN '12' WHEN INSTR('HANGBOSS'  ,APP.APP_CODE,1,1)>0 THEN '12'  ELSE '99' END           RESTYPE,                                                            APPACCHIS.LAST_UPDATE_TIME UPDATETIME                           FROM UAP_APP_ACCT_HIS APPACCHIS, UAP_APP APP                        WHERE APPACCHIS.APP_ID = APP.APP_ID                                    AND APP.APP_CODE IN ('HANGBOSS')                               AND APPACCHIS.LAST_UPDATE_TIME >=                                        TO_DATE('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and               APPACCHIS.LAST_UPDATE_TIME <                                         TO_DATE('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')               
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.generateA4AppAcctDayAddFile(A4AppAcctDayAddFile.java:191)getA4AppAcctFullInfo*******************Start******
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.getA4AppAcctDayAddFullInfo(A4AppAcctDayAddFile.java:238)sum=========== 0
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.generateA4AppAcctDayAddFile(A4AppAcctDayAddFile.java:195)getA4AppAcctFullInfo*******************End*********
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.generateA4AppAcctDayAddFile(A4AppAcctDayAddFile.java:200)a4AppAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SM4AI</type>
+<province>371</province>
+<createtime>2013-12-31T17:11:06</createtime>
+<sum>0</sum>
+<begintime>2013-12-30T00:00:00</begintime>
+<endtime>2013-12-31T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:103)generateA4AppAcctDayAddFile  ******End ***************
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:105)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:118)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:12:46]  - com.ailk.uap.makefile4new.A4AppAcctDayAddFile.main(A4AppAcctDayAddFile.java:120)GENERATE A4AppAcct Day Add FILE  TOTALTIME======14s
+[INFO ] [09:23:45]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:58)UpLoadFileThread start to run......
+[INFO ] [09:23:45]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:59)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [09:23:45]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:60)uap_version==uap2.0
+[INFO ] [09:23:45]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:62)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[INFO ] [09:23:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:74)com.ailk.uap.makefile4new.MainAcctDayAddFile ******Start***************
+[INFO ] [09:23:58]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:91)mainAcctDayAddFileSql===select 'add' as  modify_mode,t1.main_acct_id,t1.login_name,t1.name as user_name,case when (sysdate >= t1.effect_time and sysdate< t1.expire_time and t1.lock_status='0') then  '1' else '0' end valid,t1.lock_status, t1.acct_type, t1.effect_time,t1.expire_time,t1.create_time,t1.area_id,t1.default_org as org_id, t1.last_update_time as update_time from uap_main_acct t1 where t1.create_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t1.create_time < to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')  union all select 'upd'  as modify_mode,t2.main_acct_id,t2.login_name,t2.name as user_name,case when (sysdate >= t2.effect_time and  sysdate< t2.expire_time and t2.lock_status='0') then  '1' else '0' end valid,t2.lock_status, t2.acct_type, t2.effect_time,t2.expire_time,t2.create_time,t2.area_id,t2.default_org as org_id, t2.last_update_time as update_time from uap_main_acct t2 where t2.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t2.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t2.last_update_time > t2.create_time union all select 'del'  as modify_mode,t3.main_acct_id,t3.login_name,t3.name as user_name,'0' as valid,t3.lock_status, t3.acct_type, t3.effect_time,t3.expire_time,t3.create_time,t3.area_id,t3.default_org as org_id, t3.last_update_time as update_time from uap_main_acct_his t3 where t3.last_update_time >=  to_date('2013-12-30 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t3.last_update_time< to_date('2013-12-31 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+[INFO ] [09:23:58]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:93)getMainAcctFullInfo*******************Start******
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:95)getMainAcctFullInfo*******************End*********
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:100)mainAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAI</type>
+<province>371</province>
+<createtime>2013-12-31T17:22:19</createtime>
+<sum>0</sum>
+<begintime>2013-12-30T00:00:00</begintime>
+<endtime>2013-12-31T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:76)com.ailk.uap.makefile4new.MainAcctDayAddFile  ******End ***************
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:90)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:23:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:92)GENERATE com.ailk.uap.makefile4new.MainAcctDayAddFile FULL FILE  TOTALTIME======13s

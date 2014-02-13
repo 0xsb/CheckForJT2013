@@ -1,0 +1,477 @@
+[ERROR] [03:29:14]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)ORA-00942: 表或视图不存在
+
+[ERROR] [03:30:27]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)ORA-00942: 表或视图不存在
+
+[ERROR] [03:41:49]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:54) save error file  SQL is:insert into A4_FILE_ERROR_LIST
+		values
+		  (to_date('2014-01-16 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		   to_date('2014-01-17 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		    'SM4AI_371_01DY_20140116_000_000.xml',
+		    '0',
+		    'sum值与明细总数不符',
+		   to_date('2014-01-17 11:40:10', 'yyyy-MM-dd hh24:Mi:ss'))
+[ERROR] [03:41:49]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:56) now begin close connection
+[ERROR] [03:41:49]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:58) end close connection
+[ERROR] [04:36:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)
+[ERROR] [04:50:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)ORA-00942: 表或视图不存在
+
+[ERROR] [04:54:42]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into a4_iap_device_session (DEVICE_ID,TOTAL,LOGIN_HOUR)
+	         select distinct (t1.device_id),
+                count(t1.device_id) total,
+                CASE TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                         'hh24:mi') || '-' ||
+                 TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                         'hh24:mi')
+                  WHEN '00:00-00:30' THEN
+          '1'
+         WHEN '00:30-01:00' THEN
+          '2'
+         WHEN '01:00-01:30' THEN
+          '3'
+         WHEN '01:30-02:00' THEN
+          '4'
+         WHEN '02:00-02:30' THEN
+          '5'
+         WHEN '02:30-03:00' THEN
+          '6'
+         WHEN '03:00-03:30' THEN
+          '7'
+         WHEN '03:30-04:00' THEN
+          '8'
+         WHEN '04:00-04:30' THEN
+          '9'
+         WHEN '04:30-05:00' THEN
+          '10'
+         WHEN '05:00-05:30' THEN
+          '11'
+         WHEN '05:30-06:00' THEN
+          '12'
+         WHEN '06:00-06:30' THEN
+          '13'
+         WHEN '06:30-07:00' THEN
+          '14'
+         WHEN '07:00-07:30' THEN
+          '15'
+         WHEN '07:30-08:00' THEN
+          '16'
+         WHEN '08:00-08:30' THEN
+          '17'
+         WHEN '08:30-09:00' THEN
+          '18'
+         WHEN '09:00-09:30' THEN
+          '19'
+         WHEN '09:30-10:00' THEN
+          '20'
+         WHEN '10:00-10:30' THEN
+          '21'
+         WHEN '10:30-11:00' THEN
+          '22'
+         WHEN '11:00-11:30' THEN
+          '23'
+         WHEN '11:30-12:00' THEN
+          '24'
+         WHEN '12:00-12:30' THEN
+          '25'
+         WHEN '12:30-13:00' THEN
+          '26'
+         WHEN '13:00-13:30' THEN
+          '27'
+         WHEN '13:30-14:00' THEN
+          '28'
+         WHEN '14:00-14:30' THEN
+          '29'
+         WHEN '14:30-15:00' THEN
+          '30'
+         WHEN '15:00-15:30' THEN
+          '31'
+         WHEN '15:30-16:00' THEN
+          '32'
+         WHEN '16:00-16:30' THEN
+          '33'
+         WHEN '16:30-17:00' THEN
+          '34'
+         WHEN '17:00-17:30' THEN
+          '35'
+         WHEN '17:30-18:00' THEN
+          '36'
+         WHEN '18:00-18:30' THEN
+          '37'
+         WHEN '18:30-19:00' THEN
+          '38'
+         WHEN '19:00-19:30' THEN
+          '39'
+         WHEN '19:30-20:00' THEN
+          '40'
+         WHEN '20:00-20:30' THEN
+          '41'
+         WHEN '20:30-21:00' THEN
+          '42'
+         WHEN '21:00-21:30' THEN
+          '43'
+         WHEN '21:30-22:00' THEN
+          '44'
+         WHEN '22:00-22:30' THEN
+          '45'
+         WHEN '22:30-23:00' THEN
+          '46'
+         WHEN '23:00-23:30' THEN
+          '47'
+         WHEN '23:30-00:00' THEN
+          '48'
+         ELSE
+          '0'
+         END login_hour
+  from iap_device_session PARTITION(PART_DEVICE_SESSION_201401)  t1, iap_device_session_cmd t2
+ where t1.device_type = 3
+   and t1.session_id = t2.session_id
+   and t1.log_source = '4AFortLog'
+   and t2.op_time > to_date('2014-01-16 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.op_time <=
+       to_date('2014-01-17 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+ group by t1.device_id,
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                  'hh24:mi') || '-' ||
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                  'hh24:mi')
+[ERROR] [04:54:42]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[ERROR] [04:54:42]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)ORA-00942: 表或视图不存在
+
+[ERROR] [04:58:10]  - com.ailk.jt.validate.FileValidator.validate(FileValidator.java:45)<!--validator error-->
+org.xml.sax.SAXException: 解析级别 Fatal Error	出错行:-1	文件目录:null	出错消息:文件过早结束。
+	at com.ailk.jt.validate.MyDefaultHandler.fatalError(MyDefaultHandler.java:45)
+	at org.apache.xerces.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at org.apache.xerces.impl.XMLErrorReporter.reportError(Unknown Source)
+	at org.apache.xerces.impl.XMLErrorReporter.reportError(Unknown Source)
+	at org.apache.xerces.impl.XMLVersionDetector.determineDocVersion(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+	at com.ailk.jt.validate.FileValidator.validate(FileValidator.java:42)
+	at com.ailk.jt.validate.DayFileSafeForR.safeGuardR(DayFileSafeForR.java:102)
+	at com.ailk.jt.validate.DayFileSafeForR.main(DayFileSafeForR.java:71)
+[ERROR] [04:59:22]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:54) save error file  SQL is:insert into A4_FILE_ERROR_LIST
+		values
+		  (to_date('2014-01-16 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		   to_date('2014-01-17 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		    'SM4AR_371_01DY_20140116_000_000.xml',
+		    '0',
+		    '校验失败',
+		   to_date('2014-01-17 12:57:43', 'yyyy-MM-dd hh24:Mi:ss'))
+[ERROR] [04:59:22]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:56) now begin close connection
+[ERROR] [04:59:22]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:58) end close connection
+[ERROR] [05:03:34]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:86)sum=========== 19417
+[ERROR] [05:21:46]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into a4_iap_device_session (DEVICE_ID,TOTAL,LOGIN_HOUR)
+	         select distinct (t1.device_id),
+                count(t1.device_id) total,
+                CASE TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                         'hh24:mi') || '-' ||
+                 TO_CHAR((TRUNC(SYSDATE) +
+                         TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                                 'yyyy-mm-dd hh24:mi:ss'),
+                                         'yyyy-mm-dd hh24:mi:ss') -
+                                TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                         'hh24:mi')
+                  WHEN '00:00-00:30' THEN
+          '1'
+         WHEN '00:30-01:00' THEN
+          '2'
+         WHEN '01:00-01:30' THEN
+          '3'
+         WHEN '01:30-02:00' THEN
+          '4'
+         WHEN '02:00-02:30' THEN
+          '5'
+         WHEN '02:30-03:00' THEN
+          '6'
+         WHEN '03:00-03:30' THEN
+          '7'
+         WHEN '03:30-04:00' THEN
+          '8'
+         WHEN '04:00-04:30' THEN
+          '9'
+         WHEN '04:30-05:00' THEN
+          '10'
+         WHEN '05:00-05:30' THEN
+          '11'
+         WHEN '05:30-06:00' THEN
+          '12'
+         WHEN '06:00-06:30' THEN
+          '13'
+         WHEN '06:30-07:00' THEN
+          '14'
+         WHEN '07:00-07:30' THEN
+          '15'
+         WHEN '07:30-08:00' THEN
+          '16'
+         WHEN '08:00-08:30' THEN
+          '17'
+         WHEN '08:30-09:00' THEN
+          '18'
+         WHEN '09:00-09:30' THEN
+          '19'
+         WHEN '09:30-10:00' THEN
+          '20'
+         WHEN '10:00-10:30' THEN
+          '21'
+         WHEN '10:30-11:00' THEN
+          '22'
+         WHEN '11:00-11:30' THEN
+          '23'
+         WHEN '11:30-12:00' THEN
+          '24'
+         WHEN '12:00-12:30' THEN
+          '25'
+         WHEN '12:30-13:00' THEN
+          '26'
+         WHEN '13:00-13:30' THEN
+          '27'
+         WHEN '13:30-14:00' THEN
+          '28'
+         WHEN '14:00-14:30' THEN
+          '29'
+         WHEN '14:30-15:00' THEN
+          '30'
+         WHEN '15:00-15:30' THEN
+          '31'
+         WHEN '15:30-16:00' THEN
+          '32'
+         WHEN '16:00-16:30' THEN
+          '33'
+         WHEN '16:30-17:00' THEN
+          '34'
+         WHEN '17:00-17:30' THEN
+          '35'
+         WHEN '17:30-18:00' THEN
+          '36'
+         WHEN '18:00-18:30' THEN
+          '37'
+         WHEN '18:30-19:00' THEN
+          '38'
+         WHEN '19:00-19:30' THEN
+          '39'
+         WHEN '19:30-20:00' THEN
+          '40'
+         WHEN '20:00-20:30' THEN
+          '41'
+         WHEN '20:30-21:00' THEN
+          '42'
+         WHEN '21:00-21:30' THEN
+          '43'
+         WHEN '21:30-22:00' THEN
+          '44'
+         WHEN '22:00-22:30' THEN
+          '45'
+         WHEN '22:30-23:00' THEN
+          '46'
+         WHEN '23:00-23:30' THEN
+          '47'
+         WHEN '23:30-00:00' THEN
+          '48'
+         ELSE
+          '0'
+         END login_hour
+  from iap_device_session PARTITION(PART_DEVICE_SESSION_201401)  t1, iap_device_session_cmd t2
+ where t1.device_type = 3
+   and t1.session_id = t2.session_id
+   and t1.log_source = '4AFortLog'
+   and t2.op_time > to_date('2014-01-16 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+   and t2.op_time <=
+       to_date('2014-01-17 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+ group by t1.device_id,
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30 - 1) * 30 / 60 / 24),
+                  'hh24:mi') || '-' ||
+          TO_CHAR((TRUNC(SYSDATE) +
+                  TRUNC((TO_DATE(TO_CHAR(t1.login_time,
+                                          'yyyy-mm-dd hh24:mi:ss'),
+                                  'yyyy-mm-dd hh24:mi:ss') - TRUNC(SYSDATE)) * 24 * 60 / 30) * 30 / 60 / 24),
+                  'hh24:mi')
+[ERROR] [05:21:46]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[ERROR] [05:21:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)ORA-00942: 表或视图不存在
+
+[ERROR] [06:00:11]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [06:00:11]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->null
+[ERROR] [06:00:11]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [06:00:11]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)
+[ERROR] [06:02:24]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:78)sum=========== 19417
+[ERROR] [06:11:10]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [06:11:10]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->null
+[ERROR] [06:11:10]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [06:11:10]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)
+[ERROR] [06:13:26]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:78)sum=========== 19417
+[ERROR] [08:21:15]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [08:21:15]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->null
+[ERROR] [08:21:15]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [08:21:15]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)
+[ERROR] [08:23:21]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:78)sum=========== 19417
+[ERROR] [08:23:33]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:78)sum=========== 19417
+[ERROR] [09:13:15]  - com.ailk.check.safeguard.validate.method.FilesIsExists.invoke(FilesIsExists.java:45)xml file not exists, xml is : D:\work\work2012\db\day\SMJKR\SMJKR_null_01DY_20140116_000_000.xml
+[ERROR] [09:13:15]  - com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:64)smjkr smjka validate error! path:D:\work\work2012\db\day\SMJKR\SMJKR_null_01DY_20140116_000_000.xml reason：nofileError
+[ERROR] [09:15:33]  - com.ailk.check.safeguard.validate.method.FilesIsExists.invoke(FilesIsExists.java:45)xml file not exists, xml is : D:\work\work2012\db\day\SMJKR\SMJKR_null_01DY_20140116_000_000.xml
+[ERROR] [09:15:33]  - com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:64)smjkr smjka validate error! path:D:\work\work2012\db\day\SMJKR\SMJKR_null_01DY_20140116_000_000.xml reason：nofileError
+[ERROR] [09:16:33]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:54) save error file  SQL is:insert into A4_FILE_ERROR_LIST
+		values
+		  (to_date('2014-01-16 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		   to_date('2014-01-17 00:00:00', 'yyyy-MM-dd hh24:Mi:ss'),
+		    'SMJKR_null_01DY_20140116_000_000.xml',
+		    '0',
+		    '目录下未发现文件',
+		   to_date('2014-01-17 17:14:55', 'yyyy-MM-dd hh24:Mi:ss'))
+[ERROR] [09:16:33]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:56) now begin close connection
+[ERROR] [09:16:33]  - com.ailk.jt.util.SaveErrorFileUtil.saveErrorFile(SaveErrorFileUtil.java:58) end close connection
+[ERROR] [09:16:33]  - com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:77)JKDaySafeguard.safeguard() moveToDir have IOException ...
+java.io.FileNotFoundException: Source 'D:\work\work2012\db\day\SMJKR\SMJKR_null_01DY_20140116_000_000.xml' does not exist
+	at org.apache.commons.io.FileUtils.copyFile(FileUtils.java:1004)
+	at org.apache.commons.io.FileUtils.copyFileToDirectory(FileUtils.java:943)
+	at org.apache.commons.io.FileUtils.copyFileToDirectory(FileUtils.java:907)
+	at com.ailk.check.utils.FileUtil.moveToDir(FileUtil.java:40)
+	at com.ailk.check.utils.FileUtil.moveToDir(FileUtil.java:29)
+	at com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:74)
+	at com.ailk.check.main.JKDaySafeguardMain.main(JKDaySafeguardMain.java:31)
+[ERROR] [09:16:33]  - com.ailk.check.safeguard.safe.random.safe.JKDayRandomSafeFileCreator.createJKSafeFile(JKDayRandomSafeFileCreator.java:81)JKDayRandomSafeFileCreator.createJKSafeFile have Exception!
+java.io.FileNotFoundException: File 'D:\work\work2012\safefile\DY\SMJKR\SMJKR_16.xml' does not exist
+	at org.apache.commons.io.FileUtils.openInputStream(FileUtils.java:254)
+	at org.apache.commons.io.FileUtils.readFileToString(FileUtils.java:1641)
+	at com.ailk.check.safeguard.safe.random.safe.JKDayRandomSafeFileCreator.createJKSafeFile(JKDayRandomSafeFileCreator.java:66)
+	at com.ailk.check.safeguard.safe.JKDaySafeFileCreator.createJKDaySafeFile(JKDaySafeFileCreator.java:41)
+	at com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:82)
+	at com.ailk.check.main.JKDaySafeguardMain.main(JKDaySafeguardMain.java:31)
+[ERROR] [09:16:33]  - com.ailk.check.safeguard.JKDaySafeguard.safeguard(JKDaySafeguard.java:84)金库申请、金库审批日增量文件生成随机安全文件失败！
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3edc#EDC
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGBOMC
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===oracle.jdbc.driver.OracleDriver
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\safe\day
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3edc#EDC
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\safefile\MONTH
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===5
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===21
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMFLO
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===5
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\static
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMCRF
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===audit11
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===1
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===345600000
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMJKR
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMAAF
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===aitest30
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===20
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===\
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGVGOP
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGBOSS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===aitest30
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMSMF
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGSMP
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\bak\hour
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMJKA
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\I
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===2011-09-08 00:00:00
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===BJOA,GOA
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\hour\SMMAL
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMDAR
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===1-AIUAP-10027
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===5.0
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\temp
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===oracle.jdbc.driver.OracleDriver
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\upload
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===classpath:com/ailk/jt/task/entity/SQL.xml
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===20130507
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\hour_upload
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===BOSS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\hour\SMSAL
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===122
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===13526432500
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGESOP
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===classpath:com/ailk/jt/task/entity/calculateSQL.xml
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3edc#EDC
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===jdbc:oracle:thin:@10.87.30.149:1521:HN4ACS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===oracle.jdbc.OracleDriver
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\bak
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\R
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===/home/capesup/SafeM/static
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===0 6 0 * * ?
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMMAF
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\AAI
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===aitest30
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGBASS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===2013-07-16
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMBHR
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===0.8
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===/home/aiuap/SafeM
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3edc#EDC
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\safe\hour\SMMAL
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===jdbc:oracle:thin:@10.87.30.149:1521:HN4ACS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===uap2.0
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===20
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===oracle.jdbc.driver.OracleDriver
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===016
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\hour
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===1-AIUAP-10000
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===2013-07-15
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===1,2,6
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===a4_main_acct_jt
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===2011-09-09 03:04:00
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGBOSS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===5
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===jdbc:oracle:thin:@10.87.30.149:1521:HN4ACS
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\schema
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===10
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\4AI
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===34573
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===5
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\AAR
+[ERROR] [09:18:32]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===371
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===2011-09-09 00:00:00
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===10
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===aitest30
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===1-AIUAP-10012
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===16|-76|12|-58|-23|-49|111|22|38|22|-49|50|-1|-5|86|-64|89
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGVGOP
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===0.5
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===300 
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMHAF
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===10.87.30.152
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===oracle.jdbc.OracleDriver
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===/home/aiuap/bomc_upload/files/download
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMMAI
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===/home/aiuap/UploadTask/bak
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===jdbc:oracle:thin:@10.87.30.149:1521:HN4ACS
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===jdbc:oracle:thin:@10.87.30.149:1521:HN4ACS
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\SMFWL
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\month\SMMSF
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===F002|F003|F004|F006|F007|F999
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===aiuap
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\safe\hour\SMSAL
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===D:\work\work2012\db\day\4AR
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===/home/aiuap/UploadTask/dir/rsp
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===3edc#EDC
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===20110908
+[ERROR] [09:18:33]  - com.ailk.uap.config.PropertiesUtil.main(PropertiesUtil.java:41)===HANGESOP

@@ -1,0 +1,9 @@
+[ERROR] [02:17:38]  - com.ailk.jt.task.biz.CalculateUsageTest.addUserTest(CalculateUsageTest.java:70)<!--the sql backup_a4_main_acct_snap is :--> create table a4_main_acct_snap_20131217  as select * from a4_main_acct_snap_test
+[ERROR] [02:17:39]  - com.ailk.jt.task.biz.CalculateUsageTest.addUserTest(CalculateUsageTest.java:72)<!-- backup a4_main_acct_snap end--> 
+[ERROR] [02:26:40]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->insert into test_device_session
+  select w.belong_sys, t.device_id, t.total, t.login_hour
+    from a4_iap_device_session t, check_uap_db_copy w
+   where t.device_id = w.db_id
+[ERROR] [04:46:31]  - com.ailk.jt.task.biz.CalculateUsageTest.addUserTest(CalculateUsageTest.java:70)<!--the sql backup_a4_main_acct_snap is :--> create table a4_main_acct_snap_20131217  as select * from a4_main_acct_snap_test
+[ERROR] [04:46:31]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->create table a4_main_acct_snap_20131217  as select * from a4_main_acct_snap_test
+[ERROR] [04:46:31]  - com.ailk.jt.task.biz.CalculateUsageTest.addUserTest(CalculateUsageTest.java:72)<!-- backup a4_main_acct_snap end--> 

@@ -1,0 +1,5 @@
+mvn install:install-file -DgroupId=com.ibatis -DartifactId=ibatis-sqlmap -Dversion=2.3.3.720 -Dpackaging=jar -Dfile=ibatis-2.3.3.720.jar
+
+mvn install:install-file -DgroupId=com.ibatis -DartifactId=ibatis-common -Dversion=2.2.0.638 -Dpackaging=jar -Dfile=ibatis-common-2.jar
+
+mvn install:install-file -DgroupId=com.ibatis -DartifactId=ibatis-dao -Dversion=2.2.0.638 -Dpackaging=jar -Dfile=ibatis-dao-2.jar

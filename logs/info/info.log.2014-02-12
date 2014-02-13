@@ -1,0 +1,44 @@
+[INFO ] [06:44:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [06:44:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [06:44:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [06:44:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.MainAcctDayAddFile ******Start***************
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:86)mainAcctDayAddFileSql===select 'add' as  modify_mode,t1.main_acct_id,t1.login_name,t1.name as user_name,case when (sysdate >= t1.effect_time and sysdate< t1.expire_time and t1.lock_status='0') then  '1' else '0' end valid,t1.lock_status, t1.acct_type, t1.effect_time,t1.expire_time,t1.create_time,t1.area_id,t1.default_org as org_id, t1.last_update_time as update_time from uap_main_acct t1 where t1.create_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t1.create_time < to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss')  union all select 'upd'  as modify_mode,t2.main_acct_id,t2.login_name,t2.name as user_name,case when (sysdate >= t2.effect_time and  sysdate< t2.expire_time and t2.lock_status='0') then  '1' else '0' end valid,t2.lock_status, t2.acct_type, t2.effect_time,t2.expire_time,t2.create_time,t2.area_id,t2.default_org as org_id, t2.last_update_time as update_time from uap_main_acct t2 where t2.last_update_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t2.last_update_time< to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t2.last_update_time > t2.create_time union all select 'del'  as modify_mode,t3.main_acct_id,t3.login_name,t3.name as user_name,'0' as valid,t3.lock_status, t3.acct_type, t3.effect_time,t3.expire_time,t3.create_time,t3.area_id,t3.default_org as org_id, t3.last_update_time as update_time from uap_main_acct_his t3 where t3.last_update_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t3.last_update_time< to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:88)getMainAcctFullInfo*******************Start******
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:90)getMainAcctFullInfo*******************End*********
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:95)mainAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAI</type>
+<province>371</province>
+<createtime>2014-02-12T14:43:20</createtime>
+<sum>0</sum>
+<begintime>2014-02-11T00:00:00</begintime>
+<endtime>2014-02-12T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)com.ailk.uap.makefile4new.MainAcctDayAddFile  ******End ***************
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:84)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [06:45:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)GENERATE com.ailk.uap.makefile4new.MainAcctDayAddFile FULL FILE  TOTALTIME======13s
+[INFO ] [06:47:38]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [06:47:38]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [06:47:38]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [06:47:38]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.MainAcctDayAddFile ******Start***************
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:86)mainAcctDayAddFileSql===select 'add' as  modify_mode,t1.main_acct_id,t1.login_name,t1.name as user_name,case when (sysdate >= t1.effect_time and sysdate< t1.expire_time and t1.lock_status='0') then  '1' else '0' end valid,t1.lock_status, t1.acct_type, t1.effect_time,t1.expire_time,t1.create_time,t1.area_id,t1.default_org as org_id, t1.last_update_time as update_time from uap_main_acct t1 where t1.create_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t1.create_time < to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss')  union all select 'upd'  as modify_mode,t2.main_acct_id,t2.login_name,t2.name as user_name,case when (sysdate >= t2.effect_time and  sysdate< t2.expire_time and t2.lock_status='0') then  '1' else '0' end valid,t2.lock_status, t2.acct_type, t2.effect_time,t2.expire_time,t2.create_time,t2.area_id,t2.default_org as org_id, t2.last_update_time as update_time from uap_main_acct t2 where t2.last_update_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t2.last_update_time< to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and t2.last_update_time > t2.create_time union all select 'del'  as modify_mode,t3.main_acct_id,t3.login_name,t3.name as user_name,'0' as valid,t3.lock_status, t3.acct_type, t3.effect_time,t3.expire_time,t3.create_time,t3.area_id,t3.default_org as org_id, t3.last_update_time as update_time from uap_main_acct_his t3 where t3.last_update_time >=  to_date('2014-02-11 00:00:00', 'yyyy-MM-dd HH24:mi:ss') and  t3.last_update_time< to_date('2014-02-12 00:00:00', 'yyyy-MM-dd HH24:mi:ss')
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:88)getMainAcctFullInfo*******************Start******
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:90)getMainAcctFullInfo*******************End*********
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.MainAcctDayAddFile.generateMainAcctDayAddFile(MainAcctDayAddFile.java:95)mainAcctDayAddFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMMAI</type>
+<province>371</province>
+<createtime>2014-02-12T14:46:03</createtime>
+<sum>0</sum>
+<begintime>2014-02-11T00:00:00</begintime>
+<endtime>2014-02-12T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)com.ailk.uap.makefile4new.MainAcctDayAddFile  ******End ***************
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:84)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [06:47:51]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)GENERATE com.ailk.uap.makefile4new.MainAcctDayAddFile FULL FILE  TOTALTIME======13s

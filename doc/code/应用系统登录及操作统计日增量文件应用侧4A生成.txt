@@ -1,0 +1,25 @@
+应用系统登录及操作统计日增量文件应用侧4A生成
+SMAAR  SM4AR
+
+com.ailk.uap.makefile4new.AppSubAcctLoginFile
+
+连接数据库:
+审计库
+
+涉及业务表：
+iap_app_log
+
+涉及考核临时表：
+a4_4ar_temp  a4_4ar
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_4ar_temp；
+3、通过业务表查询出所需数据，插入 a4_4ar_temp；
+4、根据 a4_4ar_temp 更新 a4_4ar 的 dlvalue、czvalue 的值；
+5、查询 a4_4ar，生成XML文件SM4AR。
+
+todo
+该生成程序只生成SM4AR的文件，SMAAR是在保障程序里复制的SM4AR
+
+BOMC对 DR_UPLOAD_FILE_INFO 有监控，考虑如果SMAAR不生成的话，是否取消对其监控？

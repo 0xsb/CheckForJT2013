@@ -1,0 +1,3 @@
+[ERROR] [08:37:57]  - com.ailk.jt.util.TimeAndOtherUtil.getCurrentMonthStr(TimeAndOtherUtil.java:113)====get today time from db error!======null
+[ERROR] [08:38:28]  - com.ailk.jt.util.TimeAndOtherUtil.getCurrentMonth(TimeAndOtherUtil.java:130)====get today time from db error!======null
+[ERROR] [08:38:58]  - com.ailk.jt.util.TimeAndOtherUtil.getTodayStartTimeForTable(TimeAndOtherUtil.java:77)====get today time from db error!======null

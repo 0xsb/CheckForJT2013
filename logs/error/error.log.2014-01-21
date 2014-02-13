@@ -1,0 +1,22 @@
+[ERROR] [07:54:41]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [07:54:41]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.main(FireWallLoginAndOperateDayAddFile.java:79)FireWallLoginAndOperateDayAddFile have Exception ...
+java.lang.NullPointerException
+	at com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:115)
+	at com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.main(FireWallLoginAndOperateDayAddFile.java:75)
+[ERROR] [08:00:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[ERROR] [08:04:27]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[ERROR] [08:06:41]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[ERROR] [08:13:05]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[ERROR] [08:14:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[ERROR] [08:14:47]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[ERROR] [08:17:01]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[ERROR] [08:19:50]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[ERROR] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:50:00]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [08:53:04]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)

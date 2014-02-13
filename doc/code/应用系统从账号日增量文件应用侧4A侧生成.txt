@@ -1,0 +1,21 @@
+应用系统从账号日增量文件应用侧4A侧 生成程序
+SMAAI SM4AI
+
+com.ailk.uap.makefile4new.A4AppAcctDayAddFile
+
+连接数据库：
+aiuap
+
+涉及业务表：
+UAP_APP  UAP_APP_ACCT  UAP_APP_ACCT_HIS
+
+涉及考核临时表：
+
+主要流程：
+1、准备上传文件名称等；
+2、通过业务表查询出所需数据，并生成XML文件SM4AI；
+
+todo
+该生成程序只生成SM4AI的文件，SMAAI是在保障程序里复制的SM4AI
+
+BOMC对 DR_UPLOAD_FILE_INFO 有监控，考虑如果SMAAI不生成的话，是否取消对其监控？

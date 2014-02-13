@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smp>
+    <type>SMJKA</type>
+    <province>371</province>
+    <createtime>toReplaceT02:16:20</createtime>
+    <sum>1</sum>
+    <begintime>toReplaceT00:00:00</begintime>
+    <endtime>toReplaceT00:00:00</endtime>
+    <data>
+        <rcd>
+            <seq>1</seq>
+            <approvename>test</approvename>
+            <approvetime>toReplaceT09:17:20</approvetime>
+            <requestid>123</requestid>
+            <approvemode>00</approvemode>
+            <result>0</result>
+            <approveinfo>test</approveinfo>
+        </rcd>
+    </data>
+</smp>

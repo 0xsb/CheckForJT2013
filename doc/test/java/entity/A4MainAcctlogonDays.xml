@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="A4MainAcctlogonDays">
+
+	<typeAlias alias="a4MainAcctlogonDays"
+		type="com.ailk.jt.task.entity.A4MainAcctLogonDays" />
+
+	<resultMap id="a4MainAcctlogonDaysResult"
+		class="a4MainAcctlogonDays">
+		<result property="mainAcctName" column="main_acct_name" />
+		<result property="loginDay" column="login_day" />
+	</resultMap>
+
+	<select id="getLogOnDays" resultMap="a4MainAcctlogonDaysResult"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+      select t.main_acct_name, count(t.login_day) as login_day
+  from A4_MAIN_ACCT_LOGONS_TEMP t
+ where t.login_day >= to_date(#monthBeginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   and t.login_day < to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+ group by t.main_acct_name
+    ]]>
+	</select>
+</sqlMap>

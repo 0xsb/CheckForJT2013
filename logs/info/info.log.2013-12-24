@@ -1,0 +1,252 @@
+[INFO ] [07:25:34]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:62)UpLoadFileThread start to run......
+[INFO ] [07:25:34]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:63)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:89)generateA4ResourceCoverFullFile  ******Start***************
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:128)total sum ===0
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:139)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:140)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:143)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>2013-12-24T15:24:04</createtime>
+<sum>0</sum>
+<begintime>2013-11-01T00:00:00</begintime>
+<endtime>2013-12-01T00:00:00</endtime>
+<data></data>
+</smp>
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:92)generateA4ResourceCoverFullFile  ******End ***************
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:106)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [07:25:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.makeFile(A4SuperAuthorityFullFile.java:108)GENERATE A4RESOURCECOVER FULL FILE  TOTALTIME======14s
+[INFO ] [07:29:31]  - com.ailk.uap.makefile4new.MainAcctFullFile.makeFile(MainAcctFullFile.java:86)UpLoadFileThread start to run......
+[INFO ] [07:29:31]  - com.ailk.uap.makefile4new.MainAcctFullFile.makeFile(MainAcctFullFile.java:87)uap_file_uapload==D:\work\work2012\db\month\SMMAF
+[INFO ] [07:29:31]  - com.ailk.uap.makefile4new.MainAcctFullFile.makeFile(MainAcctFullFile.java:88)uap_version==uap2.0
+[INFO ] [07:29:45]  - com.ailk.uap.makefile4new.MainAcctFullFile.makeFile(MainAcctFullFile.java:114)generateMainAcctFullFile  ******Start***************
+[INFO ] [07:29:45]  - com.ailk.uap.makefile4new.MainAcctFullFile.generateMainAcctFullFile(MainAcctFullFile.java:156)mainAcctFullFileSql=== select * from a4_main_acct_jt
+[INFO ] [07:29:45]  - com.ailk.uap.makefile4new.MainAcctFullFile.generateMainAcctFullFile(MainAcctFullFile.java:164)getMainAcctFullInfo*******************Start******
+[ERROR] [07:32:35]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:70)AppAcctFullFileThread- start to run......
+[ERROR] [07:32:35]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:71)uap_file_uapload==D:\work\work2012\db\month\SMAAF
+[ERROR] [07:32:35]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:72)uap_version==uap2.0
+[INFO ] [07:32:49]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:96)uploadFileName===SMAAF_371_01MO_20131101_000_000.xml
+[INFO ] [07:32:49]  - com.ailk.uap.makefile4new.AppAcctFullFile.generateAppAcctFullFile(AppAcctFullFile.java:155)AppAcctFullFileSql = select t.acct_seq as user_id,t.user_id as app_user_id,app.app_name,t.login_acct,  case when t.acct_status=1 then 0 when t.acct_status=2 then 1 when t.acct_status=0 then 1 end lock_status,  case when t.acct_type='05' then '99' else t.acct_type end acct_type,t.effect_time,t.expire_time, t.create_time,  t.last_update_time as update_time,  	CASE WHEN INSTR('HANGBOSS' ,APP.APP_CODE,1,1)>0 THEN '11' WHEN INSTR('HANGBOSS'  ,APP.APP_CODE,1,1)>0 THEN '12'WHEN INSTR('HANGBASS'  ,APP.APP_CODE,1,1)>0 THEN '13'WHEN INSTR('HANGBOMC'  ,APP.APP_CODE,1,1)>0 THEN '14'WHEN INSTR('HANGVGOP'  ,APP.APP_CODE,1,1)>0 THEN '15'WHEN INSTR('HANGVGOP'  ,APP.APP_CODE,1,1)>0 THEN '16'WHEN INSTR('HANGESOP'  ,APP.APP_CODE,1,1)>0 THEN '17'WHEN INSTR('HANGESOP'  ,APP.APP_CODE,1,1)>0 THEN '18'WHEN INSTR('HANGSMP'  ,APP.APP_CODE,1,1)>0 THEN '19'  ELSE '99' END    restype from  uap_app_acct t,UAP_APP app where t.create_time <  to_date('2013-12-01 00:00:00', 'yyyy-MM-dd HH24:mi:ss')   and t.app_id = app.app_id and t.last_update_time is not null
+[INFO ] [07:32:51]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 1000****
+[INFO ] [07:32:51]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 2000****
+[INFO ] [07:32:52]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 3000****
+[INFO ] [07:32:52]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 4000****
+[INFO ] [07:32:52]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 5000****
+[INFO ] [07:32:53]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 6000****
+[INFO ] [07:32:53]  - com.ailk.uap.makefile4new.AppAcctFullFile.getAppAcctFullInfo(AppAcctFullFile.java:231)****write to file 7000****
+[INFO ] [07:32:53]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:100)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [07:32:53]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:111)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [07:32:53]  - com.ailk.uap.makefile4new.AppAcctFullFile.makeFile(AppAcctFullFile.java:112)AppAcctFullFileThread- end......
+[INFO ] [07:38:40]  - com.ailk.uap.makefile4new.AuthorFullFile.makeFile(AuthorFullFile.java:67)UpLoadFileThread start to run......
+[INFO ] [07:38:40]  - com.ailk.uap.makefile4new.AuthorFullFile.makeFile(AuthorFullFile.java:68)uap_file_uapload==D:\work\work2012\db\month\SMMSF
+[INFO ] [07:38:40]  - com.ailk.uap.makefile4new.AuthorFullFile.makeFile(AuthorFullFile.java:69)uap_version==uap2.0
+[INFO ] [08:58:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [08:58:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [08:58:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [08:58:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:58:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======14s
+[INFO ] [09:00:30]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:00:30]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:00:30]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:00:30]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:00:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======14s
+[INFO ] [09:02:36]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:02:36]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:02:36]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:02:36]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:02:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:02:50]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:02:50]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======13s
+[INFO ] [09:04:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:04:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:04:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:04:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:04:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======14s
+[INFO ] [09:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:07:41]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:07:43]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:07:43]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:08:12]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:08:25]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:08:25]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:08:25]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:08:25]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:08:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:08:47]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:11:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:11:21]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======217s
+[INFO ] [09:12:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:12:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:12:27]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:12:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:14:08]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:14:13]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:14:13]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:14:13]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:14:13]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:15:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:50)UpLoadFileThread start to run......
+[INFO ] [09:15:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:51)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:15:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:52)uap_version==uap2.0
+[INFO ] [09:15:44]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:54)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:78)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:94)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:15:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======13s
+[INFO ] [09:16:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)UpLoadFileThread start to run......
+[INFO ] [09:16:42]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:16:43]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_version==uap2.0
+[INFO ] [09:16:45]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile  ******End ***************
+[INFO ] [09:17:57]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [09:17:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [09:17:58]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)GENERATE com.ailk.uap.makefile4new.A4SuperAuthorityFullFile FULL FILE  TOTALTIME======73s
+[INFO ] [09:18:50]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)UpLoadFileThread start to run......
+[INFO ] [09:18:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:18:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_version==uap2.0
+[INFO ] [09:18:55]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:19:54]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:19:54]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:19:54]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:19:54]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:19:54]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>
+[INFO ] [09:22:46]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)UpLoadFileThread start to run......
+[INFO ] [09:22:48]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [09:22:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_version==uap2.0
+[INFO ] [09:22:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[INFO ] [09:23:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile ******Start***************
+[INFO ] [09:23:23]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:114)total sum ===0
+[INFO ] [09:23:23]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:125)getA4ResorceCoverFullInfo*******************Start******
+[INFO ] [09:23:23]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:126)getA4ResorceCoverFullInfo*******************End*********
+[INFO ] [09:23:23]  - com.ailk.uap.makefile4new.A4SuperAuthorityFullFile.generateA4ResourceCoverFullFile(A4SuperAuthorityFullFile.java:129)a4ResourceCoverFileBuffer ==== <?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSMF</type>
+<province>371</province>
+<createtime>null</createtime>
+<sum>0</sum>
+<begintime>null</begintime>
+<endtime>null</endtime>
+<data></data>
+</smp>

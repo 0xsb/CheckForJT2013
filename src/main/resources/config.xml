@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<properties>
+	<category name="dar">
+		<property name="restype" value="11,12,13,14,15,16,17,18,99" />
+		<property name="avg" value="19349" />
+		<property name="1" value="5844" />
+		<property name="2" value="5294" />
+		<property name="3" value="14198" />
+		<property name="4" value="24283" />
+		<property name="5" value="9727" />
+		<property name="6" value="23476" />
+		<property name="7" value="2724" />
+		<property name="8" value="727" />
+		<property name="9" value="6342" />
+		<property name="10" value="588" />
+		<property name="11" value="5819" />
+		<property name="12" value="1027" />
+		<property name="13" value="1100" />
+		<property name="14" value="2031" />
+		<property name="15" value="1051" />
+		<property name="16" value="1742" />
+		<property name="17" value="8315" />
+		<property name="18" value="49205" />
+		<property name="19" value="19934" />
+		<property name="20" value="7178" />
+		<property name="21" value="29005" />
+		<property name="22" value="166439" />
+		<property name="23" value="41415" />
+		<property name="24" value="5779" />
+		<property name="25" value="9764" />
+		<property name="26" value="4971" />
+		<property name="27" value="1701" />
+		<property name="28" value="16300" />
+		<property name="29" value="40543" />
+		<property name="30" value="17288" />
+		<property name="31" value="11580" />
+		<property name="32" value="8666" />
+		<property name="33" value="9673" />
+		<property name="34" value="31677" />
+		<property name="35" value="9711" />
+		<property name="36" value="28217" />
+		<property name="37" value="10752" />
+		<property name="38" value="14307" />
+		<property name="39" value="8098" />
+		<property name="40" value="7320" />
+		<property name="41" value="113414" />
+		<property name="42" value="2604" />
+		<property name="43" value="6186" />
+		<property name="44" value="35223" />
+		<property name="45" value="5975" />
+		<property name="46" value="38337" />
+		<property name="47" value="56528" />
+		<property name="48" value="6713" />
+	</category>
+</properties>
+

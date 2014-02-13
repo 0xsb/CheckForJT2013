@@ -1,0 +1,52 @@
+防火墙与ACL的对比规则如下：
+
+ 
+
+Cisco防火墙：操作日志与ACL先全量匹配，如果全量未匹配的数据，则部分匹配
+
+比如：
+场景1
+Cisco的ACL：access-list outside_rule extended permit tcp object-group OA host 10.96.25.119 eq 21100
+
+Cisco的操作日志：access-list outside_rule extended permit tcp object-group OA host 10.96.25.119 eq 21100
+
+场景2
+Cisco的ACL：access-list inside_rule extended permit tcp object-group 12580server host 218.206.204.70 range 20 22
+
+Cisco的操作日志：access-list inside_rule extended permit tcp object-group 12580server host 218.206.204.70 range ftp-data ssh
+
+匹配规则:字符匹配+host+空格+任意字符+空格+任意字符
+
+ 
+
+Huawei防火墙：操作日志与ACL先全量匹配，如果全量未匹配的数据，则部分匹配（将ACL和操作日志的中间空格全去掉，并且匹配）
+
+比如：
+Huawei的ACL：rule 165 permit tcp source 10.87.21.58 0 destination 10.87.16.0 0.0.0.255 destination-port eq 22
+
+Huawei的操作日志：rule 165 permit tcp source 10.87.21.58 0 destination 10.87.16.0 0.0.0.255 destination-port eq ssh
+
+
+匹配规则:字符匹配+ destination-port +空格+任意字符
+
+ 
+
+Thanks and Best Regards
+
+ 
+
+KeBin Chai(PMP,ITIL V2)
+
+Shared Services - Delivery & Operations
+
+HP Technology Services
+
+Mobile: 18610017875
+
+E-mail: kebin.chai@hp.com
+
+
+
+
+
+我们的对比方法写在：com.ailk.uap.makefile4new.compare.FireWallCompareUtil

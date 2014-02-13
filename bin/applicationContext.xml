@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="  
+ http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+ http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd  
+ http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- ===================================================================DAO相关配置======================================================== -->
+	<!--  快照表  -->
+	<bean id="a4MainAcctSnapDao"
+		class="com.ailk.jt.task.dao.A4MainAcctSnapDao">
+		<property name="sqlMapClient">
+			<ref bean="uapSqlMapClient" />
+		</property>
+	</bean>
+	<bean id="a4MainAcctSnapService"
+		class="com.ailk.jt.task.service.A4MainAcctSnapService">
+		<property name="a4MainAcctSnapDao" ref="a4MainAcctSnapDao" />
+	</bean>
+
+	<!-- 模拟集团表  -->
+	<bean id="a4MainAcctJtDao"
+		class="com.ailk.jt.task.dao.A4MainAcctJtDao">
+		<property name="sqlMapClient">
+			<ref bean="uapSqlMapClient" />
+		</property>
+	</bean>
+
+	<bean id="a4MainAcctJtService"
+		class="com.ailk.jt.task.service.A4MainAcctJtService">
+		<property name="a4MainAcctJtDao" ref="a4MainAcctJtDao" />
+	</bean>
+	<!-- 计算主账号可用天数 -->
+	<bean id="a4MainAcctLogonDaysDao"
+		class="com.ailk.jt.task.dao.A4MainAcctLogonDaysDao">
+		<property name="sqlMapClient">
+			<ref bean="uapSqlMapClient" />
+		</property>
+	</bean>
+
+	<!-- =============================前台异常业务相关配置============================= -->
+	<bean id="a4CBOSSDao" class="com.ailk.jt.task.dao.A4CBOSSDao">
+		<property name="sqlMapClient">
+			<ref bean="cbossSqlMapClient" />
+		</property>
+	</bean>
+
+	<bean id="a4CBOSSService"
+		class="com.ailk.jt.task.service.A4MainAcctJtService">
+		<property name="a4CBOSSDao" ref="a4CBOSSDao" />
+	</bean>
+
+	<bean id="a4CBOSSJFDao" class="com.ailk.jt.task.dao.A4CBOSSJFDao">
+		<property name="sqlMapClient">
+			<ref bean="cbossSqlMapClient" />
+		</property>
+	</bean>
+
+	<bean id="a4CBOSSJFService"
+		class="com.ailk.jt.task.service.A4MainAcctJtService">
+		<property name="a4CBOSSJFDao" ref="a4CBOSSJFDao" />
+	</bean>
+	<!-- ============================end============================ -->
+
+	<!-- ===================================================================Spring相关配置======================================================== -->
+	<!-- ============================配置数据源======================================================= -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>config.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置uap数据源  -->
+	<bean id="uapdataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="username">
+			<value>${uap_jdbc_username}</value>
+		</property>
+		<property name="password">
+			<value>${uap_jdbc_password}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${uap_jdbc_driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${uap_url_server}</value>
+		</property>
+		<property name="initialSize">
+			<value>5</value>
+		</property>
+		<property name="maxActive">
+			<value>300</value>
+		</property>
+		<property name="maxIdle">
+			<value>5</value>
+		</property>
+		<property name="maxWait">
+			<value>100000</value>
+		</property>
+	</bean>
+	<!-- 配置iap数据源  -->
+	<bean id="iapdataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="username">
+			<value>${iap_jdbc_username}</value>
+		</property>
+		<property name="password">
+			<value>${iap_jdbc_password}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${iap_jdbc_driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${iap_url_server}</value>
+		</property>
+
+		<property name="initialSize">
+			<value>5</value>
+		</property>
+		<property name="maxActive">
+			<value>300</value>
+		</property>
+		<property name="maxIdle">
+			<value>5</value>
+		</property>
+		<property name="maxWait">
+			<value>100000</value>
+		</property>
+	</bean>
+	<!-- 配置boss数据源  -->
+	<bean id="bossdataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="username">
+			<value>${boss_jdbc_username}</value>
+		</property>
+		<property name="password">
+			<value>${boss_jdbc_password}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${boss_jdbc_driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${boss_url_server}</value>
+		</property>
+		<property name="initialSize">
+			<value>5</value>
+		</property>
+		<property name="maxActive">
+			<value>300</value>
+		</property>
+		<property name="maxIdle">
+			<value>5</value>
+		</property>
+		<property name="maxWait">
+			<value>100000</value>
+		</property>
+	</bean>
+	<!-- 配置cboss数据源  -->
+	<bean id="cbossdataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="username">
+			<value>${cboss_jdbc_username}</value>
+		</property>
+		<property name="password">
+			<value>${cboss_jdbc_password}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${cboss_jdbc_driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${cboss_url_server}</value>
+		</property>
+		<property name="initialSize">
+			<value>5</value>
+		</property>
+		<property name="maxActive">
+			<value>300</value>
+		</property>
+		<property name="maxIdle">
+			<value>5</value>
+		</property>
+		<property name="maxWait">
+			<value>100000</value>
+		</property>
+	</bean>
+	<!-- ============================配置事务======================================================= -->
+
+	<!-- uap事务 -->
+	<bean id="uapTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="uapdataSource" />
+	</bean>
+	<!-- iap事务 -->
+	<bean id="iapTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="iapdataSource" />
+	</bean>
+	<!-- boss事务 -->
+	<bean id="bossTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="bossdataSource" />
+	</bean>
+	<!-- cboss事务 -->
+	<bean id="cbossTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="cbossdataSource" />
+	</bean>
+	<!-- ============================配置拦截器======================================================= -->
+	<!-- uap事务拦截 -->
+	<bean id="uapTransactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="uapTransactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="do*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- iap事务拦截 -->
+	<bean id="iapTransactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="iapTransactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="do*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- Boss事务拦截 -->
+	<bean id="bossTransactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager"
+			ref="bossTransactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="do*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- CBoss事务拦截 -->
+	<bean id="cbossTransactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager"
+			ref="cbossTransactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="do*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- ===================================================================ibatis相关配置======================================================== -->
+	<!-- 配置uap SqlMapClient -->
+	<bean id="uapSqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations"
+			value="classpath*:sqlMapConfig.xml" />
+		<property name="dataSource" ref="uapdataSource" />
+	</bean>
+
+	<!-- 配置iap SqlMapClient -->
+	<bean id="iapSqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations"
+			value="classpath*:sqlMapConfig.xml" />
+		<property name="dataSource" ref="uapdataSource" />
+	</bean>
+
+	<!-- 配置boss SqlMapClient -->
+	<bean id="bossSqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations"
+			value="classpath*:sqlMapConfig.xml" />
+		<property name="dataSource" ref="bossdataSource" />
+	</bean>
+	<!-- 配置cboss SqlMapClient -->
+	<bean id="cbossSqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations"
+			value="classpath*:sqlMapConfig.xml" />
+		<property name="dataSource" ref="cbossdataSource" />
+	</bean>
+</beans>

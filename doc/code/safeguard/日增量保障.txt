@@ -1,0 +1,31 @@
+SMBHR  SMDAR  SMMAI ---->  com.ailk.jt.validate.DayFile
+
+主要流程:
+
+---------------------------------------------------------------
+
+
+SM4AI  SMAAI ---->  com.ailk.jt.validate.DayFileSafeForI
+
+主要流程:
+
+---------------------------------------------------------------
+
+
+
+SM4AR  SMAAR ----> com.ailk.jt.validate.DayFileSafeForR
+
+主要流程:
+
+---------------------------------------------------------------
+
+
+SMFWL   SMFLO ---->  com.ailk.jt.validate.FWLandFLOFileSafeguard
+
+主要流程:
+
+---------------------------------------------------------------
+
+
+SMJKR   SMJKA  ---->  com.ailk.check.safeguard.JKDaySafeguard
+

@@ -1,0 +1,48 @@
+############################################ 2013 CheckForJT ##########################################################
+##           ##
+## hour file ## 小时文件生成的任务，一共生成2个文件，每个命令生成一个，因为目前在13上还是测试，所以设定是23分生成，上线后可能改为3分
+##           ##
+###############
+23      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateHourSMSAL.sh >> generateSMSAL.log
+23      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateHourSMMAL.sh >> generateSMMAL.log
+############################################################################################################################
+##           ##
+## day file  ## 日文件生成的任务，一共生成11个文件，4AR、4AI的对应AAR、AAI是在保障程序中复制4AR、4AI
+##           ## SMJK2、SMFWLandSMFLO都是直接生成两个文件
+###############
+2       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySM4AR.sh >> generateSM4AR.log
+3       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMDAR.sh >> generateSMDAR.log
+9       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMJK2.sh >> generateSMJK2.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMMAI.sh >> generateSMMAI.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMBHR.sh >> generateSMBHR.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySM4AI.sh >> generateSM4AI.log
+6       4       *       *       *     cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/runGenerateDaySMFWLandSMFLO.sh >> generateSMFWLandSMFLO.log
+############################################################################################################################
+##                ##
+## validate file  ## 以下是所有文件的保障程序任务，第一个是两个小时文件的保障，执行时间上线后也会调整
+##                ## 其它是日文件的保障，第二个是SMMAI、SMBHR、SMDAR三个文件的保障
+#################### 剩下的看名字就应该能了解是什么类型的保障，在此不再多说
+43      *       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runValidateHourFile.sh >> safeHour.log
+11      5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runValidateDayFile.sh >> safeDay.log
+7       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForR.sh >> safeForR.log
+6       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForI.sh >> safeForI.log
+8       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForJK.sh >> safeForJK.log
+3       5       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/runDayFileSafeForSMFWLandSMFLO.sh >> safeForSMFWLandSMFLO.log
+############################################################################################################################
+##                ##
+## up to bomc     ## 
+##                ##
+####################
+该任务是将/home/aiuap/CheckForJT2013/hour_upload目录下的小时XML文件上传到10.87.21.64的ftp的SafeM目录下
+*/5      *       *       *       *       cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/hourUploadToBomcJava.sh >> hourUploadToBomcJava.log
+
+与上面类似，该任务是将/home/aiuap/CheckForJT2013/upload目录下的日文件上传到10.87.21.64的ftp的SafeM目录下，执行时间上线后也会调整到6点开始
+5,15,25,35,45,55      7-9      *      *      *      cd /home/aiuap/CheckForJT2013/bin; sh /home/aiuap/CheckForJT2013/bin/dayUploadToBomcJava.sh >> dayUploadToBomcJava.log
+############################################################################################################################
+##                         ##
+## static safe to bomc     ## 静态文件的生成任务，前两个是小时的，后一个是日文件的
+##                         ## 延续2012年的要求，静态安全文件作为BOMC的一个保障手段
+#############################
+12      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeSMMAL.sh >> staticSafeSMMAL.log
+12      *       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeSMSAL.sh >> staticSafeSMSAL.log
+32      4       *       *       *    cd /home/aiuap/CheckForJT2013/bin ; sh  /home/aiuap/CheckForJT2013/bin/staticSafeDay.sh >> staticSafeDay.log

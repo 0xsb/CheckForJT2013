@@ -1,0 +1,126 @@
+以下流程是以7月2号上报为示例，实际操作时请修改表名和时间
+
+
+1.首先备份一下2号的jt表 ：
+create table a4_main_acct_jt_20130702_b as (select * from a4_main_acct_jt_20130702) ;
+
+
+2.用1号的opendays和logindays更新2号的表（需要在原表加上索引）
+先在2号表上建索引
+AIUAP20	IDX_TEMP_MAIN	Normal	MAIN_ACCT_ID	N		N	tablespace ts_ai4a20_uap pctfree 10 initrans 2 maxtrans 255 storage ( initial 64k next 1m minextents 1 maxextents unlimited ))
+或create index IDX_TEMP_MAIN on A4_MAIN_ACCT_JT_20130702_B (MAIN_ACCT_ID);
+对1号表添加索引
+AIUAP20	IDX_TEMP_MAIN_TWO	Normal	MAIN_ACCT_ID	N		N	tablespace ts_ai4a20_uap pctfree 10 initrans 2 maxtrans 255 storage ( initial 64k next 1m minextents 1 maxextents unlimited )
+
+
+3.对2号表进行更新 opendays 、logindays、acct_usage：
+
+update a4_main_acct_jt_20130702 a
+   set (a.logondays, a.opendays, a.acct_usage) = (select b.logondays,
+                                                         b.opendays,
+                                                         b.acct_usage
+                                                    from a4_main_acct_jt_20130701 b
+                                                   where b.main_acct_id =
+                                                         a.main_acct_id)
+ where exists (select 1
+          from a4_main_acct_jt_20130701 b
+         where b.main_acct_id = a.main_acct_id);
+
+
+4.如果执行上面sql报错，有可能是jt表中出现三条重复数据（金林在2013年发现），需要在1号表、2号表中删除重复数据
+select count(*),t.login_name from a4_main_acct_jt_20130701 t group by t.login_name having count(*)>1;
+
+select count(*),t.login_name from a4_main_acct_jt_20130702 t group by t.login_name having count(*)>1;
+
+select t.*,rowid from a4_main_acct_jt_20130702 t where t.login_name in('sunzhibiao99','tianhanpu','mahui99');
+
+
+5.执行完成以后，查询2号的数据会发现有t.opendays < t.logondays and t.logondays <> 0 的情况上万条，需要进行更改
+update a4_main_acct_jt_20130702 t
+   set t.opendays = t.logondays
+ where t.opendays < t.logondays
+   and t.logondays <> 0;
+
+
+6.检查
+查询 select * from a4_main_acct_jt_20130702 t where t.logondays < t.opendays;
+检查数据是否正常
+
+
+7.由于2012年组巡发生某些事情的原因，华为的组织机构为20032的，已经更改为100024，但是在a4_main_acct_jt中却没有改变
+所以需要更新这部分组织机构
+
+更改jt表中对应的orgid
+update a4_main_acct_jt_20130702 w set w.org_id='100024' where w.org_id='20032'; --一般在20个数据左右
+
+
+8.对考核指标进行统计是否符合标准。
+-------合作伙伴使用率
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='6' and t.acct_usage>=0.4 and t.opendays>5;---164
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='6' and t.opendays>5;---164
+select 164/164 from dual;-----1
+
+------营业员使用率
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='1' and t.acct_usage>=0.4 and t.opendays>5;---13381
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='1' and t.opendays>5;---13381
+select 13381/13381 from dual;--------1
+------客服坐席使用率
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='2' and t.acct_usage>=0.4 and t.opendays>5;---3693
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='2' and t.opendays>5;---3693
+select 3693/3693 from dual;--------1
+
+-----合作伙伴良好管理率
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='6' and t.logondays<4 and t.valid=0;---631
+select count(*) from a4_main_acct_jt_20130702 t where t.acct_type='6' and t.logondays<4;---638
+select 631/638 from dual;---------0.989028213166144
+
+变动率查询：
+select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_jt_20130702 t
+        minus
+        select w.login_name, w.Lock_Status, w.Valid
+          from a4_main_acct_snap_20130702 w
+         where w.modify_mode <> 'del');---------集团有快照没的
+         
+         
+select count(1)
+  from (select t.login_name, t.Lock_Status, t.Valid
+          from a4_main_acct_snap_20130702 t
+         where t.Modify_Mode <> 'del'
+        minus
+        select w.login_name, w.Lock_Status, w.Valid from a4_main_acct_jt_20130702 w);------快照没有集团有的
+        
+        
+select count(1)
+ from (select a.login_name, a.valid, a.acct_type
+          from (select t.login_name, t.valid, t.acct_type
+                  from a4_main_acct_jt_20130702 t) a,
+               a4_main_acct_snap_20130702 b
+         where a.login_name = b.login_name
+           and b.modify_mode <> 'del'
+        minus
+        select m.login_name, m.valid, m.acct_type
+          from (select w.login_name, w.valid, w.acct_type
+                  from a4_main_acct_snap_20130702 w
+                 where w.modify_mode <> 'del') m,
+               a4_main_acct_jt_20130702 n
+         where m.login_name = n.login_name); ---------集团有快照也有的
+         
+         
+         
+         
+         select count(1) from a4_main_acct_jt_20130702 t ;-------------178268
+         
+         select 3/167342 from dual; --以上3种情况相加除以总数查看变动率
+
+
+9.生成文件
+生成之前，先修改/home/aiuap/jiaoyan/SpringIbatisDemo2012/bin/config.properties
+配置文件中的main_acct_month_table=a4_main_acct_jt_20130702  注：为当前使用表，比如本次用的是7月2号的表数据上报
+保存，然后生成月全量文件。检验完
+
+10.让申肃韬看文件、指标、数据内容。
+
+11.上报文件
+注意：日志输出要重定向，否则日志无法重现    

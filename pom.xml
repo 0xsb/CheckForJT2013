@@ -1,0 +1,490 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ailk.check</groupId>
+    <artifactId>CheckForJT</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <name>CheckForJT</name>
+    <url>http://localhost:9090</url>
+    <description>
+        集团上报XML生成与保障。
+    </description>
+
+    <!--<scm>
+        <connection>scm:cvs:pserver:wangpu@10.87.30.41:2401/cvsdata/product4A</connection>
+        <developerConnection>scm:cvs:pserver:wangpu@10.87.30.41:2401/cvsdata/product4A</developerConnection>
+    </scm>-->
+
+    <developers>
+        <developer>
+            <id>wangpu</id>
+            <name>Wang Pu</name>
+            <email>wangpuv@hotmail.com</email>
+            <timezone>8</timezone>
+        </developer>
+
+        <developer>
+            <id>zhangjinlin</id>
+            <name>Zhang Jinlin</name>
+            <email>zhangjl5@asiainfo-linkage.com</email>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- 主要依赖库的版本定义 -->
+        <junit.version>4.11</junit.version>
+        <slf4j.version>1.7.2</slf4j.version>
+        <commons-io.version>2.2</commons-io.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
+        <h2.version>1.2.147</h2.version>
+
+        <!-- 数据库 -->
+        <!--<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
+        <jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
+        <jdbc.driver.version>${h2.version}</jdbc.driver.version>-->
+
+        <jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+        <jdbc.driver.artifactId>ojdbc5</jdbc.driver.artifactId>
+        <jdbc.driver.version>11.2.0.1.0</jdbc.driver.version>
+
+        <!-- Plugin的属性定义 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.5</jdk.version>
+    </properties>
+
+    <!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
+    <repositories>
+        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://localhost:8081/nexus/content/groups/public</url>
+        </repository>
+        -->
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址.
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://localhost:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    -->
+
+    <dependencies>
+        <!-- com.asiainfo.uap.util.des -->
+        <dependency>
+            <groupId>com.asiainfo.uap.util.des</groupId>
+            <artifactId>3des</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- spring 2.5.6 all in one -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>2.5.6.SEC01</version>
+        </dependency>
+
+        <!-- ibatis -->
+        <dependency>
+            <groupId>com.ibatis</groupId>
+            <artifactId>ibatis-sqlmap</artifactId>
+            <version>2.3.3.720</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibatis</groupId>
+            <artifactId>ibatis-common</artifactId>
+            <version>2.2.0.638</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibatis</groupId>
+            <artifactId>ibatis-dao</artifactId>
+            <version>2.2.0.638</version>
+        </dependency>
+
+        <!-- optional datasource pool -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+
+        <!-- jdbc driver -->
+        <dependency>
+            <groupId>${jdbc.driver.groupId}</groupId>
+            <artifactId>${jdbc.driver.artifactId}</artifactId>
+            <version>${jdbc.driver.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- XML读取验证 -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+
+        <!-- 文件操作工具 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!-- jaxb2 -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- logging begin -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>oro</groupId>
+                    <artifactId>oro</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- logging end -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 未知包 -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-jxpath</groupId>
+            <artifactId>commons-jxpath</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>build210</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jconfig</groupId>
+            <artifactId>jconfig</artifactId>
+            <version>2.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- compiler插件, 设定JDK版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <!-- test插件, 仅测试名称为*Test的类,使用支持分组测试的surefire-junit47 driver -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <argLine>-Xmx256M</argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.12.4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- cobertura插件, 设置不需要计算覆盖率的类 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>**/xsd/*/*.class</exclude>
+                        </excludes>
+                    </instrumentation>
+                    <check/>
+                </configuration>
+            </plugin>
+
+            <!-- site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <locales>zh_CN</locales>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 使用jaxb2-maven-plugin，生成java类 -->
+    <profiles>
+        <profile>
+            <id>smjk-xsd-generate-java</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxb2-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>smjkr-xjc</id>
+                                <!-- 默认phase是generate-sources -->
+                                <goals>
+                                    <goal>xjc</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                                    <schemaDirectory>${project.basedir}/src/test/resources/xsd</schemaDirectory>
+                                    <schemaFiles>smp_smjkr.xsd</schemaFiles>
+                                    <packageName>com.ailk.check.xsd.smjkr</packageName>
+                                    <staleFile>${project.build.directory}/jaxb2/.smjkrXjcStaleFlag</staleFile>
+                                    <clearOutputDir>false</clearOutputDir>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>smjka-xjc</id>
+                                <!-- 默认phase是generate-sources -->
+                                <goals>
+                                    <goal>xjc</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                                    <schemaDirectory>${project.basedir}/src/test/resources/xsd</schemaDirectory>
+                                    <schemaFiles>smp_smjka.xsd</schemaFiles>
+                                    <packageName>com.ailk.check.xsd.smjka</packageName>
+                                    <staleFile>${project.build.directory}/jaxb2/.smjkaXjcStaleFlag</staleFile>
+                                    <clearOutputDir>false</clearOutputDir>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>smmaf-xsd-generate-java</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxb2-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>smmaf-xjc</id>
+                                <!-- 默认phase是generate-sources -->
+                                <goals>
+                                    <goal>xjc</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                                    <schemaDirectory>${project.basedir}/src/test/resources/xsd</schemaDirectory>
+                                    <schemaFiles>smp_smmaf.xsd</schemaFiles>
+                                    <packageName>com.ailk.check.xsd.smmaf</packageName>
+                                    <staleFile>${project.build.directory}/jaxb2/.smmafXjcStaleFlag</staleFile>
+                                    <clearOutputDir>false</clearOutputDir>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.6</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>project-team</report>
+                            <report>plugins</report>
+                            <report>summary</report>
+                            <report>dependencies</report>
+                            <!--<report>scm</report>-->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.14.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>${jdk.version}</targetJdk>
+                    <excludes>
+                        <exclude>**/xsd/*/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                </configuration>
+            </plugin>-->
+        </plugins>
+    </reporting>
+</project>

@@ -1,0 +1,19 @@
+金库申请审批日增量 生成程序
+SMJKR SMJKA
+
+com.ailk.uap.makefile4new.GoldBankApplyAndOperateDayAddFile
+
+涉及业务表：
+UAP_BUSI_SCENE_ID_REALATION  uap_main_acct  UAP_APP_SCENE  UAP_APP_SCENE_DATA  UAP_GOLD_INFO  uap_app
+
+涉及考核临时表：
+a4_gold_app_ope_first  a4_gold_app_ope
+
+主要流程：
+1、通过业务表查询出所需数据后插入 a4_gold_app_ope_first；
+2、检查 a4_gold_app_ope_first 是否存在大于2小时占比超过10%的情况，
+如果不存在，将 a4_gold_app_ope_first 全部数据插入 a4_gold_app_ope ，
+如果存在，只插入小于2小时的数据 （所有大于2小时的数据被丢弃）
+3、查询 a4_gold_app_ope 表 approvetime 不为null的 并生成XML文件
+
+todo 最后一步需要修改，增加requestname 不为null

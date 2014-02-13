@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="smp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" type="xs:string" fixed="SMBHR" />
+				<xs:element name="province">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:enumeration value="100" />
+							<xs:enumeration value="200" />
+							<xs:enumeration value="210" />
+							<xs:enumeration value="220" />
+							<xs:enumeration value="230" />
+							<xs:enumeration value="240" />
+							<xs:enumeration value="250" />
+							<xs:enumeration value="270" />
+							<xs:enumeration value="280" />
+							<xs:enumeration value="290" />
+							<xs:enumeration value="311" />
+							<xs:enumeration value="351" />
+							<xs:enumeration value="371" />
+							<xs:enumeration value="431" />
+							<xs:enumeration value="451" />
+							<xs:enumeration value="471" />
+							<xs:enumeration value="531" />
+							<xs:enumeration value="551" />
+							<xs:enumeration value="571" />
+							<xs:enumeration value="591" />
+							<xs:enumeration value="731" />
+							<xs:enumeration value="771" />
+							<xs:enumeration value="791" />
+							<xs:enumeration value="851" />
+							<xs:enumeration value="871" />
+							<xs:enumeration value="891" />
+							<xs:enumeration value="898" />
+							<xs:enumeration value="931" />
+							<xs:enumeration value="951" />
+							<xs:enumeration value="971" />
+							<xs:enumeration value="991" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="createtime" type="xs:dateTime" />
+				<xs:element name="sum" type="xs:integer" />
+				<xs:element name="begintime" type="xs:dateTime" />
+				<xs:element name="endtime" type="xs:dateTime" />
+				<xs:element name="data">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="rcd" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="seq" type="xs:integer" />
+										<xs:element name="resname">
+											<xs:simpleType>
+												<xs:restriction base="NonZeroLenString">
+													<xs:maxLength value="64" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="behaviour">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="101" />
+													<xs:enumeration value="102" />
+													<xs:enumeration value="103" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="companyname">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="北京移动" />
+													<xs:enumeration value="广东移动" />
+													<xs:enumeration value="上海移动" />
+													<xs:enumeration value="天津移动" />
+													<xs:enumeration value="重庆移动" />
+													<xs:enumeration value="江苏移动" />
+													<xs:enumeration value="辽宁移动" />
+													<xs:enumeration value="湖北移动" />
+													<xs:enumeration value="四川移动" />
+													<xs:enumeration value="陕西移动" />
+													<xs:enumeration value="新疆移动" />
+													<xs:enumeration value="河北移动" />
+													<xs:enumeration value="山西移动" />
+													<xs:enumeration value="河南移动" />
+													<xs:enumeration value="吉林移动" />
+													<xs:enumeration value="黑龙江移动" />
+													<xs:enumeration value="内蒙移动" />
+													<xs:enumeration value="山东移动" />
+													<xs:enumeration value="安徽移动" />
+													<xs:enumeration value="浙江移动" />
+													<xs:enumeration value="福建移动" />
+													<xs:enumeration value="青海移动" />
+													<xs:enumeration value="湖南移动" />
+													<xs:enumeration value="广西移动" />
+													<xs:enumeration value="江西移动" />
+													<xs:enumeration value="贵州移动" />
+													<xs:enumeration value="云南移动" />
+													<xs:enumeration value="西藏移动" />
+													<xs:enumeration value="海南移动" />
+													<xs:enumeration value="甘肃移动" />
+													<xs:enumeration value="宁夏移动" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="total" type="xs:integer" />
+										<xs:element name="buztotal" type="xs:integer" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="NonZeroLenString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

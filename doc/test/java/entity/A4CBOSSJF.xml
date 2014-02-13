@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="A4CBOSSJF">
+
+	<typeAlias alias="a4CBOSSJF" type="com.ailk.jt.task.entity.A4CBOSSJF" />
+
+	<resultMap id="A4CBOSSJF" class="a4CBOSSJF">
+		<result property="homeSwitchNode" column="HOME_SWITCH_NODE" />
+		<result property="busiCount" column="BUSI_COUNT" />
+	</resultMap>
+	<insert id="insertAcct" parameterClass="a4CBOSSJF">
+		<![CDATA[
+	        INSERT INTO
+	        a4_cboss_buss_jf (
+	        	HOME_SWITCH_NODE,
+	        	BUSI_COUNT
+	        ) VALUES (
+				#homeSwitchNode# ,
+				#busiCount# 
+	        )
+	    ]]>
+	</insert>
+
+</sqlMap>

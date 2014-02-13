@@ -1,0 +1,542 @@
+[INFO ] [07:54:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [07:54:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [07:54:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [07:54:32]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[ERROR] [07:54:41]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[ERROR] [07:54:41]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.main(FireWallLoginAndOperateDayAddFile.java:79)FireWallLoginAndOperateDayAddFile have Exception ...
+java.lang.NullPointerException
+	at com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:115)
+	at com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.main(FireWallLoginAndOperateDayAddFile.java:75)
+[INFO ] [08:00:12]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:00:12]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:00:12]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:00:12]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:00:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:00:23]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:173)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:00:23]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:174)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:00:23]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:00:24]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:237)total sumForSMFWL ===1
+[ERROR] [08:00:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[INFO ] [08:01:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)UpLoadFileThread start to run......
+[INFO ] [08:01:25]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:01:25]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)uap_version==uap2.0
+[INFO ] [08:01:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:01:49]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:02:04]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:02:16]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:02:17]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:02:30]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java)total sumForSMFWL ===1
+[ERROR] [08:04:27]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[INFO ] [08:05:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:05:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:05:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:05:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:05:18]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:05:48]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:173)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:05:53]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:174)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:05:56]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:06:02]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java)total sumForSMFWL ===1
+[ERROR] [08:06:41]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)null\SMFWL_371_01DY_20140120_000_000.xml (系统找不到指定的路径。)
+[INFO ] [08:07:28]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:07:28]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:07:28]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:07:28]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:174)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:238)total sumForSMFWL ===1
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:183)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:186)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:05:52</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:126)DR_UPLOAD_FILE_INFO**********insert**SMFWL********Start*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:149)DR_UPLOAD_FILE_INFO**********insert**SMFWL ********End*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:174)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFLOInfo(FireWallLoginAndOperateDayAddFile.java:307)total sumForSMFLO ===4
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:183)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:186)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFLO</type>
+<province>371</province>
+<createtime>2014-01-21T16:05:52</createtime>
+<sum>4</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match application junos-http]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>2</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match destination-address 211.136.93.21/32]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>3</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 then permit]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>4</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match source-address WangTing]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:126)DR_UPLOAD_FILE_INFO**********insert**SMFLO********Start*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:149)DR_UPLOAD_FILE_INFO**********insert**SMFLO ********End*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile  ******End ***************
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:84)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:07:40]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)GENERATE com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile FULL FILE  TOTALTIME======12s
+[INFO ] [08:12:53]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:12:53]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:12:53]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:12:53]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:13:04]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:13:04]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:13:04]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:13:04]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:177)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:13:05]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:13:05]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:184)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:13:05]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:187)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:11:17</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[ERROR] [08:13:05]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[INFO ] [08:13:54]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:13:54]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:13:54]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:13:54]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:177)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:184)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:14:06]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:187)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:12:18</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[ERROR] [08:14:06]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[INFO ] [08:14:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:14:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:14:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:14:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:177)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:184)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:14:47]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:187)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:12:59</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[ERROR] [08:14:47]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[INFO ] [08:15:07]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:15:07]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:15:07]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:15:07]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:15:19]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:15:46]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:15:49]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:15:52]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:15:58]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:16:03]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:16:09]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:13:31</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[ERROR] [08:17:01]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[INFO ] [08:17:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:17:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:17:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:17:24]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:17:36]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:15:48</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[ERROR] [08:19:50]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)系统找不到指定的路径。
+[INFO ] [08:22:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:22:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:22:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:22:23]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:177)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:239)total sumForSMFWL ===1
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:184)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:187)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:20:47</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldSceneApplyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:176)a4GoldSceneOperatelyDayAddFileSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:177)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFLOInfo(FireWallLoginAndOperateDayAddFile.java:308)total sumForSMFLO ===4
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:184)getSMFWLDayFullInfo*******************End*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:187)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFLO</type>
+<province>371</province>
+<createtime>2014-01-21T16:20:47</createtime>
+<sum>4</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match application junos-http]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>2</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match destination-address 211.136.93.21/32]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>3</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 then permit]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>4</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match source-address WangTing]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:127)DR_UPLOAD_FILE_INFO**********insert**SMFLO********Start*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:150)DR_UPLOAD_FILE_INFO**********insert**SMFLO ********End*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile  ******End ***************
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:84)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:22:35]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)GENERATE com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile FULL FILE  TOTALTIME======11s
+[INFO ] [08:32:14]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:32:14]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMFWL
+[INFO ] [08:32:14]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:32:14]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile begin ...
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:80)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile ******Start***************
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:163)a4FirewallLoginSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:164)a4FireWallOptSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:165)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFWLInfo(FireWallLoginAndOperateDayAddFile.java:220)total sumForSMFWL ===1
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:172)get a4FirewallLoginSql*******************End*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFWL</type>
+<province>371</province>
+<createtime>2014-01-21T16:30:38</createtime>
+<sum>1</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<logintime>2013-08-20T17:27:16</logintime>
+<ip>10.87.25.252</ip>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+<logintype>1</logintype>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:163)a4FirewallLoginSql===select distinct t.mainacctid,t.loginname,t.logintime,t.ip,t.resname,t.resaddress,t.result,t.logintype,t.loginsessionid from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:164)a4FireWallOptSql===select distinct t.mainacctid,t.loginname,t.opertime,t.opercontent,t.loginsessionid,t.resname,t.resaddress,t.result from A4_FIRE_WALL_ALL_OPE t where t.is_acl = '3' or t.is_acl = '0' 
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:165)getSMFWLDayFullInfo*******************Start******
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.getDayFileSMFLOInfo(FireWallLoginAndOperateDayAddFile.java:289)total sumForSMFLO ===4
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:172)get a4FirewallLoginSql*******************End*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.createDayFileCommon(FireWallLoginAndOperateDayAddFile.java:175)a4GoldDayFileBuffer====<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMFLO</type>
+<province>371</province>
+<createtime>2014-01-21T16:30:38</createtime>
+<sum>4</sum>
+<begintime>2014-01-20T00:00:00</begintime>
+<endtime>2014-01-21T00:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match application junos-http]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>2</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match destination-address 211.136.93.21/32]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>3</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 then permit]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+<rcd>
+<seq>4</seq>
+<mainacctid>123</mainacctid>
+<loginname>zhanghua</loginname>
+<opertime>2013-08-20T17:27:16</opertime>
+<opercontent><![CDATA[set security policies from-zone trust to-zone untrust policy 2 match source-address WangTing]]></opercontent>
+<loginsessionid>abcdgesuxocu12jdi</loginsessionid>
+<resname>test</resname>
+<resaddress>10.87.25.252:22</resaddress>
+<result>0</result>
+</rcd>
+</data>
+</smp>
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:115)DR_UPLOAD_FILE_INFO**********insert**SMFLO********Start*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile.insertDrUploadFileInfo(FireWallLoginAndOperateDayAddFile.java:138)DR_UPLOAD_FILE_INFO**********insert**SMFLO ********End*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:82)com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile  ******End ***************
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:84)DR_UPLOAD_FILE_INFO**********insert ********Start*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:96)DR_UPLOAD_FILE_INFO**********insert ********End*********
+[INFO ] [08:32:26]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)GENERATE com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile FULL FILE  TOTALTIME======12s
+[INFO ] [08:48:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:48:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\I
+[INFO ] [08:48:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:48:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.A4AppAcctDayAddFile begin ...
+[ERROR] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMDAR
+[INFO ] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:48:59]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.DbOperateLogDayFile begin ...
+[ERROR] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\day\SMMAI
+[INFO ] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:49:29]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.MainAcctDayAddFile begin ...
+[ERROR] [08:50:00]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:50:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:50:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMSMF
+[INFO ] [08:50:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:50:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.A4SuperAuthorityFullFile begin ...
+[ERROR] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMMSF
+[INFO ] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:50:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.AuthorFullFile begin ...
+[ERROR] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMAAF
+[INFO ] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:51:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.AppAcctFullFile begin ...
+[ERROR] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMMAF
+[INFO ] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:51:33]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.MainAcctFullFile begin ...
+[ERROR] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMHAF
+[INFO ] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:52:03]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.SysResourceAcctFullFile begin ...
+[ERROR] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)
+[INFO ] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:64)UpLoadFileThread start to run......
+[INFO ] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:65)uap_file_uapload==D:\work\work2012\db\month\SMCRF
+[INFO ] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:66)uap_version==uap2.0
+[INFO ] [08:52:34]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:68)com.ailk.uap.makefile4new.A4ResourceCoverFullFile begin ...
+[ERROR] [08:53:04]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:102)

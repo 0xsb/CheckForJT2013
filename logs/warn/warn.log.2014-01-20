@@ -1,0 +1,5 @@
+[ERROR] [01:18:43]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [01:18:43]  - com.ailk.jt.util.DBUtil.executeSQL(DBUtil.java:240)<!-- when exectue sql occur error! sql is: -->null
+[ERROR] [01:18:43]  - com.ailk.jt.util.SQLUtil.getSql(SQLUtil.java:192)===exception occured in read sql file======class path resource [com/ailk/jt/task/entity/SQL.xml] cannot be resolved to absolute file path because it does not reside in the file system
+[ERROR] [01:18:43]  - com.ailk.uap.makefile4new.AbstractMakeFile.makeFile(AbstractMakeFile.java:98)
+[ERROR] [01:21:03]  - com.ailk.uap.makefile4new.SysResourceAcctFullFile.getSysResourceAcctFullInfo(SysResourceAcctFullFile.java:78)sum=========== 19417

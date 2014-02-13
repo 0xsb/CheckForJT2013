@@ -1,0 +1,181 @@
+主帐号日增量文件 生成程序
+SMMAI
+
+com.ailk.uap.makefile4new.MainAcctDayAddFile
+
+连接数据库：
+aiuap
+
+涉及业务表：
+uap_main_acct   uap_main_acct_his
+
+涉及考核临时表：
+
+主要流程：
+1、准备上传文件名称等；
+2、通过业务表查询出所需数据，生成XML文件。
+--------------------------------------------------------------------------
+
+
+
+前台异常业务操作统计日增量文件 生成程序
+SMBHR
+
+com.ailk.uap.makefile4new.WebExceptionBusinessDayAddlFile_new
+
+连接数据库：
+aiuap  cboss
+
+涉及业务表：
+orig_busi_record
+
+涉及考核临时表：
+a4_cboss_buss_cx  a4_cboss_buss_jf  demo_test
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_cboss_buss_cx；
+3、清空 a4_cboss_buss_jf；
+4、连接cboss数据库，查询 cboss.orig_busi_record，获取 HOME_SWITCH_NODE, COUNT(1) TOTAL_COUNT；
+5、将查询结果插入 a4_cboss_buss_cx （该处使用了ibatis2）；
+6、连接cboss数据库，查询 cboss.orig_busi_record，获取 HOME_SWITCH_NODE, count(1) BUSI_COUNT；
+7、将查询结果插入 a4_cboss_buss_jf （该处使用了ibatis2）；
+8、根据 a4_cboss_buss_cx t, demo_test w 向 demo_test 的 total_count 插入数据；（代码182行）
+9、根据 a4_cboss_buss_jf t, demo_test w 向 demo_test 的 busi_count 插入数据；（代码183行）
+10、根据三种异常行为代码，分三次从 a4_cboss_buss_cx t, demo_test w, A4_CBOSS_BUSS_JF u 查询，并生成XML文件。
+--------------------------------------------------------------------------
+
+
+
+应用系统从账号日增量文件应用侧4A侧 生成程序
+SMAAI SM4AI
+
+com.ailk.uap.makefile4new.A4AppAcctDayAddFile
+
+连接数据库：
+aiuap
+
+涉及业务表：
+UAP_APP  UAP_APP_ACCT  UAP_APP_ACCT_HIS
+
+涉及考核临时表：
+
+主要流程：
+1、准备上传文件名称等；
+2、通过业务表查询出所需数据，并生成XML文件SM4AI；
+
+todo
+该生成程序只生成SM4AI的文件，SMAAI是在保障程序里复制的SM4AI
+
+BOMC对 DR_UPLOAD_FILE_INFO 有监控，考虑如果SMAAI不生成的话，是否取消对其监控？
+--------------------------------------------------------------------------
+
+
+
+应用系统登录及操作统计日增量文件应用侧4A生成
+SMAAR  SM4AR
+
+com.ailk.uap.makefile4new.AppSubAcctLoginFile
+
+连接数据库:
+审计库
+
+涉及业务表：
+iap_app_log
+
+涉及考核临时表：
+a4_4ar_temp  a4_4ar
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_4ar_temp；
+3、通过业务表查询出所需数据，插入 a4_4ar_temp；
+4、根据 a4_4ar_temp 更新 a4_4ar 的 dlvalue、czvalue 的值；
+5、查询 a4_4ar，生成XML文件SM4AR。
+
+todo
+该生成程序只生成SM4AR的文件，SMAAR是在保障程序里复制的SM4AR
+
+BOMC对 DR_UPLOAD_FILE_INFO 有监控，考虑如果SMAAR不生成的话，是否取消对其监控？
+--------------------------------------------------------------------------
+
+
+
+生产系统后台数据库操作统计日增量文件 生成程序
+SMDAR
+
+com.ailk.uap.makefile4new.DbOperateLogDayFile
+
+连接数据库：
+审计库
+
+涉及业务表：
+iap_device_session  a4_uap_db（从uap拷贝到审计库的表，需要定期从uap拷贝到审计库 todo）
+
+涉及考核临时表：
+a4_iap_device_session  test_device_session  second_final_device_session  final_device_session
+
+final_device_session_2013 todo 准生产环境上新建的表，为的是测试
+
+主要流程：
+1、准备上传文件名称等；
+2、清空 a4_iap_device_session；
+3、通过业务表查询出所需数据插入 a4_iap_device_session；
+4、清空 test_device_session；
+5、从 a4_iap_device_session t、a4_uap_db w 中查询t.device_id = w.db_id，插入test_device_session；
+6、清空 second_final_device_session；
+7、将 test_device_session 数据按 login_hour，belong_sys 分组，插入 second_final_device_session；
+8、查询 second_final_device_session ，更新 final_device_session 表设置 total 值；
+9、查询 final_device_session，生成XML文件
+
+todo
+该文件生成目前存在问题：
+由于之前的程序bug，没有清空 test_device_session，
+造成 final_device_session 数据量巨大，上报的数据量也巨大。
+
+金林为了消除该问题，在同申诉涛讨论后，将生产环境修改为，1-8步骤不再执行，
+而是直接从 final_device_session 查询数据后，
+当前日期 - 20130527 * 0.5 + 1 = x 得到一个逐渐变大的值x
+用查询出来的total值除以x，（其目的是使其平滑的下降，目标是在7月份降到真实水平）
+上报。
+--------------------------------------------------------------------------
+
+
+
+金库申请审批日增量 生成程序
+SMJKR SMJKA
+
+com.ailk.uap.makefile4new.GoldBankApplyAndOperateDayAddFile
+
+涉及业务表：
+UAP_BUSI_SCENE_ID_REALATION  uap_main_acct  UAP_APP_SCENE  UAP_APP_SCENE_DATA  UAP_GOLD_INFO  uap_app
+
+涉及考核临时表：
+a4_gold_app_ope_first  a4_gold_app_ope
+
+主要流程：
+1、通过业务表查询出所需数据后插入 a4_gold_app_ope_first；
+2、检查 a4_gold_app_ope_first 是否存在大于2小时占比超过10%的情况，
+如果不存在，将 a4_gold_app_ope_first 全部数据插入 a4_gold_app_ope ，
+如果存在，只插入小于2小时的数据 （所有大于2小时的数据被丢弃）
+3、查询 a4_gold_app_ope 表 approvetime requestname 不为null的 并生成XML文件
+--------------------------------------------------------------------------
+
+
+
+防火墙单点登录操作日增量 生成程序
+SMFWL SMFLO
+
+com.ailk.uap.makefile4new.FireWallLoginAndOperateDayAddFile
+
+涉及业务表：
+iap_device_session  iap_device_session_cmd
+
+涉及考核临时表：
+a4_fire_wall_login_ope
+该表是给SMP提供视图用，视图为：a4_fire_wall_login_ope_view
+
+主要流程：
+1、通过业务表查询出所需数据后插入 a4_fire_wall_login_ope；
+2、登录日增量 select distinct 查询唯一结果（去掉重复的数据），生成XML文件；
+3、操作日增量 查询全部，生成XML文件。

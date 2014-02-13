@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<id name="backup_a4_main_acct_jt">
+		<![CDATA[
+        create table a4_main_acct_jt_#timeForTable#  as select * from a4_main_acct_jt_test
+     ]]>
+	</id>
+
+	<id name="select_a4_main_acct_login_days_old">
+		<![CDATA[
+		insert into   a4_main_acct_logons  (
+SELECT w.main_acct_id,w.login_name, COUNT(DISTINCT TO_CHAR(T.OPERATE_TIME, 'yyyy-MM-dd')) as login_days
+  FROM audit11.IAP_APP_LOG          PARTITION(#dataBasePart#) T,
+   a4_main_acct_usableday_usage w
+WHERE w.valid = 1
+ and w.login_name = t.main_acct_name
+ and T.OPERATE_TYPE_ID = '1-AIUAP-10000'
+ AND T.DOMAIN_ID = 'UAP'
+ AND T.OPERATE_TIME > TO_DATE(#monthBeginTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   AND T.OPERATE_TIME < TO_DATE(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+group by w.login_name, w.main_acct_id)
+   ]]>
+	</id>
+
+
+
+	<!-- 主账号使用率、变动率、良好伙伴管理率使用到的SQL -->
+	<id name="back_a4_main_acct_snap">
+		<![CDATA[
+	      create table a4_main_acct_snap_#timeForTable#  as select * from a4_main_acct_snap_test
+        ]]>
+	</id>
+
+	<id name="truncate_a4_main_acct_his_yestory">
+		truncate table a4_main_acct_his_yestoday_t
+	</id>
+
+	<id name="insert_into_a4_main_acct_his_yestory">
+		insert into a4_main_acct_his_yestoday_t select * from
+		a4_main_acct_his_today_test
+	</id>
+
+	<id name="truncate_a4_main_acct_his_today">
+		truncate table a4_main_acct_his_today_test
+	</id>
+
+	<id name="truncate_a4_main_acct_snap">
+		truncate table a4_main_acct_snap_test
+	</id>
+	<id name="update_a4_main_acct_jt">
+		<![CDATA[
+		   update a4_main_acct_jt t
+    set (t.opendays, t.logondays) =
+        (select w.aviliable_days, w.logon_days
+           from A4_MAIN_ACCT_USABLEDAY_USAGE w
+          where t.main_acct_id = w.main_acct_id
+            and w.valid = 1)
+  where t.valid = 1
+		 ]]>
+	</id>
+	<id name="update_jt_table_superUser_from_SQL">
+		<![CDATA[
+	 update a4_main_acct_snap y set y.superuser=(
+SELECT 
+       CASE
+         WHEN (CASE
+                WHEN (INSTR((SELECT WM_CONCAT(DISTINCT AUTHOR.RES_KIND)
+                              FROM UAP_ACCT_AUTHOR AUTHOR
+                             WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID),
+                            '1') > 0) THEN
+                 (SELECT COUNT(AUTHOR.AUTHOR_ID)
+                    FROM UAP_ACCT_AUTHOR AUTHOR, UAP_APP_ACCT APPACCT
+                   WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID
+                     AND AUTHOR.RES_ACCT_ID = APPACCT.ACCT_SEQ
+                     AND AUTHOR.RES_KIND = '1'
+                     AND APPACCT.ACCT_TYPE IN ('03', '04'))
+                WHEN (INSTR((SELECT WM_CONCAT(DISTINCT AUTHOR.RES_KIND)
+                              FROM UAP_ACCT_AUTHOR AUTHOR
+                             WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID),
+                            '2') > 0) THEN
+                 (SELECT COUNT(AUTHOR.AUTHOR_ID)
+                    FROM UAP_ACCT_AUTHOR AUTHOR, UAP_HOST_ACCT HOSTACCT
+                   WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID
+                     AND AUTHOR.RES_ACCT_ID = HOSTACCT.HOST_ACCT_ID
+                     AND AUTHOR.RES_KIND = '2'
+                     AND HOSTACCT.ACCT_TYPE IN ('03', '04'))
+                WHEN (INSTR((SELECT WM_CONCAT(DISTINCT AUTHOR.RES_KIND)
+                              FROM UAP_ACCT_AUTHOR AUTHOR
+                             WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID),
+                            '3') > 0) THEN
+                 (SELECT COUNT(AUTHOR.AUTHOR_ID)
+                    FROM UAP_ACCT_AUTHOR AUTHOR, UAP_DB_ACCT DBACCT
+                   WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID
+                     AND AUTHOR.RES_ACCT_ID = DBACCT.DB_ACCT_ID
+                     AND AUTHOR.RES_KIND = '3'
+                     AND DBACCT.ACCT_TYPE IN ('03', '04'))
+                WHEN (INSTR((SELECT WM_CONCAT(DISTINCT AUTHOR.RES_KIND)
+                              FROM UAP_ACCT_AUTHOR AUTHOR
+                             WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID),
+                            '4') > 0) THEN
+                 (SELECT COUNT(AUTHOR.AUTHOR_ID)
+                    FROM UAP_ACCT_AUTHOR AUTHOR, UAP_ND_ACCT NDACCT
+                   WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID
+                     AND AUTHOR.RES_ACCT_ID = NDACCT.ND_ACCT_ID
+                     AND AUTHOR.RES_KIND = '4'
+                     AND NDACCT.ACCT_TYPE IN ('03', '04'))
+                WHEN (INSTR((SELECT WM_CONCAT(DISTINCT AUTHOR.RES_KIND)
+                              FROM UAP_ACCT_AUTHOR AUTHOR
+                             WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID),
+                            '5') > 0) THEN
+                 (SELECT COUNT(AUTHOR.AUTHOR_ID)
+                    FROM UAP_ACCT_AUTHOR AUTHOR, UAP_SD_ACCT SDACCT
+                   WHERE AUTHOR.USE_MAIN_ACCT_ID = T.MAIN_ACCT_ID
+                     AND AUTHOR.RES_ACCT_ID = SDACCT.SD_ACCT_ID
+                     AND AUTHOR.RES_KIND = '5'
+                     AND SDACCT.ACCT_TYPE IN ('03', '04'))
+                ELSE
+                 0
+              END) > 0 THEN
+          '1'
+         ELSE
+          '0'
+       END SUPERUSER      
+  FROM UAP_MAIN_ACCT T
+ WHERE T.Main_Acct_Id=y.main_acct_id)
+	]]>
+	</id>
+
+	<id name="insert_into_a4_main_acct_his_today">
+		<![CDATA[
+	 insert into a4_main_acct_his_today_t
+   (main_acct_id,
+    login_name,
+    user_name,
+    valid,
+    lock_status,
+    acct_type,
+    rolelist,
+    effect_time,
+    expire_time,
+    create_time,
+    area_id,
+    org_id,
+    orgname,
+    update_time,
+    superuser,
+    opendays,
+    logondays,
+    modify_mode,
+    acct_usage)
+   select main_acct_id,
+          login_name,
+          name,
+          0,
+          0,
+          acct_type,
+          '',
+          effect_time,
+          expire_time,
+          create_time,
+          area_id,
+          default_org,
+          '',
+          last_update_time,
+          0,
+          0,
+          0,
+          'del',
+          0.0000
+    from uap_main_acct_his_test t
+     ]]>
+	</id>
+
+
+	<id name="insert_a4_main_acct_snap">
+		<![CDATA[
+	    insert into a4_main_acct_snap_test
+  (select main_acct_id,
+          case
+            when length(t.login_name) > 32 then
+             substr(t.login_name, 0, 32)
+            else
+             t.login_name
+          end login_name,
+          name as USER_NAME,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and
+                 t.lock_status = '0') then
+             '1'
+            else
+             '0'
+          end valid,
+          case
+            when (sysdate >= t.effect_time and sysdate < t.expire_time and
+                 t.lock_status = '0') then
+             '0'
+            else
+             '1'
+          end lock_status,
+          ACCT_TYPE,
+          '' rolelist,
+          effect_time,
+          expire_time,
+          create_time,
+          area_id,
+          default_org as ORG_ID,
+          '' as ORGNAME,
+          last_update_time as UPDATE_TIME,
+          '0' superuser,
+          '0' opendays,
+          '0' logondays,
+          case
+            when (to_char(t.last_update_time, 'yyyy-mm-dd') <>
+                 to_char(t.create_time, 'yyyy-mm-dd')) then
+             'upd'
+            else
+             'add'
+          end modify_mode,
+          0.0000 acct_usage
+     from uap_main_acct_test t
+    where t.create_time <
+          to_date(#endTime#, 'yyyy-MM-dd hh24:Mi:ss')
+   union all 
+	 select main_acct_id,
+       case
+         when length(t1.login_name) > 32 then
+          substr(t1.login_name, 0, 32)
+         else
+          t1.login_name
+       end login_name,
+        USER_NAME,
+       case
+         when (sysdate >= t1.effect_time and sysdate < t1.expire_time and
+              t1.lock_status = '0') then
+          '1'
+         else
+          '1'
+       end valid,
+       case
+         when (sysdate >= t1.effect_time and sysdate < t1.expire_time and
+              t1.lock_status = '0') then
+          '1'
+         else
+          '1'
+       end lock_status,
+       acct_type,
+       '' rolelist,
+       effect_time,
+       expire_time,
+       create_time,
+       area_id,
+       ORG_ID,
+       '' as ORGNAME,
+        UPDATE_TIME,
+       '0' superuser,
+       '0' opendays,
+       '0' logondays,
+       'del' modify_mode,
+       0.0000 as acct_usage
+  from (select main_acct_id,
+               login_name,
+               user_name,
+               valid,
+               lock_status,
+               acct_type,
+               rolelist,
+               effect_time,
+               expire_time,
+               create_time,
+               area_id,
+               org_id,
+               orgname,
+               update_time,
+               superuser,
+               opendays,
+               logondays,
+               modify_mode,
+               acct_usage
+          from a4_main_acct_his_today_test
+         where login_name not in (select login_name from uap_main_acct)
+        minus
+        select main_acct_id,
+               login_name,
+               user_name,
+               valid,
+               lock_status,
+               acct_type,
+               rolelist,
+               effect_time,
+               expire_time,
+               create_time,
+               area_id,
+               org_id,
+               orgname,
+               update_time,
+               superuser,
+               opendays,
+               logondays,
+               modify_mode,
+               acct_usage
+          from a4_main_acct_his_yestoday_t) t1
+)
+	 ]]>
+	</id>
+
+
+	<id name="a4_aar_for_bomc_cz_update">
+		<![CDATA[
+	 update a4_aar t set t.czvalue=#czvalue# where t.num=#hour# 
+	]]>
+	</id>
+<id name="check_SMMAL">
+		<![CDATA[
+	 select t.file_name, t.file_create,t.upload_status
+   from dr_upload_file_info t
+  where t.file_name like '%SMMAL%'
+    and t.file_create > to_date(to_char(TRUNC(sysdate - 1 / 24, 'HH'),
+                                        'yyyy-MM-dd hh24:Mi:ss'),
+                                'yyyy-MM-dd hh24:Mi:ss')
+    and t.file_create < to_date(to_char(sysdate, 'yyyy-MM-dd hh24:Mi:ss'),
+                                'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+	<id name="check_SMSAL">
+		<![CDATA[
+	 select t.file_name, t.file_create,t.upload_status
+   from dr_upload_file_info t
+  where t.file_name like '%SMSAL%'
+    and t.file_create > to_date(to_char(TRUNC(sysdate - 1 / 24, 'HH'),
+                                        'yyyy-MM-dd hh24:Mi:ss'),
+                                'yyyy-MM-dd hh24:Mi:ss')
+    and t.file_create < to_date(to_char(sysdate, 'yyyy-MM-dd hh24:Mi:ss'),
+                                'yyyy-MM-dd hh24:Mi:ss')
+       ]]>
+	</id>
+
+</sql>

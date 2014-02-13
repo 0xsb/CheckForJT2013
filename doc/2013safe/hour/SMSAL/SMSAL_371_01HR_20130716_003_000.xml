@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<smp>
+<type>SMSAL</type>
+<province>371</province>
+<createtime>2013-07-16T03:23:02</createtime>
+<sum>14</sum>
+<begintime>2013-07-16T02:00:00</begintime>
+<endtime>2013-07-16T03:00:00</endtime>
+<data><rcd>
+<seq>1</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:12:26</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>2</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>经分B库-10.97.186.37</resname>
+<resaddress>10.97.186.40:1521</resaddress>
+<logintime>2013-07-16T02:12:34</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>3</seq>
+<loginname>hwwangguofei</loginname>
+<acctname>hetingqiang</acctname>
+<resname>SM2_MAIL_SERVER01</resname>
+<resaddress>10.87.19.187:22</resaddress>
+<logintime>2013-07-16T02:15:01</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>4</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:46:48</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>5</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>经分B库-10.97.186.37</resname>
+<resaddress>10.97.186.40:1521</resaddress>
+<logintime>2013-07-16T02:48:43</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>6</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>经分B库-10.97.186.37</resname>
+<resaddress>10.97.186.40:1521</resaddress>
+<logintime>2013-07-16T02:49:19</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>7</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>经分B库-10.97.186.37</resname>
+<resaddress>10.97.186.40:1521</resaddress>
+<logintime>2013-07-16T02:49:26</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>8</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:49:32</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>9</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:49:43</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>10</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:54:52</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>11</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:55:33</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>12</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:56:26</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>13</seq>
+<loginname>xuekai1</loginname>
+<acctname>boco</acctname>
+<resname>网管(HA5-BOMC09)</resname>
+<resaddress>10.87.21.56:22</resaddress>
+<logintime>2013-07-16T02:57:47</logintime>
+<ip>10.96.21.235</ip>
+<result>0 </result>
+<logintype>0</logintype>
+</rcd>
+<rcd>
+<seq>14</seq>
+<loginname>hwxuejingping</loginname>
+<acctname>XUEJINGPING</acctname>
+<resname>新经分A库</resname>
+<resaddress>10.97.186.70:1521</resaddress>
+<logintime>2013-07-16T02:49:32</logintime>
+<ip>10.87.17.13</ip>
+<result>0 </result>
+<logintype>1</logintype>
+</rcd>
+</data>
+</smp>
